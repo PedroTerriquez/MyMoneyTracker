@@ -7,29 +7,77 @@ import { deviceStorage } from '../services/deviceStorage';
 export default class Contacts extends Component {
   constructor(props){
     super(props);
-		this.state = { friends : [] }
-		this.getFriends = this.getFriends.bind(this);
-		this.renderContacts = this.renderContacts.bind(this);
+    this.state = {
+      friends : [],
+      pending: [],
+      requests: []
+    }
+    this.getFriends = this.getFriends.bind(this);
+    this.getPendingFriendships = this.getPendingFriendships.bind(this);
+    this.getFriendshipRequests = this.getFriendshipRequests.bind(this);
+    this.renderContacts = this.renderContacts.bind(this);
+    this.renderPendingFriendships = this.renderPendingFriendships.bind(this);
+    this.renderRequestFriendships = this.renderRequestFriendships.bind(this);
+  }
+
+  componentDidMount(){
+    this.getFriends()
+    this.getPendingFriendships()
+    this.getFriendshipRequests()
   }
 
   getFriends() {
-    axios.get(`${global.API_URL}/friendships`, { headers: { Authorization: "Bearer " + deviceStorage.loadToken() } })
+    axios.get(`${global.API_URL}/friendships`, deviceStorage.loadToken())
       .then((response) => {
         this.setState({ friends: response.data })
       })
       .catch((error)=>{
-      console.log(error);
-    })
+        console.log(error);
+      })
+  }
+
+  getPendingFriendships() {
+    axios.get(`${global.API_URL}/friendships/pending_friendships_sended`, deviceStorage.loadToken())
+      .then((response) => {
+        this.setState({ pending: response.data })
+      })
+      .catch((error)=>{
+        console.log(error);
+      })
+  }
+
+  getFriendshipRequests() {
+    axios.get(`${global.API_URL}/friendships/pending_friendships_requests`, deviceStorage.loadToken())
+      .then((response) => {
+        this.setState({ requests: response.data })
+      })
+      .catch((error)=>{
+        console.log(error);
+      })
   }
 
   renderContacts() {
-		this.getFriends()
-		return this.state.friends.map( friend => ( <Text> { friend.first_name } </Text>))
+    return this.state.friends.map( friend => ( <Text> { `${friend.id} ${friend.first_name} ${friend.email}` } </Text>))
+  }
+
+  renderPendingFriendships() {
+    return this.state.pending.map( friendship => ( <Text> { `${friendship.id} ${friendship.first_name} ${friendship.email}` } </Text>))
+  }
+
+  renderRequestFriendships() {
+    return this.state.requests.map( friendship => ( <Text> { `${friendship.id} ${friendship.first_name} ${friendship.email}` } </Text>))
   }
 
   render() {
     return(
-      <View>{ this.renderContacts() }</View>
+      <View>
+        <Text> CONTACTS </Text>
+        { this.renderContacts() }
+        <Text> PENDING </Text>
+        { this.renderPendingFriendships() }
+        <Text> REQUESTS </Text>
+        { this.renderRequestFriendships() }
+      </View>
     )
   }
 }
