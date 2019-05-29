@@ -54,7 +54,6 @@ export default class Login extends Component {
         <Button onPress={ this.handleSubmit } title='Submit' />
         <Text>User: {this.state.user} </Text>
         <Text>Password: {this.state.password} </Text>
-        <Links navigation={this.props.navigation}/>
       </View>
     )}
 }

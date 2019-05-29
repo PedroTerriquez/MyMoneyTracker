@@ -4,8 +4,9 @@ import Login from './src/components/Login.js'
 import Home from './src/components/Home.js'
 import Contacts from './src/components/Contacts.js'
 import AddContact from './src/components/AddContact.js'
+import Notifications from './src/components/Notification.js'
 import Links from './src/components/Links.js'
-import {createStackNavigator, createAppContainer} from 'react-navigation';
+import {createStackNavigator, createAppContainer, createDrawerNavigator} from 'react-navigation';
 
 const MainNavigator = createStackNavigator(
   {
@@ -13,15 +14,25 @@ const MainNavigator = createStackNavigator(
     Home: Home,
     Contacts: Contacts,
     AddContact: AddContact,
+    Notifications: Notifications,
+  }
+);
+
+const Menu = createDrawerNavigator(
+  {
+    MainNavigator: MainNavigator,
+    Login: Login,
+    Home: Home,
+    Contacts: Contacts,
+    AddContact: AddContact,
+    Notifications: Notifications,
   },
   {
-    //initialRouteName: 'Home',
-    //headerMode: 'none',
     contentComponent: Links
   }
 );
 
-export default createAppContainer(MainNavigator);
+export default createAppContainer(Menu);
 
 const styles = StyleSheet.create({
   welcome: {

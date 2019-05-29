@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Text, TextInput } from 'react-native';
+import { View, Text, TextInput } from 'react-native';
 import axios from 'axios';
-import { View } from 'react-native';
 import { deviceStorage } from '../services/deviceStorage';
 
 export default class Contacts extends Component {
