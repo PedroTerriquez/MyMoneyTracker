@@ -6,6 +6,8 @@ import Contacts from './src/components/Contacts.js'
 import AddContact from './src/components/AddContact.js'
 import Notifications from './src/components/Notification.js'
 import Links from './src/components/Links.js'
+import Balance from './src/components/Balance.js'
+import Promise from './src/components/Promise.js'
 import {createStackNavigator, createAppContainer, createDrawerNavigator} from 'react-navigation';
 
 const MainNavigator = createStackNavigator(
@@ -15,6 +17,8 @@ const MainNavigator = createStackNavigator(
     Contacts: Contacts,
     AddContact: AddContact,
     Notifications: Notifications,
+    Balance: Balance,
+    Promise: Promise,
   }
 );
 
@@ -42,5 +46,3 @@ const styles = StyleSheet.create({
   }
 });
 
-global.API_URL = 'https://presta-mesta.herokuapp.com/v1'
-global.JWT = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.s43ukN-Jmoj3VIzlvRl8qRseIAldMiL4-Xj5gcQ437k"

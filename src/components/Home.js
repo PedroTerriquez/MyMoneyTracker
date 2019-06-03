@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, TextInput } from 'react-native';
 import Links from './Links'
+import Payment from './presentational/Payment'
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 
@@ -18,7 +19,7 @@ export default class Home extends Component {
   }
 
   getPayments() {
-    axios.get(`${global.API_URL}/friends_payments`, deviceStorage.loadToken())
+    axios.get(`${global.API_URL}/payments/friends_payments`, deviceStorage.loadToken())
       .then((response) => {
         this.setState({ payments: response.data })
       })
@@ -28,7 +29,18 @@ export default class Home extends Component {
   }
 
   renderPayments() {
-    return this.state.payments.map( payment => ( <Text> { `${payment.id} ${paymnet.title} ${payment.amount}` } </Text>))
+    return this.state.payments.map( payment => (
+      <Payment
+        key = { payment.id }
+        id = { payment.id }
+        creator = { payment.creator_id }
+        method ='Cash'
+        date = { payment.agreement_date }
+        amount = { payment.amount }
+        promise = { payment.payment_promise_id }
+        balance = { payment.balance_id }
+      />
+    ))
   }
 
   render() {
