@@ -8,6 +8,7 @@ import Notifications from './src/components/Notification.js'
 import Links from './src/components/Links.js'
 import Balance from './src/components/Balance.js'
 import Promise from './src/components/Promise.js'
+import AddPayment from './src/components/AddPayment.js'
 import {createStackNavigator, createAppContainer, createDrawerNavigator} from 'react-navigation';
 
 const MainNavigator = createStackNavigator(
@@ -19,6 +20,7 @@ const MainNavigator = createStackNavigator(
     Notifications: Notifications,
     Balance: Balance,
     Promise: Promise,
+    AddPayment: AddPayment,
   }
 );
 
@@ -45,4 +47,3 @@ const styles = StyleSheet.create({
     marginTop: 40,
   }
 });
-

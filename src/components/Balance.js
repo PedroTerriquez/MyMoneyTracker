@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { Button, Text, View } from 'react-native';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import Payment from './presentational/Payment'
@@ -45,10 +45,12 @@ export default class Balance extends Component {
   }
 
   render() {
+    const { navigation } = this.props
     return(
       <View>
         <Text>Balance with USER</Text>
         <Text>{ JSON.stringify(this.state.info) }</Text>
+        <Button title='Add Payment' onPress={ () => navigation.navigate('AddPayment', { id: navigation.getParam('id'), type: 'balance', recipient: this.state.info.user2_id }) } />
         <Text>-------------------</Text>
         <Text>Last Payments</Text>
         { this.renderPayments() }
