@@ -11,6 +11,7 @@ class Payment extends Component {
     const { id, title, creator, method, amount, date, promise, balance } = this.props
     return(
       <TouchableOpacity onPress={() => this.handleClick(promise || balance, promise ? 'Promise' : 'Balance')}>
+        <Text>id: { id }</Text>
         <Text>{ creator }</Text>
         <Text>{ method }</Text>
         <Text>{ date }</Text>

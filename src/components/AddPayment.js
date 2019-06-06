@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TextInput, Button, View } from 'react-native';
+import { Alert, Text, TextInput, Button, View } from 'react-native';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 

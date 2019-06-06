@@ -15,15 +15,14 @@ export default class Login extends Component {
   }
 
   handleSubmit() {
-		if (deviceStorage.loadToken() != null){
-			this.props.navigation.navigate('Contacts');
-			return
-		}
+    if (global.JWT != null){
+      this.props.navigation.navigate('Home');
+    }
 
     axios.post(`${global.API_URL}/login`, { email: this.state.user, password: this.state.password },)
       .then((response) => {
         deviceStorage.saveToken(response.data.auth_token);
-        this.props.navigation.navigate('Contacts');
+        this.props.navigation.navigate('Home');
       })
       .catch((error) => {
         console.log(error);

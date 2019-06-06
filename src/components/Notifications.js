@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { ScrollView, Text, TextInput } from 'react-native';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
+import Notification from './presentational/Notification'
 
 export default class Notifications extends Component {
   constructor(props){
@@ -28,15 +29,22 @@ export default class Notifications extends Component {
   }
 
   renderNotifications() {
-    return this.state.notifications.map( notification => ( <Text> { `${notification.id} ${notification.status} ${notification.notification_type}` } </Text>))
+    return this.state.notifications.map( notification => (
+      <Notification
+        id={notification.id}
+        creator={notification.sender_id}
+        type={notification.notification_type}
+        amount={notification.amount} />
+      )
+    )
   }
 
   render() {
     return(
-      <View>
+      <ScrollView>
         <Text> NOTIFICATIONS </Text>
         { this.renderNotifications() }
-      </View>
+      </ScrollView>
     )
   }
 }
