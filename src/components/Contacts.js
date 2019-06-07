@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { ScrollView, Text, TextInput } from 'react-native';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
+import Contact from './presentational/Contact'
 
 export default class Contacts extends Component {
   constructor(props){
@@ -56,27 +57,46 @@ export default class Contacts extends Component {
   }
 
   renderContacts() {
-    return this.state.friends.map( friend => ( <Text> { `${friend.id} ${friend.first_name} ${friend.email}` } </Text>))
+    return this.state.friends.map( friend => (
+      <Contact
+        id={friend.id}
+        name={friend.first_name}
+      />
+    ))
   }
 
   renderPendingFriendships() {
-    return this.state.pending.map( friendship => ( <Text> { `${friendship.id} ${friendship.first_name} ${friendship.email}` } </Text>))
+    return this.state.pending.map( friendship => (
+      <Contact
+        id={friendship.id}
+        name={friendship.first_name}
+        type='pending'
+      />
+    ))
   }
 
   renderRequestFriendships() {
-    return this.state.requests.map( friendship => ( <Text> { `${friendship.id} ${friendship.first_name} ${friendship.email}` } </Text>))
+    return this.state.requests.map( friendship => (
+      <Contact
+        id={friendship.id}
+        name={friendship.first_name}
+        type='request'
+      />
+    ))
   }
 
   render() {
     return(
-      <View>
+      <ScrollView>
         <Text> CONTACTS </Text>
         { this.renderContacts() }
+        <Text> ---------------------------------- </Text>
         <Text> PENDING </Text>
         { this.renderPendingFriendships() }
+        <Text> ---------------------------------- </Text>
         <Text> REQUESTS </Text>
         { this.renderRequestFriendships() }
-      </View>
+      </ScrollView>
     )
   }
 }
