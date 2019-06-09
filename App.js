@@ -9,6 +9,9 @@ import Links from './src/components/Links.js'
 import Balance from './src/components/Balance.js'
 import Promise from './src/components/Promise.js'
 import AddPayment from './src/components/AddPayment.js'
+import AddPromise from './src/components/AddPromise.js'
+import PromisesList from './src/components/PromisesList.js'
+import BalancesList from './src/components/BalancesList.js'
 import {createStackNavigator, createAppContainer, createDrawerNavigator} from 'react-navigation';
 
 const MainNavigator = createStackNavigator(
@@ -21,6 +24,9 @@ const MainNavigator = createStackNavigator(
     Balance: Balance,
     Promise: Promise,
     AddPayment: AddPayment,
+    AddPromise: AddPromise,
+    BalancesList: BalancesList,
+    PromisesList: PromisesList,
   }
 );
 
@@ -32,6 +38,8 @@ const Menu = createDrawerNavigator(
     Contacts: Contacts,
     AddContact: AddContact,
     Notifications: Notifications,
+    BalancesList: BalancesList,
+    PromisesList: PromisesList,
   },
   {
     contentComponent: Links
