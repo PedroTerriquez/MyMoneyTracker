@@ -3,6 +3,7 @@ import { Button, Text, View } from 'react-native';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import Payment from './presentational/Payment'
+import PromiseHeader from './presentational/PromiseHeader'
 
 export default class Promise extends Component {
   constructor(props){
@@ -46,11 +47,16 @@ export default class Promise extends Component {
 
   render() {
     const { navigation } = this.props
+    const { info } = this.state
     return(
-      <View>
-        <Text>Promise with USER</Text>
-        <Text>{ JSON.stringify(this.state.info) }</Text>
-        <Button title='Add Payment' onPress={ () => navigation.navigate('AddPayment', { id: navigation.getParam('id'), type: 'promise', recipient: this.state.info.administrator_id }) } />
+      info && <View>
+        <PromiseHeader
+          id={ info.id }
+          title={ info.title }
+          paid={ info.paid_amount }
+          total={ info.total }
+        />
+        <Button title='Add Payment' onPress={ () => navigation.navigate('AddPayment', { id: navigation.getParam('id'), type: 'promise', recipient: info.administrator_id }) } />
         <Text>-------------------</Text>
         <Text>Last Payments</Text>
         { this.renderPayments() }

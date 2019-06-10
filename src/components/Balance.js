@@ -3,6 +3,7 @@ import { Button, Text, View } from 'react-native';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import Payment from './presentational/Payment'
+import BalanceHeader from './presentational/BalanceHeader'
 
 export default class Balance extends Component {
   constructor(props){
@@ -46,10 +47,15 @@ export default class Balance extends Component {
 
   render() {
     const { navigation } = this.props
+    const { info } = this.state
     return(
-      <View>
-        <Text>Balance with USER</Text>
-        <Text>{ JSON.stringify(this.state.info) }</Text>
+      info && <View>
+        <BalanceHeader
+          user1={ info.user1_id }
+          user2={ info.user2_id }
+          total1={ info.balance_user_1 }
+          total2={ info.balance_user_2 }
+        />
         <Button title='Add Payment' onPress={ () => navigation.navigate('AddPayment', { id: navigation.getParam('id'), type: 'balance', recipient: this.state.info.user2_id }) } />
         <Text>-------------------</Text>
         <Text>Last Payments</Text>

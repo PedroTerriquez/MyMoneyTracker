@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, ScrollView, Text, TextInput } from 'react-native';
+import { ScrollView, Text, TouchableOpacity } from 'react-native';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
+import PromiseCard from './presentational/PromiseCard'
 
 export default class PromisesList extends Component {
   constructor(props){
@@ -30,11 +31,10 @@ export default class PromisesList extends Component {
 
   renderPromises() {
     return this.state.myPromises.map( promise => (
-      <View>
-        <Text>{ promise.id }</Text>
-        <Text>{ promise.title }</Text>
-        <Text>--------------------------------</Text>
-      </View>
+      <PromiseCard
+         id={promise.id}
+         title={promise.title}
+      />
     ))
   }
 
