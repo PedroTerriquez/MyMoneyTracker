@@ -9,6 +9,7 @@ class Contact extends Component {
     axios.post(`${global.API_URL}/friendships/${id}/accept`, {}, deviceStorage.loadToken() )
       .then((response) => {
         console.log(response.data)
+        this.props.delete(id)
       })
       .catch((error)=>{
         console.log(error);
@@ -18,6 +19,7 @@ class Contact extends Component {
   reject = (id) => {
     axios.post(`${global.API_URL}/friendships/${id}/reject`, {}, deviceStorage.loadToken() )
       .then((response) => {
+        this.props.delete(id)
         console.log(response.data)
       })
       .catch((error)=>{
@@ -29,6 +31,7 @@ class Contact extends Component {
     axios.post(`${global.API_URL}/friendships/${id}/cancel`, {}, deviceStorage.loadToken() )
       .then((response) => {
         console.log(response.data)
+        this.props.delete(id)
       })
       .catch((error)=>{
         console.log(error);

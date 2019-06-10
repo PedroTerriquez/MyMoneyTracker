@@ -53,6 +53,8 @@ export default class Login extends Component {
         <Button onPress={ this.handleSubmit } title='Submit' />
         <Text>User: {this.state.user} </Text>
         <Text>Password: {this.state.password} </Text>
+        <Button title='2' onPress={ ()=>this.setState({user: 'test2@hotmail.com'})}/>
+        <Button title='3' onPress={ ()=>this.setState({user: 'test3@hotmail.com'})}/>
       </View>
     )}
 }

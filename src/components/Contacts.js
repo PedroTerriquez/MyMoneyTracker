@@ -86,12 +86,25 @@ export default class Contacts extends Component {
     ))
   }
 
+  deletePending(id) {
+    this.setState({pending: this.state.pending.filter(function(friendship) {
+      return friendship.friendship_id !== id
+    })});
+  }
+
+  deleteRequest(id) {
+    this.setState({requests: this.state.requests.filter(function(friendship) {
+      return friendship.friendship_id !== id
+    })});
+  }
+
   renderPendingFriendships() {
     return this.state.pending.map( friendship => (
       <Contact
-        id={friendship.id}
+        id={friendship.friendship_id}
         name={friendship.first_name}
         type='pending'
+        delete={this.deletePending.bind(this)}
       />
     ))
   }
@@ -99,9 +112,10 @@ export default class Contacts extends Component {
   renderRequestFriendships() {
     return this.state.requests.map( friendship => (
       <Contact
-        id={friendship.id}
+        id={friendship.friendship_id}
         name={friendship.first_name}
         type='request'
+        delete={this.deleteRequest.bind(this)}
       />
     ))
   }
