@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput } from 'react-native';
+import { ScrollView, Text, TextInput } from 'react-native';
 import Links from './Links'
 import Payment from './presentational/Payment'
 import axios from 'axios';
@@ -37,6 +37,7 @@ export default class Home extends Component {
         method ='Cash'
         date = { payment.agreement_date }
         amount = { payment.amount }
+        title = { payment.title }
         promise = { payment.payment_promise_id }
         balance = { payment.balance_id }
       />
@@ -45,10 +46,10 @@ export default class Home extends Component {
 
   render() {
     return(
-      <View>
+      <ScrollView>
         <Text> LAST PAYMENTS </Text>
         { this.renderPayments() }
-			</View>
+      </ScrollView>
     )
   }
 }

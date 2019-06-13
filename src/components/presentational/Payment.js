@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Button, Text, TouchableOpacity } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 class Payment extends Component {
@@ -8,14 +8,15 @@ class Payment extends Component {
   }
 
   render() {
-    const { id, title, creator, method, amount, date, promise, balance } = this.props
+    const { id, title, creator, method, amount, date, promise, balance, status } = this.props
     return(
       <TouchableOpacity onPress={() => this.handleClick(promise || balance, promise ? 'Promise' : 'Balance')}>
         <Text>id: { id }</Text>
-        <Text>{ creator }</Text>
-        <Text>{ method }</Text>
-        <Text>{ date }</Text>
-        <Text>{ amount }</Text>
+        <Text>Creator: { creator }</Text>
+        <Text>Method: { method }</Text>
+        <Text>Date: { date }</Text>
+        <Text>Amount: { amount }</Text>
+        { status == 'pending' && <Button title='Edit' onPress={()=> this.props.navigation.navigate('AddPayment', { props: this.props }) }/> }
       </TouchableOpacity>
     )
   }

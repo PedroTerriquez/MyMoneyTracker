@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Alert, Text, TextInput, Button, View } from 'react-native';
+import { Text, TextInput, Button, View } from 'react-native';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 
@@ -13,26 +13,23 @@ export default class AddPayment extends Component {
     this.newPayment = this.newPayment.bind(this);
   }
 
-  newPayment() {
-    values = {
+  componentDidMount() {
+    this.setState({ ...this.props.navigation.getParam('props') })
+  }
+
+  paymentValues() {
+    return values = {
       title: this.state.title,
       amount: this.state.amount,
       balance_id: this.props.navigation.getParam('id'),
       payment_type: this.props.navigation.getParam('type'),
       recipient_id: this.props.navigation.getParam('recipient'),
     }
-    axios.post(`${global.API_URL}/payments/`, values, deviceStorage.loadToken() )
+  }
+  newPayment() {
+    axios.post(`${global.API_URL}/payments/`, this.paymentValues(), deviceStorage.loadToken() )
       .then((response) => {
-        Alert.alert(
-          'Payment Sent',
-          'Your payment was succesfully sent to the recipient, waiting for his approval',
-          [
-            {text: 'Ask me later', onPress: () => console.log('Ask me later pressed')},
-            {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel', },
-            {text: 'OK', onPress: () => console.log('OK Pressed')},
-          ],
-          {cancelable: false},
-        );
+        this.props.navigation.goBack();
       })
       .catch((error)=>{
         console.log(error);
@@ -44,17 +41,19 @@ export default class AddPayment extends Component {
       <View>
         <TextInput
           autoFocus={ true }
+          value={this.state.title}
           placeholder='Title'
           onChangeText={ (text) => this.setState({title: text}) }
         />
         <TextInput
           placeholder='Amount'
+          value={this.state.amount.toString()}
           onChangeText={ (text) => this.setState({amount: text}) }
           keyboardType={ 'numeric' }
         />
         <Button
-          title='Send'
-          onPress={ () => this.newPayment() }
+          title='Save'
+          onPress={ () => this.handleSubmit() }
         />
       </View>
     )
