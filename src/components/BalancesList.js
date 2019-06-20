@@ -34,8 +34,10 @@ export default class BalancesList extends Component {
         id= { balance.id }
         user1= { balance.user1_id }
         user2= { balance.user2_id }
-        total1= { balance.balance_user_1 }
-        total2= { balance.balance_user_2 }
+        name1= { balance.user1_name }
+        name2= { balance.user2_name }
+        total1= { balance.user1_money }
+        total2= { balance.user2_money }
       />
     ))
   }

@@ -34,6 +34,9 @@ export default class PromisesList extends Component {
       <PromiseCard
          id={promise.id}
          title={promise.title}
+         paid={promise.paid_amount}
+         total={promise.total}
+         adminName={promise.administrator_name}
       />
     ))
   }

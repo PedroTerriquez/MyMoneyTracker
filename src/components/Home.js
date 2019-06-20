@@ -34,6 +34,7 @@ export default class Home extends Component {
         key = { payment.id }
         id = { payment.id }
         creator = { payment.creator_id }
+        creatorName = { payment.creator_name }
         method ='Cash'
         date = { payment.agreement_date }
         amount = { payment.amount }

@@ -36,6 +36,7 @@ export default class Promise extends Component {
         key = { payment.id }
         id = { payment.id }
         creator = { payment.creator_id }
+        creatorName = { payment.creator_name }
         method ='Cash'
         date = { payment.agreement_date }
         amount = { payment.amount }
@@ -55,6 +56,7 @@ export default class Promise extends Component {
           title={ info.title }
           paid={ info.paid_amount }
           total={ info.total }
+          creator={info.creator_name}
         />
         <Button title='Add Payment' onPress={ () => navigation.navigate('AddPayment', { id: navigation.getParam('id'), type: 'promise', recipient: info.administrator_id }) } />
         <Text>-------------------</Text>

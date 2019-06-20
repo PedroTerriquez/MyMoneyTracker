@@ -26,14 +26,14 @@ class Notification extends Component {
   }
 
   render() {
-    const { id, creator, type, amount, name = 'pepito' } = this.props
+    const { id, creator, creatorName, type, amount } = this.props
     return(
       <TouchableOpacity onPress={ () => this.props.navigation.navigate('Home') }>
-        <Text>id: { id }</Text>
-        <Text>{ creator }</Text>
-        <Text>{ name }</Text>
-        <Text>{ type }</Text>
-        <Text>{ amount }</Text>
+        <Text>Id: { id }</Text>
+        <Text>Creator: { creator }</Text>
+        <Text>From:{ creatorName }</Text>
+        <Text>Type: { type }</Text>
+        <Text>Amount: { amount }</Text>
         <Button
           title='Accept'
           onPress={ () => this.accept(id) }/>

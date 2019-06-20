@@ -33,6 +33,7 @@ export default class Notifications extends Component {
       <Notification
         id={notification.id}
         creator={notification.sender_id}
+        creatorName={notification.sender_name}
         type={notification.notification_type}
         amount={notification.amount} />
       )

@@ -53,8 +53,10 @@ export default class Balance extends Component {
         <BalanceHeader
           user1={ info.user1_id }
           user2={ info.user2_id }
-          total1={ info.balance_user_1 }
-          total2={ info.balance_user_2 }
+          name1={ info.user1_name }
+          name2={ info.user2_name }
+          total1={ info.user1_money }
+          total2={ info.user2_money }
         />
         <Button title='Add Payment' onPress={ () => navigation.navigate('AddPayment', { id: navigation.getParam('id'), type: 'balance', recipient: this.state.info.user2_id }) } />
         <Text>-------------------</Text>
