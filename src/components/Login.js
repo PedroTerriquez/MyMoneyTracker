@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Alert, View, Keyboard, Button, Text, TextInput, StyleSheet } from 'react-native';
+import { View, Keyboard } from 'react-native';
+import { Container, Content, CardItem, Form, Item, Input, Label, Button, Text, Right, Thumbnail } from 'native-base';
 import { deviceStorage } from '../services/deviceStorage';
-import Links from './Links'
 
 export default class Login extends Component {
   constructor(){
@@ -22,7 +22,7 @@ export default class Login extends Component {
     axios.post(`${global.API_URL}/login`, { email: this.state.user, password: this.state.password },)
       .then((response) => {
         deviceStorage.saveToken(response.data.auth_token);
-        this.props.navigation.navigate('Home');
+        this.props.navigation.replace('Home');
       })
       .catch((error) => {
         console.log(error);
@@ -31,46 +31,48 @@ export default class Login extends Component {
 
   render() {
     return(
-      <View style={ styles.container }>
-        <Text> Login </Text>
-        <Text> Email: </Text>
-        <TextInput
-          id='user'
-          style={ styles.input }
-          autoFocus={ true }
-          placeholder='Your email'
-          onChangeText={ (text) => this.setState({user: text}) }
-          keyboardType={ 'email-address' }
-          onBlur={ Keyboard.dismiss } />
-        <Text> Password: </Text>
-        <TextInput
-          id='password'
-          style={ styles.input }
-          placeholder='Your password'
-          onBlur={ Keyboard.dismiss }
-          onChangeText={ (text) => this.setState({password: text}) }
-          secureTextEntry={ true } />
-        <Button onPress={ this.handleSubmit } title='Submit' />
-        <Text>User: {this.state.user} </Text>
-        <Text>Password: {this.state.password} </Text>
-        <Button title='2' onPress={ ()=>this.setState({user: 'test2@hotmail.com'})}/>
-        <Button title='3' onPress={ ()=>this.setState({user: 'test3@hotmail.com'})}/>
-      </View>
+      <Container>
+        <Content>
+          <Form style={{alignItems: 'center'}}>
+            <Thumbnail
+              style={{width: 200, height: 200, borderRadius: 100}}
+              source={{uri: 'https://picsum.photos/300/300.jpg'}} />
+            <Text style={{fontSize: 20, fontWeight: 'bold'}}> Login </Text>
+            <Item floatingLabel>
+              <Label>Email</Label>
+              <Input
+                id='user'
+                autoFocus={ true }
+                onChangeText={ (text) => this.setState({user: text}) }
+                keyboardType={ 'email-address' }
+                onBlur={ Keyboard.dismiss } />
+            </Item>
+            <Item floatingLabel>
+              <Label>Password</Label>
+              <Input
+                id='password'
+                onBlur={ Keyboard.dismiss }
+                onChangeText={ (text) => this.setState({password: text}) }
+                secureTextEntry={ true } />
+            </Item>
+            <CardItem>
+              <Right>
+                <Text>Forgot your password?</Text>
+              </Right>
+            </CardItem>
+            <Button
+              rounded
+              dark
+              onPress={ this.handleSubmit } >
+              <Text>LOGIN</Text>
+            </Button>
+          </Form>
+          <Text>or login with</Text>
+          <Text>Don’t have an account? SIGN UP</Text>
+          <Text>Testing buttons</Text>
+          <Button small onPress={ ()=>this.setState({user: 'test2@hotmail.com'})}><Text>User2</Text></Button>
+          <Button small onPress={ ()=>this.setState({user: 'test3@hotmail.com'})}><Text>User3</Text></Button>
+        </Content>
+      </Container>
     )}
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    //backgroundColor: '#8D51B1',
-  },
-  input:{
-    height: 40,
-    //backgroundColor: 'rgba(225,225,225,0.2)',
-    marginBottom: 10,
-    padding: 10,
-    //color: '#fff'
-  },
-})

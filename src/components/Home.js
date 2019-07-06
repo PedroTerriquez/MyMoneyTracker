@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, TextInput } from 'react-native';
+import { Container, Button, Segment, Content, Text } from 'native-base';
 import Links from './Links'
 import Payment from './presentational/Payment'
 import axios from 'axios';
@@ -9,7 +9,9 @@ export default class Home extends Component {
   constructor(props){
     super(props);
     this.state = {
-      payments: [],
+      balance_payments: [],
+      promise_payments: [],
+			tab: 0,
     }
     this.getPayments = this.getPayments.bind(this)
   }
@@ -21,15 +23,16 @@ export default class Home extends Component {
   getPayments() {
     axios.get(`${global.API_URL}/payments/friends_payments`, deviceStorage.loadToken())
       .then((response) => {
-        this.setState({ payments: response.data })
+        this.setState({ balance_payments: response.data.balance, promise_payments: response.data.promise })
+        this.state
       })
       .catch((error)=>{
         console.log(error);
       })
   }
 
-  renderPayments() {
-    return this.state.payments.map( payment => (
+  renderPayments(payments) {
+    return payments.map( payment => (
       <Payment
         key = { payment.id }
         id = { payment.id }
@@ -46,11 +49,21 @@ export default class Home extends Component {
   }
 
   render() {
+		payments = this.state.tab == 0 ? this.renderPayments(this.state.promise_payments) : this.renderPayments(this.state.balance_payments)
     return(
-      <ScrollView>
-        <Text> LAST PAYMENTS </Text>
-        { this.renderPayments() }
-      </ScrollView>
+			<Container>
+				<Segment>
+					<Button active={this.state.tab == 0} onPress={ ()=> this.setState({tab: 0}) }>
+						<Text>Payment Promises</Text>
+					</Button>
+					<Button last active={this.state.tab == 1} onPress={ ()=> this.setState({tab: 1}) }>
+						<Text>Payment Balance</Text>
+					</Button>
+				</Segment>
+				<Content padder>
+					{payments}
+				</Content>
+			</Container>
     )
   }
 }

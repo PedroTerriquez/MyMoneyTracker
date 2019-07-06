@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Text, TouchableOpacity} from 'react-native';
+import { TouchableOpacity} from 'react-native';
+import { Card, CardItem, Thumbnail, Text, Left, Body, Right } from 'native-base';
 import { withNavigation } from 'react-navigation';
 
 class PromiseCard extends Component {
@@ -7,12 +8,21 @@ class PromiseCard extends Component {
     const { id, title, paid, total, adminName } = this.props
     return(
       <TouchableOpacity onPress={ () => this.props.navigation.navigate('Promise',  { id: id} )}>
-        <Text>Id: { id }</Text>
-        <Text>Title: { title }</Text>
-        <Text>Paid: { paid }</Text>
-        <Text>Total: { total }</Text>
-        <Text>Admin: { adminName }</Text>
-        <Text>--------------------------------</Text>
+        <Card>
+          <CardItem>
+            <Left>
+              <Thumbnail source={{uri: 'http://cronicadexalapa.com/wp-content/uploads/2016/11/popo-caca.jpg'}} />
+              <Body>
+                <Text>{ id }</Text>
+                <Text>{ adminName }</Text>
+                <Text note>{ title }</Text>
+              </Body>
+            </Left>
+            <Right>
+              <Text>{ paid }/{total}</Text>
+            </Right>
+          </CardItem>
+        </Card>
       </TouchableOpacity>
     )
   }

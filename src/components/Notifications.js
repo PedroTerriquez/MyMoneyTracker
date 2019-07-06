@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, TextInput } from 'react-native';
+import { ScrollView } from 'react-native';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import Notification from './presentational/Notification'
@@ -32,9 +32,11 @@ export default class Notifications extends Component {
     return this.state.notifications.map( notification => (
       <Notification
         id={notification.id}
+        key={notification.id}
         creator={notification.sender_id}
         creatorName={notification.sender_name}
         type={notification.notification_type}
+        date={notification.updated_at}
         amount={notification.amount} />
       )
     )
@@ -43,7 +45,6 @@ export default class Notifications extends Component {
   render() {
     return(
       <ScrollView>
-        <Text> NOTIFICATIONS </Text>
         { this.renderNotifications() }
       </ScrollView>
     )

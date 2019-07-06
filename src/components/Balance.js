@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Text, View } from 'react-native';
+import { Button, Text, ScrollView } from 'react-native';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import Payment from './presentational/Payment'
@@ -36,11 +36,13 @@ export default class Balance extends Component {
         key = { payment.id }
         id = { payment.id }
         creator = { payment.creator_id }
-        method ='Cash'
-        date = { payment.agreement_date }
-        amount = { payment.amount }
+        method  ='Cash'
+        date    = { payment.agreement_date }
+        amount  = { payment.amount }
         promise = { payment.payment_promise_id }
         balance = { payment.balance_id }
+        status  = { payment.status }
+        title   = { payment.title }
       />
     ))
   }
@@ -49,7 +51,7 @@ export default class Balance extends Component {
     const { navigation } = this.props
     const { info } = this.state
     return(
-      info && <View>
+      info && <ScrollView>
         <BalanceHeader
           user1={ info.user1_id }
           user2={ info.user2_id }
@@ -59,10 +61,8 @@ export default class Balance extends Component {
           total2={ info.user2_money }
         />
         <Button title='Add Payment' onPress={ () => navigation.navigate('AddPayment', { id: navigation.getParam('id'), type: 'balance', recipient: this.state.info.user2_id }) } />
-        <Text>-------------------</Text>
-        <Text>Last Payments</Text>
         { this.renderPayments() }
-      </View>
+      </ScrollView>
     )
   }
 }

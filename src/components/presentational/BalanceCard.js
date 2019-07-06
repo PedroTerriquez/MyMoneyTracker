@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Text, TouchableOpacity} from 'react-native';
+import { TouchableOpacity} from 'react-native';
+import { Card, CardItem, Thumbnail, Text, Left, Body, Right } from 'native-base';
 import { withNavigation } from 'react-navigation';
 
 class BalanceCard extends Component {
@@ -7,14 +8,21 @@ class BalanceCard extends Component {
     const { id, user1, user2, name1, name2, total1, total2 } = this.props
     return(
       <TouchableOpacity onPress={ () => this.props.navigation.navigate('Balance',  { id: id} )}>
-        <Text>Id: { id }</Text>
-        <Text>User1: { user1 }</Text>
-        <Text>User2: { user2 }</Text>
-        <Text>Name1: { name1 }</Text>
-        <Text>Name2: { name2 }</Text>
-        <Text>Total1: { total1 }</Text>
-        <Text>Total2: { total2 }</Text>
-        <Text>--------------------------------</Text>
+        <Card>
+          <CardItem>
+            <Left>
+              <Thumbnail source={{uri: 'http://cronicadexalapa.com/wp-content/uploads/2016/11/popo-caca.jpg'}} />
+              <Body>
+                <Text>{ id }</Text>
+                <Text>{ name1 }</Text>
+                <Text>{ name2 }</Text>
+              </Body>
+            </Left>
+            <Right>
+              <Text>{ total1 }/{total2}</Text>
+            </Right>
+          </CardItem>
+        </Card>
       </TouchableOpacity>
     )
   }

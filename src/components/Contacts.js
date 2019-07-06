@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Button, ScrollView, Text, TextInput } from 'react-native';
+import { ScrollView } from 'react-native';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import Contact from './presentational/Contact'
@@ -18,7 +18,6 @@ export default class Contacts extends Component {
     this.renderContacts = this.renderContacts.bind(this);
     this.renderPendingFriendships = this.renderPendingFriendships.bind(this);
     this.renderRequestFriendships = this.renderRequestFriendships.bind(this);
-    this.createBalance = this.createBalance.bind(this);
   }
 
   componentDidMount(){
@@ -57,35 +56,6 @@ export default class Contacts extends Component {
       })
   }
 
-  createBalance(id){
-    axios.post(`${global.API_URL}/balances/`, {user2_id: id}, deviceStorage.loadToken() )
-      .then((response) => {
-        console.log("BALANCE CREATED")
-      })
-      .catch((error)=>{
-        console.log(error);
-      })
-  }
-
-  renderContacts() {
-    return this.state.friends.map( friend => (
-      <View>
-        <Contact
-          id={friend.id}
-          name={friend.first_name}
-        />
-        <Button
-          title='Create Promise'
-          onPress={ () => this.props.navigation.navigate('AddPromise', {id: friend.id} )}
-        />
-        <Button
-          title='Create Balance'
-          onPress={ () => this.createBalance(friend.id) }
-        />
-      </View>
-    ))
-  }
-
   deletePending(id) {
     this.setState({pending: this.state.pending.filter(function(friendship) {
       return friendship.friendship_id !== id
@@ -98,10 +68,22 @@ export default class Contacts extends Component {
     })});
   }
 
+  renderContacts() {
+    return this.state.friends.map( friend => (
+      <Contact
+        id={friend.id}
+        key={friend.id}
+        name={friend.first_name}
+        type='normal'
+      />
+    ))
+  }
+
   renderPendingFriendships() {
     return this.state.pending.map( friendship => (
       <Contact
         id={friendship.friendship_id}
+        key={friendship.friendship_id}
         name={friendship.first_name}
         type='pending'
         delete={this.deletePending.bind(this)}
@@ -113,6 +95,7 @@ export default class Contacts extends Component {
     return this.state.requests.map( friendship => (
       <Contact
         id={friendship.friendship_id}
+        key={friendship.friendship_id}
         name={friendship.first_name}
         type='request'
         delete={this.deleteRequest.bind(this)}
@@ -123,13 +106,8 @@ export default class Contacts extends Component {
   render() {
     return(
       <ScrollView>
-        <Text> CONTACTS </Text>
         { this.renderContacts() }
-        <Text> ---------------------------------- </Text>
-        <Text> PENDING </Text>
         { this.renderPendingFriendships() }
-        <Text> ---------------------------------- </Text>
-        <Text> REQUESTS </Text>
         { this.renderRequestFriendships() }
       </ScrollView>
     )

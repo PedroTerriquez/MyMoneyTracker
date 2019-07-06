@@ -1,17 +1,38 @@
 import React, { Component } from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import { Card, CardItem, Thumbnail, Text, Left, Body, Right } from 'native-base';
 
 export default class BalanceHeader extends Component {
   render() {
     const { user1, user2, name1, name2, total1, total2 } = this.props
     return(
       <View>
-        <Text>User 1: { user1 }</Text>
-        <Text>User 2: { user2 }</Text>
-        <Text>UserName 1: { name1 }</Text>
-        <Text>UserName 2: { name2 }</Text>
-        <Text>Total User 1: { total1 }</Text>
-        <Text>Total User 2: { total2 }</Text>
+        <Card>
+					<CardItem>
+						<Body>
+							<Text>{ user1 }{ user2 }</Text>
+							<Text>{ name1 }</Text>
+							<Text>{ name2 }</Text>
+              <Text>{ total1 }/{total2}</Text>
+						</Body>
+					</CardItem>
+          <CardItem>
+            <Left  style={{alignItems: 'center'}}>
+              <Thumbnail source={{uri: 'https://picsum.photos/300/300.jpg'}} />
+            </Left>
+            <Body style={{alignItems: 'center'}}>
+							<Thumbnail
+								style={{width: 150, height: 150, borderRadius: 100 }}
+								source={{uri: 'https://picsum.photos/200/200.jpg'}} />
+            </Body>
+            <Right>
+              <Thumbnail source={{uri: 'https://picsum.photos/300/300.jpg'}} />
+            </Right>
+          </CardItem>
+          <CardItem>
+						<Text>Debes ${total1} pesos a {name2}.</Text>
+          </CardItem>
+        </Card>
       </View>
     )
   }

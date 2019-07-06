@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Text, TextInput, Button, View } from 'react-native';
+import { View, ScrollView } from 'react-native';
+import { Item, Input, Icon, Text, Card, CardItem, Button, Right, Body } from 'native-base';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 
@@ -34,27 +35,41 @@ export default class AddContact extends Component {
 
   renderPeople() {
     return this.state.people.map( person => (
-      <View>
-        <Text> { `${person.first_name} ${person.last_name} - ${person.email}` } </Text>
-        <Button
-          title='Add'
-          onPress={ () => this.addFriend(person.id) }
-        />
-      </View>
+      <ScrollView>
+        <Card>
+          <CardItem>
+              <Body>
+                <Text>{person.first_name} {person.last_name}</Text>
+                <Text note>{person.email}</Text>
+              </Body>
+              <Right>
+                <Button
+                  success
+                  small
+                  rounded
+                  onPress={ () => this.addFriend(person.id) }>
+                  <Text>Add</Text>
+                  <Icon type='FontAwesome' name='check' />
+                </Button>
+              </Right>
+          </CardItem>
+        </Card>
+      </ScrollView>
     ))
   }
 
   render() {
     return(
       <View>
-        <Text>Search: </Text>
-        <TextInput
-          autoFocus={ true }
-          placeholder='Name or email'
-          onChangeText={ (text) => this.getPeople(text) }
-          keyboardType={ 'email-address' }
-        />
-        <Text>Results: </Text>
+        <Item rounded>
+          <Input
+            placeholder='Search by name or email'
+            autoFocus={ true }
+            onChangeText={ (text) => this.getPeople(text) }
+            ref={(ref) => this.SearchInput = ref }
+            keyboardType={ 'email-address' } />
+          <Icon type='AntDesign' name='close' onPress={ ()=> this.SearchInput._root.clear() } />
+        </Item>
         { this.renderPeople() }
       </View>
     )

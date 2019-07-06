@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Text, View } from 'react-native';
+import { Button, View } from 'react-native';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import Payment from './presentational/Payment'
@@ -42,6 +42,8 @@ export default class Promise extends Component {
         amount = { payment.amount }
         promise = { payment.payment_promise_id }
         balance = { payment.balance_id }
+        status  = { payment.status }
+        title   = { payment.title }
       />
     ))
   }
@@ -59,8 +61,6 @@ export default class Promise extends Component {
           creator={info.creator_name}
         />
         <Button title='Add Payment' onPress={ () => navigation.navigate('AddPayment', { id: navigation.getParam('id'), type: 'promise', recipient: info.administrator_id }) } />
-        <Text>-------------------</Text>
-        <Text>Last Payments</Text>
         { this.renderPayments() }
       </View>
     )

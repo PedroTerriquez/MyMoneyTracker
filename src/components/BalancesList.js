@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, TouchableOpacity } from 'react-native';
+import { ScrollView } from 'react-native';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import BalanceCard from './presentational/BalanceCard'
@@ -32,6 +32,7 @@ export default class BalancesList extends Component {
     return this.state.myBalances.map( balance => (
       <BalanceCard
         id= { balance.id }
+        key= { balance.id }
         user1= { balance.user1_id }
         user2= { balance.user2_id }
         name1= { balance.user1_name }

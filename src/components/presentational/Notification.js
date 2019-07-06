@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Text, TouchableOpacity } from 'react-native';
+import { TouchableOpacity } from 'react-native';
+import { Card, CardItem, Item, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 import { withNavigation } from 'react-navigation';
 import { deviceStorage } from '../../services/deviceStorage';
 import axios from 'axios';
@@ -26,20 +27,41 @@ class Notification extends Component {
   }
 
   render() {
-    const { id, creator, creatorName, type, amount } = this.props
+    const { id, creator, creatorName, type, amount, date } = this.props
     return(
       <TouchableOpacity onPress={ () => this.props.navigation.navigate('Home') }>
-        <Text>Id: { id }</Text>
-        <Text>Creator: { creator }</Text>
-        <Text>From:{ creatorName }</Text>
-        <Text>Type: { type }</Text>
-        <Text>Amount: { amount }</Text>
-        <Button
-          title='Accept'
-          onPress={ () => this.accept(id) }/>
-        <Button
-          title='Reject'
-          onPress={ () => this.reject(id) } />
+        <Card>
+          <CardItem>
+            <Left>
+              <Thumbnail source={{uri: 'http://cronicadexalapa.com/wp-content/uploads/2016/11/popo-caca.jpg'}} />
+              <Body>
+                <Text>id: { id }</Text>
+                <Text>Creator: { creator }</Text>
+                <Text>You receive a {type} request from {creatorName}</Text>
+                <Text note>{date}</Text>
+              </Body>
+            </Left>
+            <Right>
+              <Text>${amount}</Text>
+              <Item>
+                <Button
+                  success
+                  small
+                  rounded
+                  onPress={ () => this.accept(id) }>
+                  <Icon type='FontAwesome' name='check' />
+                </Button>
+                <Button
+                  danger
+                  rounded
+                  small
+                  onPress={ () => this.reject(id) }>
+                  <Icon type='FontAwesome' name='remove' />
+                </Button>
+              </Item>
+            </Right>
+          </CardItem>
+        </Card>
       </TouchableOpacity>
     )
   }

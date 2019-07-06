@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, TouchableOpacity } from 'react-native';
+import { ScrollView } from 'react-native';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import PromiseCard from './presentational/PromiseCard'
@@ -33,6 +33,7 @@ export default class PromisesList extends Component {
     return this.state.myPromises.map( promise => (
       <PromiseCard
          id={promise.id}
+         key={promise.id}
          title={promise.title}
          paid={promise.paid_amount}
          total={promise.total}
