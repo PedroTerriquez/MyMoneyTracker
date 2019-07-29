@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import PromiseCard from './presentational/PromiseCard'
@@ -30,6 +30,9 @@ export default class PromisesList extends Component {
   }
 
   renderPromises() {
+    if (this.state.myPromises.length == 0) {
+      return <Text>No promises yet, start one.</Text>
+    }
     return this.state.myPromises.map( promise => (
       <PromiseCard
          id={promise.id}

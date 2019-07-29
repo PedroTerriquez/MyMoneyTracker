@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Text, ScrollView } from 'react-native';
+import { Fab, Container, Icon } from 'native-base';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import Payment from './presentational/Payment'
@@ -51,18 +52,28 @@ export default class Balance extends Component {
     const { navigation } = this.props
     const { info } = this.state
     return(
-      info && <ScrollView>
-        <BalanceHeader
-          user1={ info.user1_id }
-          user2={ info.user2_id }
-          name1={ info.user1_name }
-          name2={ info.user2_name }
-          total1={ info.user1_money }
-          total2={ info.user2_money }
-        />
-        <Button title='Add Payment' onPress={ () => navigation.navigate('AddPayment', { id: navigation.getParam('id'), type: 'balance', recipient: this.state.info.user2_id }) } />
-        { this.renderPayments() }
-      </ScrollView>
+      info &&
+        <ScrollView>
+          <Container>
+            <Fab
+              active={true}
+              direction="up"
+              containerStyle={{ }}
+              style={{ backgroundColor: '#5067FF' }}
+              position="bottomRight" >
+              <Icon type='Ionicons' name="ios-add" />
+            </Fab>
+            <BalanceHeader
+              user1={ info.user1_id }
+              user2={ info.user2_id }
+              name1={ info.user1_name }
+              name2={ info.user2_name }
+              total1={ info.user1_money }
+              total2={ info.user2_money }
+            />
+            { this.renderPayments() }
+          </Container>
+        </ScrollView>
     )
   }
 }

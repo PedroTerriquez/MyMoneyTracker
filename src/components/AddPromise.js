@@ -28,7 +28,7 @@ export default class AddPromise extends Component {
       title: this.state.title,
       interest: this.state.interest,
       total: this.state.total,
-      recipient_id: this.props.navigation.getParam('id')
+      debtor_id: this.props.navigation.getParam('id')
     }
   }
 

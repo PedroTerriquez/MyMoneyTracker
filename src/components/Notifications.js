@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import Notification from './presentational/Notification'
@@ -29,6 +29,9 @@ export default class Notifications extends Component {
   }
 
   renderNotifications() {
+    if (this.state.notifications.length == 0) {
+      return <Text>No notifications yet.</Text>
+    }
     return this.state.notifications.map( notification => (
       <Notification
         id={notification.id}

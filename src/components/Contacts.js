@@ -69,6 +69,9 @@ export default class Contacts extends Component {
   }
 
   renderContacts() {
+    if (this.state.friends.length == 0) {
+      return <Text>No contacts yet. Add a new friend to start to save money.</Text>
+    }
     return this.state.friends.map( friend => (
       <Contact
         id={friend.id}
@@ -80,6 +83,9 @@ export default class Contacts extends Component {
   }
 
   renderPendingFriendships() {
+    if (this.state.pending.length == 0) {
+      return <Text>No pending requests.</Text>
+    }
     return this.state.pending.map( friendship => (
       <Contact
         id={friendship.friendship_id}
@@ -92,6 +98,9 @@ export default class Contacts extends Component {
   }
 
   renderRequestFriendships() {
+    if (this.state.requests.length == 0) {
+      return <Text>It's great! There are no people making you wait.</Text>
+    }
     return this.state.requests.map( friendship => (
       <Contact
         id={friendship.friendship_id}

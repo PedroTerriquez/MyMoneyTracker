@@ -32,6 +32,9 @@ export default class Home extends Component {
   }
 
   renderPayments(payments) {
+    if (payments.length == 0) {
+      return <Text>No payments yet, start a promise or balance.</Text>
+    }
     return payments.map( payment => (
       <Payment
         key = { payment.id }

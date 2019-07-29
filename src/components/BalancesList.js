@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import BalanceCard from './presentational/BalanceCard'
@@ -29,6 +29,9 @@ export default class BalancesList extends Component {
   }
 
   renderBalances() {
+    if (this.state.myBalances.length == 0) {
+      return <Text>No balances yet, start one.</Text>
+    }
     return this.state.myBalances.map( balance => (
       <BalanceCard
         id= { balance.id }
