@@ -55,7 +55,7 @@ class Contact extends Component {
         danger
         small
         rounded
-        onPress={ () => this.cancel(person.id) }>
+        onPress={ () => this.cancel(id) }>
         <Icon type='FontAwesome' name='remove' />
       </Button>
     )
@@ -68,14 +68,14 @@ class Contact extends Component {
           success
           small
           rounded
-          onPress={ () => this.accept(person.id) }>
+          onPress={ () => this.accept(id) }>
           <Icon type='FontAwesome' name='check' />
         </Button>
         <Button
           danger
           small
           rounded
-          onPress={ () => this.reject(person.id) }>
+          onPress={ () => this.reject(id) }>
           <Icon type='FontAwesome' name='remove' />
         </Button>
       </Item>
@@ -106,9 +106,9 @@ class Contact extends Component {
   render() {
     const { id, name, type } = this.props
     let buttons;
-    if (type == 'request') {
+    if (type == 'sent_request') {
       buttons = this.renderRequestButtons(id)
-    } else if (type == 'pending'){
+    } else if (type == 'pending_request'){
       buttons = this.renderPedingButton(id)
     } else if (type == 'normal'){
       buttons = this.renderNormalButton(id)

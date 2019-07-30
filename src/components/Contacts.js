@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, Text } from 'react-native';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import Contact from './presentational/Contact'
@@ -37,7 +37,7 @@ export default class Contacts extends Component {
   }
 
   getPendingFriendships() {
-    axios.get(`${global.API_URL}/friendships/pending_friendships_sended`, deviceStorage.loadToken())
+    axios.get(`${global.API_URL}/friendships/sent_friendships`, deviceStorage.loadToken())
       .then((response) => {
         this.setState({ pending: response.data })
       })
@@ -47,7 +47,7 @@ export default class Contacts extends Component {
   }
 
   getFriendshipRequests() {
-    axios.get(`${global.API_URL}/friendships/pending_friendships_requests`, deviceStorage.loadToken())
+    axios.get(`${global.API_URL}/friendships/pending_friendships`, deviceStorage.loadToken())
       .then((response) => {
         this.setState({ requests: response.data })
       })
@@ -84,14 +84,14 @@ export default class Contacts extends Component {
 
   renderPendingFriendships() {
     if (this.state.pending.length == 0) {
-      return <Text>No pending requests.</Text>
+      return <Text>It's great! There are no people making you wait.</Text>
     }
     return this.state.pending.map( friendship => (
       <Contact
         id={friendship.friendship_id}
         key={friendship.friendship_id}
         name={friendship.first_name}
-        type='pending'
+        type='sent_request'
         delete={this.deletePending.bind(this)}
       />
     ))
@@ -99,14 +99,14 @@ export default class Contacts extends Component {
 
   renderRequestFriendships() {
     if (this.state.requests.length == 0) {
-      return <Text>It's great! There are no people making you wait.</Text>
+      return <Text>No pending requests</Text>
     }
     return this.state.requests.map( friendship => (
       <Contact
         id={friendship.friendship_id}
         key={friendship.friendship_id}
         name={friendship.first_name}
-        type='request'
+        type='pending_request'
         delete={this.deleteRequest.bind(this)}
       />
     ))
