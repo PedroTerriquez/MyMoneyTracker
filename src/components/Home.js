@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Button, Segment, Content, Text } from 'native-base';
+import { Container, Button, Segment, Content, Text, Header, Left, Right, Body, Title } from 'native-base';
 import Links from './Links'
 import Payment from './presentational/Payment'
 import axios from 'axios';
@@ -11,7 +11,7 @@ export default class Home extends Component {
     this.state = {
       balance_payments: [],
       promise_payments: [],
-			tab: 0,
+      tab: 0,
     }
     this.getPayments = this.getPayments.bind(this)
   }
@@ -52,21 +52,26 @@ export default class Home extends Component {
   }
 
   render() {
-		payments = this.state.tab == 0 ? this.renderPayments(this.state.promise_payments) : this.renderPayments(this.state.balance_payments)
+    payments = this.state.tab == 0 ? this.renderPayments(this.state.promise_payments) : this.renderPayments(this.state.balance_payments)
     return(
-			<Container>
-				<Segment>
-					<Button active={this.state.tab == 0} onPress={ ()=> this.setState({tab: 0}) }>
-						<Text>Payment Promises</Text>
-					</Button>
-					<Button last active={this.state.tab == 1} onPress={ ()=> this.setState({tab: 1}) }>
-						<Text>Payment Balance</Text>
-					</Button>
-				</Segment>
-				<Content padder>
-					{payments}
-				</Content>
-			</Container>
+      <Container>
+        <Header>
+          <Body>
+            <Title>Last Payments</Title>
+          </Body>
+        </Header>
+        <Segment>
+          <Button active={this.state.tab == 0} onPress={ ()=> this.setState({tab: 0}) }>
+            <Text>Payment Promises</Text>
+          </Button>
+          <Button last active={this.state.tab == 1} onPress={ ()=> this.setState({tab: 1}) }>
+            <Text>Payment Balance</Text>
+          </Button>
+        </Segment>
+        <Content padder>
+          {payments}
+        </Content>
+      </Container>
     )
   }
 }

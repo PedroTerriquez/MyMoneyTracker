@@ -21,7 +21,7 @@ export default class Promise extends Component {
   }
 
   getPayments(id) {
-    axios.get(`${global.API_URL}/payment_promises/${id}`, deviceStorage.loadToken() )
+    axios.get(`${global.API_URL}/promises/${id}`, deviceStorage.loadToken() )
       .then((response) => {
         this.setState({ payments: response.data.payments, info: response.data.promise })
       })

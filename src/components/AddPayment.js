@@ -18,7 +18,7 @@ export default class AddPayment extends Component {
     this.setState({ ...this.props.navigation.getParam('props') })
   }
 
-  paymenCreationtValues() {
+  paymentCreationValues() {
     return values = {
       title: this.state.title,
       amount: this.state.amount,
@@ -55,7 +55,7 @@ export default class AddPayment extends Component {
   }
 
   newPayment() {
-    axios.post(`${global.API_URL}/payments/`, this.paymentValues(), deviceStorage.loadToken() )
+    axios.post(`${global.API_URL}/payments/`, this.paymentCreationValues(), deviceStorage.loadToken() )
       .then((response) => {
         this.props.navigation.goBack();
       })

@@ -8,7 +8,7 @@ export default class AddPromise extends Component {
     super(props);
     this.state = {
       id: null,
-      period_quantity: 10,
+      amount_payments: 10,
       period: 1,
       title: '',
       interest: '',
@@ -23,7 +23,7 @@ export default class AddPromise extends Component {
 
   promiseValues() {
     return values = {
-      payment_period_quantity: this.state.period_quantity,
+      amount_payments: this.state.amount_payments,
       payment_period: this.state.period,
       title: this.state.title,
       interest: this.state.interest,
@@ -33,16 +33,16 @@ export default class AddPromise extends Component {
   }
 
   handleSave() {
-    var id = this.props.navigation.getParam('props').id
-    if( id != null) {
-      this.updatePromise(id)
+    var props = this.props.navigation.getParam('props')
+    if(!!props && props.id) {
+      this.updatePromise(props.id)
     } else {
       this.newPromise()
     }
   }
 
   updatePromise(id) {
-    axios.patch(`${global.API_URL}/payment_promises/${id}`, this.promiseValues(), deviceStorage.loadToken() )
+    axios.patch(`${global.API_URL}/promises/${id}`, this.promiseValues(), deviceStorage.loadToken() )
       .then((response) => {
         this.props.navigation.goBack()
       })
@@ -52,7 +52,7 @@ export default class AddPromise extends Component {
   }
 
   newPromise() {
-    axios.post(`${global.API_URL}/payment_promises/`, this.promiseValues() , deviceStorage.loadToken() )
+    axios.post(`${global.API_URL}/promises/`, this.promiseValues() , deviceStorage.loadToken() )
       .then((response) => {
         this.props.navigation.goBack()
       })
@@ -85,8 +85,8 @@ export default class AddPromise extends Component {
             <Item floatingLabel>
               <Label>Money per payment</Label>
               <Input
-                value={ this.state.period_quantity.toString() }
-                onChangeText={ (text) => this.setState({period_quantity: text}) }
+                value={ this.state.amount_payments.toString() }
+                onChangeText={ (text) => this.setState({amount_payments: text}) }
                 keyboardType={ 'numeric' } />
             </Item>
             <Item floatingLabel>
@@ -112,7 +112,7 @@ export default class AddPromise extends Component {
             <Item floatingLabel disabled>
               <Label>Total amount of payments</Label>
               <Input
-                value={ ((this.state.total*this.state.interest)/this.state.period_quantity).toString() } />
+                value={ ((this.state.total*this.state.interest)/this.state.amount_payments).toString() } />
             </Item>
             <Item style={{borderColor: 'transparent', alignSelf: 'center', padding: '10%'}}>
               <Button

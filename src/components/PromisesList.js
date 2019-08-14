@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView } from 'react-native';
+import { Container, Button, Segment, Content, Text } from 'native-base';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import PromiseCard from './presentational/PromiseCard'
@@ -9,7 +10,8 @@ export default class PromisesList extends Component {
     super(props);
     this.state = {
       myPromises: [],
-      pendingPromises: []
+      pendingPromises: [],
+			tab: 0,
     }
     this.getPromises = this.getPromises.bind(this);
     this.renderPromises = this.renderPromises.bind(this);
@@ -20,20 +22,20 @@ export default class PromisesList extends Component {
   }
 
   getPromises() {
-    axios.get(`${global.API_URL}/payment_promises`, deviceStorage.loadToken())
+    axios.get(`${global.API_URL}/promises`, deviceStorage.loadToken())
       .then((response) => {
-        this.setState({ myPromises: response.data, pendingPromises: response.data })
+        this.setState({ myPromises: response.data.my_promises, pendingPromises: response.data.owe_promises })
       })
       .catch((error)=>{
         console.log(error);
       })
   }
 
-  renderPromises() {
-    if (this.state.myPromises.length == 0) {
+  renderPromises(promises) {
+    if (promises.length == 0) {
       return <Text>No promises yet, start one.</Text>
     }
-    return this.state.myPromises.map( promise => (
+    return promises.map( promise => (
       <PromiseCard
          id={promise.id}
          key={promise.id}
@@ -46,10 +48,21 @@ export default class PromisesList extends Component {
   }
 
   render() {
+		promises = this.state.tab == 0 ? this.renderPromises(this.state.myPromises) : this.renderPromises(this.state.pendingPromises)
     return(
-      <ScrollView>
-        { this.renderPromises() }
-      </ScrollView>
+			<Container>
+				<Segment>
+					<Button active={this.state.tab == 0} onPress={ ()=> this.setState({tab: 0}) }>
+						<Text>My Promises</Text>
+					</Button>
+					<Button last active={this.state.tab == 1} onPress={ ()=> this.setState({tab: 1}) }>
+						<Text>Owe Promises</Text>
+					</Button>
+				</Segment>
+				<Content padder>
+					{promises}
+				</Content>
+			</Container>
     )
   }
 }
