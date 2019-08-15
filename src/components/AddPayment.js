@@ -22,8 +22,8 @@ export default class AddPayment extends Component {
     return values = {
       title: this.state.title,
       amount: this.state.amount,
-      balance_id: this.props.navigation.getParam('id'),
-      payment_type: this.props.navigation.getParam('type'),
+      paymentable_id: this.props.navigation.getParam('id'),
+      paymentable_type: this.props.navigation.getParam('type'),
       recipient_id: this.props.navigation.getParam('recipient'),
     }
   }

@@ -9,9 +9,9 @@ class Payment extends Component {
   }
 
   render() {
-    const { id, title, creator, creatorName, method, amount, date, promise, balance, status } = this.props
+    const { id, title, creator, creatorName, method, amount, date, paymentable_id, type, status } = this.props
     return(
-      <TouchableOpacity onPress={() => this.handleClick(promise || balance, promise ? 'Promise' : 'Balance')}>
+      <TouchableOpacity onPress={() => this.handleClick(paymentable_id, type)}>
         <Card>
           <CardItem>
             <Left>

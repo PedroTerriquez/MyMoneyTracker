@@ -33,7 +33,7 @@ export default class PromisesList extends Component {
 
   renderPromises(promises) {
     if (promises.length == 0) {
-      return <Text>No promises yet, start one.</Text>
+      return <Text>No promises yet.</Text>
     }
     return promises.map( promise => (
       <PromiseCard

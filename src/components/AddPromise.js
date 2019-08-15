@@ -11,8 +11,8 @@ export default class AddPromise extends Component {
       amount_payments: 10,
       period: 1,
       title: '',
-      interest: '',
-      total: '',
+      interest: 0,
+      total: 0,
     }
     this.newPromise = this.newPromise.bind(this);
   }
@@ -62,6 +62,7 @@ export default class AddPromise extends Component {
   }
 
   render() {
+    const {amount_payments, title, interest, period, total} = this.state
     return(
       <Container>
         <Content>
@@ -75,7 +76,7 @@ export default class AddPromise extends Component {
                 placeholderStyle={{ color: "#bfc6ea" }}
                 placeholderIconColor="#007aff"
                 placeholder="Select a period"
-                selectedValue={this.state.period}
+                selectedValue={period}
                 onValueChange={(itemValue, itemIndex) => this.setState({period: itemValue})} >
                 <Picker.Item label="Daily" value="day" />
                 <Picker.Item label="Weekly" value="week" />
@@ -85,34 +86,34 @@ export default class AddPromise extends Component {
             <Item floatingLabel>
               <Label>Money per payment</Label>
               <Input
-                value={ this.state.amount_payments.toString() }
+                value={ amount_payments.toString() }
                 onChangeText={ (text) => this.setState({amount_payments: text}) }
                 keyboardType={ 'numeric' } />
             </Item>
             <Item floatingLabel>
               <Label>Concept</Label>
               <Input
-                value={ this.state.title }
+                value={ title }
                 onChangeText={ (text) => this.setState({title: text}) } />
             </Item>
             <Item floatingLabel>
               <Label>Interest</Label>
               <Input
-                value={ this.state.interest.toString() }
+                value={ interest.toString() }
                 onChangeText={ (text) => this.setState({interest: text}) }
                 keyboardType={ 'numeric' } />
             </Item>
             <Item floatingLabel>
               <Label>Total finance</Label>
               <Input
-                value={ this.state.total.toString() }
+                value={ total.toString() }
                 onChangeText={ (text) => this.setState({total: text}) }
                 keyboardType={ 'numeric' } />
             </Item>
             <Item floatingLabel disabled>
               <Label>Total amount of payments</Label>
               <Input
-                value={ ((this.state.total*this.state.interest)/this.state.amount_payments).toString() } />
+                value={ parseInt((total*((100+parseInt(interest))/100))/amount_payments).toString() } />
             </Item>
             <Item style={{borderColor: 'transparent', alignSelf: 'center', padding: '10%'}}>
               <Button

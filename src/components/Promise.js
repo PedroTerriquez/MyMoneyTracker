@@ -60,7 +60,9 @@ export default class Promise extends Component {
           total={ info.total }
           creator={info.creator_name}
         />
-        <Button title='Add Payment' onPress={ () => navigation.navigate('AddPayment', { id: navigation.getParam('id'), type: 'promise', recipient: info.administrator_id }) } />
+        {
+          !info.mine && <Button title='Add Payment' onPress={ () => navigation.navigate('AddPayment', { id: navigation.getParam('id'), type: 'Promise', recipient: info.administrator_id }) } />
+        }
         { this.renderPayments() }
       </View>
     )

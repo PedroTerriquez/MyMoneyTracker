@@ -45,8 +45,8 @@ export default class Home extends Component {
         date = { payment.agreement_date }
         amount = { payment.amount }
         title = { payment.title }
-        promise = { payment.payment_promise_id }
-        balance = { payment.balance_id }
+        paymentable_id = { payment.paymentable_id }
+        type = { payment.paymentable_type }
       />
     ))
   }
