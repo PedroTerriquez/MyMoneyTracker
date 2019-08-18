@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Text, ScrollView } from 'react-native';
+import { Button, Text, ScrollView, View } from 'react-native';
 import { Fab, Container, Icon } from 'native-base';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
@@ -34,16 +34,16 @@ export default class Balance extends Component {
   renderPayments() {
     return this.state.payments.map( payment => (
       <Payment
-        key = { payment.id }
-        id = { payment.id }
-        creator = { payment.creator_id }
-        method  ='Cash'
-        date    = { payment.agreement_date }
-        amount  = { payment.amount }
-        promise = { payment.payment_promise_id }
-        balance = { payment.balance_id }
-        status  = { payment.status }
-        title   = { payment.title }
+        key    = { payment.id }
+        id     = { payment.id }
+        creator= { payment.creator_id }
+        method ='Cash'
+        date   = { payment.agreement_date }
+        amount = { payment.amount }
+        status = { payment.status }
+        title  = { payment.title }
+        type   = { payment.paymentable_type }
+        paymentable_id = { payment.paymentable_id }
       />
     ))
   }
@@ -53,27 +53,28 @@ export default class Balance extends Component {
     const { info } = this.state
     return(
       info &&
-        <ScrollView>
           <Container>
-            <Fab
-              active={true}
-              direction="up"
-              containerStyle={{ }}
-              style={{ backgroundColor: '#5067FF' }}
-              position="bottomRight" >
-              <Icon type='Ionicons' name="ios-add" />
-            </Fab>
-            <BalanceHeader
-              user1={ info.user1_id }
-              user2={ info.user2_id }
-              name1={ info.user1_name }
-              name2={ info.user2_name }
-              total1={ info.user1_money }
-              total2={ info.user2_money }
-            />
-            { this.renderPayments() }
-          </Container>
-        </ScrollView>
+            <ScrollView>
+              <BalanceHeader
+                user1={ info.user1_id }
+                user2={ info.user2_id }
+                name1={ info.user1_name }
+                name2={ info.user2_name }
+                total1={ info.user1_money }
+                total2={ info.user2_money }
+              />
+              { this.renderPayments() }
+            </ScrollView>
+            <View style={{ flex: 1 }}>
+              <Fab
+                active={false}
+                style={{ backgroundColor: '#5067FF', flex: 1, zIndex: 999 }}
+                onPress={ () => navigation.navigate('AddPayment', { id: info.id, type: 'Balance'}) }
+                position="bottomRight" >
+                <Icon type='Ionicons' name="ios-add" />
+              </Fab>
+            </View>
+        </Container>
     )
   }
 }
