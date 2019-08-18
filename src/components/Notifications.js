@@ -28,6 +28,12 @@ export default class Notifications extends Component {
       })
   }
 
+  removeVisualNotification(id) {
+    this.setState({notifications: this.state.notifications.filter(function(notification) {
+      return notification.id !== id
+    })});
+  }
+
   renderNotifications() {
     if (this.state.notifications.length == 0) {
       return <Text>No notifications yet.</Text>
@@ -40,7 +46,9 @@ export default class Notifications extends Component {
         creatorName={notification.sender_name}
         type={notification.notification_type}
         date={notification.updated_at}
-        amount={notification.amount} />
+        amount={notification.amount}
+        remove={this.removeVisualNotification.bind(this) }
+      />
       )
     )
   }

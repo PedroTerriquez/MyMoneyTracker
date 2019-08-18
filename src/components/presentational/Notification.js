@@ -10,6 +10,7 @@ class Notification extends Component {
     axios.patch(`${global.API_URL}/notifications/${id}`, { status: 'accept' }, deviceStorage.loadToken() )
       .then((response) => {
         console.log(response.data)
+        this.props.remove(id)
       })
       .catch((error)=>{
         console.log(error);
@@ -20,6 +21,7 @@ class Notification extends Component {
     axios.patch(`${global.API_URL}/notifications/${id}`, { status: 'cancel' }, deviceStorage.loadToken() )
       .then((response) => {
         console.log(response.data)
+        this.props.remove(id)
       })
       .catch((error)=>{
         console.log(error);
