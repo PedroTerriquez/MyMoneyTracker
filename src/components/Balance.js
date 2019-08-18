@@ -42,6 +42,7 @@ export default class Balance extends Component {
         amount = { payment.amount }
         status = { payment.status }
         title  = { payment.title }
+        mine   = { payment.mine }
         type   = { payment.paymentable_type }
         paymentable_id = { payment.paymentable_id }
       />

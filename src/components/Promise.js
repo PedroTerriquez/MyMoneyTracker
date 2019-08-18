@@ -40,10 +40,12 @@ export default class Promise extends Component {
         method ='Cash'
         date = { payment.agreement_date }
         amount = { payment.amount }
-        promise = { payment.payment_promise_id }
         balance = { payment.balance_id }
         status  = { payment.status }
         title   = { payment.title }
+        mine    = { payment.mine }
+        type    = { payment.paymentable_type}
+        paymentable_id = { payment.paymentable_id }
       />
     ))
   }

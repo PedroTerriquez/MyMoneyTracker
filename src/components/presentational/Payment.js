@@ -9,7 +9,7 @@ class Payment extends Component {
   }
 
   render() {
-    const { id, title, creator, creatorName, method, amount, date, paymentable_id, type, status } = this.props
+    const { id, title, creator, creatorName, method, amount, date, paymentable_id, type, status, mine } = this.props
     return(
       <TouchableOpacity onPress={() => this.handleClick(paymentable_id, type)}>
         <Card>
@@ -17,7 +17,7 @@ class Payment extends Component {
             <Left>
               <Thumbnail source={{uri: 'https://picsum.photos/100/100.jpg'}} />
               <Body>
-                <Text>id: { id }</Text>
+                <Text>Payment id: { id }</Text>
                 <Text>Creator: { creator }</Text>
                 <Text>Status: { status }</Text>
                 <Text>{creatorName}</Text>
@@ -27,7 +27,7 @@ class Payment extends Component {
             <Right>
               <Text note>{date}</Text>
               <Text>{amount}</Text>
-              { status == 'pending' &&
+              { (mine == true && status == 'pending') &&
               <Button small success onPress={()=> this.props.navigation.navigate('AddPayment', { props: this.props }) }>
                 <Icon type='FontAwesome' name='edit' />
               </Button>
