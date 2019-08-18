@@ -28,10 +28,11 @@ export default class Notifications extends Component {
       })
   }
 
-  removeVisualNotification(id) {
-    this.setState({notifications: this.state.notifications.filter(function(notification) {
-      return notification.id !== id
-    })});
+  removeButtons(id) {
+    clone = this.state.notifications.slice()
+    let index = clone.findIndex(el => el.id == id);
+    clone[index].status = "modified"
+    this.setState({notifications: clone})
   }
 
   renderNotifications() {
@@ -40,14 +41,15 @@ export default class Notifications extends Component {
     }
     return this.state.notifications.map( notification => (
       <Notification
-        id={notification.id}
-        key={notification.id}
-        creator={notification.sender_id}
+        id     = {notification.id}
+        key    = {notification.id}
+        creator= {notification.sender_id}
+        type   = {notification.notification_type}
+        date   = {notification.updated_at}
+        amount = {notification.amount}
+        status = {notification.status}
         creatorName={notification.sender_name}
-        type={notification.notification_type}
-        date={notification.updated_at}
-        amount={notification.amount}
-        remove={this.removeVisualNotification.bind(this) }
+        remove={this.removeButtons.bind(this) }
       />
       )
     )

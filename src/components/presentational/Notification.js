@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { Card, CardItem, Item, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 import { withNavigation } from 'react-navigation';
 import { deviceStorage } from '../../services/deviceStorage';
@@ -29,7 +29,7 @@ class Notification extends Component {
   }
 
   render() {
-    const { id, creator, creatorName, type, amount, date } = this.props
+    const { id, creator, creatorName, type, amount, date, status } = this.props
     return(
       <TouchableOpacity onPress={ () => this.props.navigation.navigate('Home') }>
         <Card>
@@ -46,20 +46,23 @@ class Notification extends Component {
             <Right>
               <Text>${amount}</Text>
               <Item>
-                <Button
-                  success
-                  small
-                  rounded
-                  onPress={ () => this.accept(id) }>
-                  <Icon type='FontAwesome' name='check' />
-                </Button>
-                <Button
-                  danger
-                  rounded
-                  small
-                  onPress={ () => this.reject(id) }>
-                  <Icon type='FontAwesome' name='remove' />
-                </Button>
+                { (status == 'pending') && <View>
+                    <Button
+                      success
+                      small
+                      rounded
+                      onPress={ () => this.accept(id) }>
+                      <Icon type='FontAwesome' name='check' />
+                    </Button>
+                    <Button
+                      danger
+                      rounded
+                      small
+                      onPress={ () => this.reject(id) }>
+                      <Icon type='FontAwesome' name='remove' />
+                    </Button>
+                  </View>
+                }
               </Item>
             </Right>
           </CardItem>
