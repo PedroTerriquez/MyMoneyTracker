@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, View } from 'react-native';
+import { Button, ScrollView } from 'react-native';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import Payment from './presentational/Payment'
@@ -54,7 +54,7 @@ export default class Promise extends Component {
     const { navigation } = this.props
     const { info } = this.state
     return(
-      info && <View>
+      info && <ScrollView>
         <PromiseHeader
           id={ info.id }
           title={ info.title }
@@ -66,7 +66,7 @@ export default class Promise extends Component {
           !info.mine && <Button title='Add Payment' onPress={ () => navigation.navigate('AddPayment', { id: navigation.getParam('id'), type: 'Promise', recipient: info.administrator_id }) } />
         }
         { this.renderPayments() }
-      </View>
+      </ScrollView>
     )
   }
 }
