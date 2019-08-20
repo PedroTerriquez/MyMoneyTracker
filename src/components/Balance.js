@@ -5,6 +5,7 @@ import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import Payment from './presentational/Payment'
 import BalanceHeader from './presentational/BalanceHeader'
+import { NavigationEvents } from 'react-navigation';
 
 export default class Balance extends Component {
   constructor(props){
@@ -70,11 +71,17 @@ export default class Balance extends Component {
               <Fab
                 active={false}
                 style={{ backgroundColor: '#5067FF', flex: 1, zIndex: 999 }}
-                onPress={ () => navigation.navigate('AddPayment', { id: info.id, type: 'Balance'}) }
+                onPress={ () => navigation.navigate('AddPayment', {
+                  id: info.id,
+                  type: 'Balance',
+                })}
                 position="bottomRight" >
                 <Icon type='Ionicons' name="ios-add" />
               </Fab>
             </View>
+            <NavigationEvents
+              onWillFocus={() => this.getPayments(info.id)}
+            />
         </Container>
     )
   }
