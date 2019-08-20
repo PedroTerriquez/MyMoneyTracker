@@ -26,35 +26,40 @@ export default class AddContact extends Component {
   addFriend(id){
     axios.post(`${global.API_URL}/friendships`, { user2_id: id }, deviceStorage.loadToken() )
       .then((response) => {
-        console.log(response.data)
+        this.removeButton(id)
       })
       .catch((error)=>{
         console.log(error);
       })
   }
 
+  removeButton(id){
+    clone = this.state.people.slice()
+    let index = clone.findIndex(el => el.id == id);
+    clone[index].id = null
+    this.setState({people: clone})
+  }
+
   renderPeople() {
     return this.state.people.map( person => (
-      <ScrollView>
-        <Card>
+        <Card key={person.id}>
           <CardItem>
               <Body>
                 <Text>{person.first_name} {person.last_name}</Text>
                 <Text note>{person.email}</Text>
               </Body>
               <Right>
-                <Button
+                { person.id && <Button
                   success
                   small
                   rounded
                   onPress={ () => this.addFriend(person.id) }>
                   <Text>Add</Text>
                   <Icon type='FontAwesome' name='check' />
-                </Button>
+                </Button>}
               </Right>
           </CardItem>
         </Card>
-      </ScrollView>
     ))
   }
 
@@ -70,7 +75,9 @@ export default class AddContact extends Component {
             keyboardType={ 'email-address' } />
           <Icon type='AntDesign' name='close' onPress={ ()=> this.SearchInput._root.clear() } />
         </Item>
-        { this.renderPeople() }
+        <ScrollView>
+          { this.renderPeople() }
+        </ScrollView>
       </View>
     )
   }

@@ -37,16 +37,17 @@ export default class Home extends Component {
     }
     return payments.map( payment => (
       <Payment
-        key = { payment.id }
-        id = { payment.id }
+        key     = { payment.id }
+        id      = { payment.id }
         creator = { payment.creator_id }
-        creatorName = { payment.creator_name }
-        method ='Cash'
-        date = { payment.agreement_date }
-        amount = { payment.amount }
-        title = { payment.title }
+        method  ='Cash'
+        date    = { payment.agreement_date }
+        amount  = { payment.amount }
+        title   = { payment.title }
+        status  = { payment.status}
+        type    = { payment.paymentable_type }
+        creatorName    = { payment.creator_name }
         paymentable_id = { payment.paymentable_id }
-        type = { payment.paymentable_type }
       />
     ))
   }
