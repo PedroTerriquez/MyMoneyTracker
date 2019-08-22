@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Card, CardItem, Thumbnail, Text, Left, Body, Right } from 'native-base';
+import PureChart from 'react-native-pure-chart';
 
 export default class BalanceHeader extends Component {
   render() {
     const { user1, user2, name1, name2, total1, total2 } = this.props
-    const mayor = total1 > total2 ? 1 : 2
-    const nameMayor = mayor == 1 ? name1: name2
-    const debt = mayor == 1 ? total1-total2 : total2-total1
+    let numberMayor = total1 > total2 ? 1 : 2
+    let nameMayor = numberMayor == 1 ? name1: name2
+    let debt = numberMayor == 1 ? total1-total2 : total2-total1
+    let sampleData = [ { value: total1, label: name1, color: 'red', }, { value: total2, label: name2, color: 'blue' } ]
     return(
       <View>
         <Card>
@@ -23,9 +25,6 @@ export default class BalanceHeader extends Component {
               <Thumbnail source={{uri: 'https://picsum.photos/300/300.jpg'}} />
             </Left>
             <Body style={{alignItems: 'center'}}>
-							<Thumbnail
-								style={{width: 150, height: 150, borderRadius: 100 }}
-								source={{uri: 'https://picsum.photos/200/200.jpg'}} />
             </Body>
             <Right>
               <Thumbnail source={{uri: 'https://picsum.photos/300/300.jpg'}} />

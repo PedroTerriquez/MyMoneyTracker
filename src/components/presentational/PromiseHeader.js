@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View } from 'react-native';
 import { Card, CardItem, Thumbnail, Text, Body } from 'native-base';
 import { withNavigation } from 'react-navigation';
+import Speedometer from 'react-native-speedometer-chart';
 
 class PromiseHeader extends Component {
   render() {
@@ -17,7 +18,7 @@ class PromiseHeader extends Component {
           </CardItem>
           <CardItem>
             <Body style={{alignItems: 'center'}}>
-              <Text>${ paid } de ${ total }.</Text>
+              <Speedometer value={paid} totalValue={total} showPercent showLabels/>
             </Body>
           </CardItem>
         </Card>

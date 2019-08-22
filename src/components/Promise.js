@@ -4,6 +4,7 @@ import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import Payment from './presentational/Payment'
 import PromiseHeader from './presentational/PromiseHeader'
+import { NavigationEvents } from 'react-navigation';
 
 export default class Promise extends Component {
   constructor(props){
@@ -66,6 +67,7 @@ export default class Promise extends Component {
           !info.mine && <Button title='Add Payment' onPress={ () => navigation.navigate('AddPayment', { id: navigation.getParam('id'), type: 'Promise', recipient: info.administrator_id }) } />
         }
         { this.renderPayments() }
+        <NavigationEvents onWillFocus={() => this.getPayments(info.id)} />
       </ScrollView>
     )
   }

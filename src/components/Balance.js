@@ -79,9 +79,7 @@ export default class Balance extends Component {
                 <Icon type='Ionicons' name="ios-add" />
               </Fab>
             </View>
-            <NavigationEvents
-              onWillFocus={() => this.getPayments(info.id)}
-            />
+            <NavigationEvents onWillFocus={() => this.getPayments(info.id)} />
         </Container>
     )
   }
