@@ -22,7 +22,7 @@ class PromiseHeader extends Component {
             </Body>
           </CardItem>
         </Card>
-        <Text>Promise id: { id }</Text>
+        {/* <Text>Promise id: { id }</Text> */}
         { status == 'pending' && <Button title='Edit' onPress={()=> navigation.navigate('AddPromise', { props: this.props }) }/> }
       </View>
     )

@@ -45,7 +45,7 @@ export default class BalanceHeader extends Component {
 							height={50}
 							preserveAspectRatio="xMidYMid slice"
 							opacity="1"
-							href={'https://picsum.photos/40/40.jpg'}
+              href={'https://cdn2.iconfinder.com/data/icons/rcons-user/32/male-shadow-circle-512.png'}
 						/>
 					</G>
 				)
@@ -54,6 +54,11 @@ export default class BalanceHeader extends Component {
 
     return(
       <View>
+				{/*
+				<Text>id: { user1 }/{ user2 }</Text>
+				<Text>name: { name1 }/{ name2 }</Text>
+				<Text>totals: { total1 }/{total2 }</Text>
+				*/}
 				<PieChart
 					style={{ height: 300 }}
 					valueAccessor={({ item }) => item.amount}
@@ -62,14 +67,7 @@ export default class BalanceHeader extends Component {
 					outerRadius={'95%'} >
 					<Labels/>
 				</PieChart>
-				<Text>id: { user1 }/{ user2 }</Text>
-				<Text>name: { name1 }/{ name2 }</Text>
-				<Text>totals: { total1 }/{total2 }</Text>
-        <Card>
-          <CardItem>
-            <Text>{nameMayor} debe ${debt} pesos.</Text>
-          </CardItem>
-        </Card>
+				<Text>{nameMayor} has pagado menos, debes ${debt} pesos.</Text>
       </View>
     )
   }

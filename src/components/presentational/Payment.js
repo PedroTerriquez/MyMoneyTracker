@@ -17,16 +17,18 @@ class Payment extends Component {
             <Left>
               <Thumbnail source={{uri: 'https://picsum.photos/100/100.jpg'}} />
               <Body>
+                {/*
                 <Text>Payment id: { id }</Text>
-                <Text>Creator: { creator }</Text>
+                <Text>Creator id: { creator }</Text>
                 <Text>Status: { status }</Text>
+								*/}
                 <Text>{creatorName}</Text>
                 <Text note>{method}</Text>
               </Body>
             </Left>
             <Right>
               <Text note>{date}</Text>
-              <Text>{amount}</Text>
+              <Text>${amount}</Text>
               { (mine == true && status == 'pending') &&
               <Button small success onPress={()=> this.props.navigation.navigate('AddPayment', { props: this.props }) }>
                 <Icon type='FontAwesome' name='edit' />

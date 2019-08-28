@@ -34,14 +34,13 @@ export default class Promise extends Component {
   renderPayments() {
     return this.state.payments.map( payment => (
       <Payment
-        key = { payment.id }
-        id = { payment.id }
+        key     = { payment.id }
+        id      = { payment.id }
         creator = { payment.creator_id }
         creatorName = { payment.creator_name }
-        method ='Cash'
-        date = { payment.agreement_date }
+        method  ='Cash'
+        date    = { payment.agreement_date }
         amount = { payment.amount }
-        balance = { payment.balance_id }
         status  = { payment.status }
         title   = { payment.title }
         mine    = { payment.mine }
