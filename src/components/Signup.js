@@ -4,25 +4,36 @@ import { View, Keyboard } from 'react-native';
 import { Container, Content, CardItem, Form, Item, Input, Label, Button, Text, Right, Thumbnail } from 'native-base';
 import { deviceStorage } from '../services/deviceStorage';
 
-export default class Login extends Component {
+export default class Signup extends Component {
   constructor(){
     super();
     this.state = {
-      user: 'test1@example.com',
-      password: '123456'
+      user: '',
+      password: '',
+      first_name: '',
+      last_name: '',
     };
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleSubmit() {
-    if (global.JWT != null){
-      this.props.navigation.navigate('Home');
-    }
-
-    axios.post(`${global.API_URL}/login`, { email: this.state.user, password: this.state.password },)
+  login(){
+    const { user, password} = this.state
+    axios.post(`${global.API_URL}/login`, { email: user, password: password},)
       .then((response) => {
         deviceStorage.saveToken(response.data.auth_token);
         this.props.navigation.replace('Home');
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  handleSubmit() {
+    const { user, password, first_name, last_name } = this.state
+    const data = { email: user, password: password, first_name: first_name, last_name: last_name }
+    axios.post(`${global.API_URL}/users`, data,)
+      .then((response) => {
+        this.login();
       })
       .catch((error) => {
         console.log(error);
@@ -37,12 +48,27 @@ export default class Login extends Component {
             <Thumbnail
               style={{width: 200, height: 200, borderRadius: 100}}
               source={{uri: 'https://picsum.photos/300/300.jpg'}} />
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}> Login </Text>
+            <Text style={{fontSize: 20, fontWeight: 'bold'}}> Sign up </Text>
+            <Item floatingLabel>
+              <Label>First name</Label>
+              <Input
+                id='first_name'
+                autoFocus={ true }
+                onChangeText={ (text) => this.setState({first_name: text}) }
+                onBlur={ Keyboard.dismiss } />
+            </Item>
+            <Item floatingLabel>
+              <Label>Last name</Label>
+              <Input
+                id='last_name'
+                autoFocus={ true }
+                onChangeText={ (text) => this.setState({last_name: text}) }
+                onBlur={ Keyboard.dismiss } />
+            </Item>
             <Item floatingLabel>
               <Label>Email</Label>
               <Input
                 id='user'
-                autoFocus={ true }
                 onChangeText={ (text) => this.setState({user: text}) }
                 keyboardType={ 'email-address' }
                 onBlur={ Keyboard.dismiss } />
@@ -55,23 +81,13 @@ export default class Login extends Component {
                 onChangeText={ (text) => this.setState({password: text}) }
                 secureTextEntry={ true } />
             </Item>
-            <CardItem>
-              <Right>
-                <Text>Forgot your password?</Text>
-              </Right>
-            </CardItem>
             <Button
               rounded
               dark
               onPress={ this.handleSubmit } >
-              <Text>LOGIN</Text>
+              <Text>Sign up</Text>
             </Button>
           </Form>
-          <Text>or login with</Text>
-          <Text>Don’t have an account?</Text><Button onPress={()=>this.props.navigation.replace('Signup')}><Text>Sign Up</Text></Button>
-          <Text>Testing buttons</Text>
-          <Button small onPress={ ()=>this.setState({user: 'test2@example.com'})}><Text>User2</Text></Button>
-          <Button small onPress={ ()=>this.setState({user: 'test3@example.com'})}><Text>User3</Text></Button>
         </Content>
       </Container>
     )}

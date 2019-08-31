@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Button, Segment, Content, Text, Header, Left, Right, Body, Title } from 'native-base';
+import { Container, Button, Segment, Content, Text, Header, Body, Title } from 'native-base';
 import Links from './Links'
 import Payment from './presentational/Payment'
 import axios from 'axios';

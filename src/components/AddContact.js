@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView } from 'react-native';
-import { Item, Input, Icon, Text, Card, CardItem, Button, Right, Body } from 'native-base';
+import { Item, Input, Icon, Text, Card, CardItem, Button, Right, Body, Left, Thumbnail } from 'native-base';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 
@@ -44,10 +44,13 @@ export default class AddContact extends Component {
     return this.state.people.map( person => (
         <Card key={person.id}>
           <CardItem>
-              <Body>
-                <Text>{person.first_name} {person.last_name}</Text>
-                <Text note>{person.email}</Text>
-              </Body>
+              <Left>
+                <Thumbnail source={{uri: 'https://picsum.photos/100/100.jpg'}} />
+                <Body>
+                  <Text>{person.first_name} {person.last_name}</Text>
+                  <Text note>{person.email}</Text>
+                </Body>
+              </Left>
               <Right>
                 { person.id && <Button
                   success

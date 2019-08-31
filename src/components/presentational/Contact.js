@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TouchableOpacity } from 'react-native';
-import { Item, Icon, Text, Card, CardItem, Button, Right, Left, Body } from 'native-base';
+import { Item, Icon, Text, Card, CardItem, Button, Right, Left, Body, Thumbnail } from 'native-base';
 import { withNavigation } from 'react-navigation';
 import { deviceStorage } from '../../services/deviceStorage';
 import axios from 'axios';
@@ -115,16 +115,19 @@ class Contact extends Component {
     }
 
     return(
-      <TouchableOpacity onPress={ () => this.props.navigation.navigate('Home') }>
+      <TouchableOpacity>
         <Card>
           <CardItem>
+            <Left>
+              <Thumbnail source={{uri: 'https://picsum.photos/100/100.jpg'}} />
               <Body>
-                <Text note>{id}</Text>
+                <Text note>Friendship id: {id}</Text>
                 <Text>{name}</Text>
               </Body>
-              <Right>
-                { buttons }
-              </Right>
+            </Left>
+            <Right>
+              { buttons }
+            </Right>
           </CardItem>
         </Card>
       </TouchableOpacity>

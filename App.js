@@ -1,8 +1,10 @@
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import Login from './src/components/Login.js'
+import Signup from './src/components/Signup.js'
 import Home from './src/components/Home.js'
 import Contacts from './src/components/Contacts.js'
+import ContactRequests from './src/components/ContactRequests.js'
 import AddContact from './src/components/AddContact.js'
 import Notifications from './src/components/Notifications.js'
 import Links from './src/components/Links.js'
@@ -17,6 +19,7 @@ import {createStackNavigator, createAppContainer, createDrawerNavigator} from 'r
 const MainNavigator = createStackNavigator(
   {
     Login: Login,
+    Signup: Signup,
     Home: Home,
     Contacts: Contacts,
     AddContact: AddContact,
@@ -35,6 +38,7 @@ const Menu = createDrawerNavigator(
     MainNavigator: MainNavigator,
     Home: Home,
     Contacts: Contacts,
+    ContactRequests: ContactRequests,
     AddContact: AddContact,
     Notifications: Notifications,
     BalancesList: BalancesList,
@@ -46,14 +50,6 @@ const Menu = createDrawerNavigator(
 );
 
 export default createAppContainer(Menu);
-
-const styles = StyleSheet.create({
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    marginTop: 40,
-  }
-});
 
 //global.API_URL = 'https://presta-mesta.herokuapp.com/v1'
 global.API_URL = 'http://localhost:3002/v1'
