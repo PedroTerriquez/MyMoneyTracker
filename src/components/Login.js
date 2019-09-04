@@ -3,21 +3,20 @@ import axios from 'axios';
 import { View, Keyboard } from 'react-native';
 import { Container, Content, CardItem, Form, Item, Input, Label, Button, Text, Right, Thumbnail } from 'native-base';
 import { deviceStorage } from '../services/deviceStorage';
+import ToastService from '../services/ToastService.js';
 
 export default class Login extends Component {
   constructor(){
     super();
     this.state = {
       user: 'test1@example.com',
-      password: '123456'
+      password: '123456',
+      errors: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleSubmit() {
-    if (global.JWT != null){
-      this.props.navigation.navigate('Home');
-    }
 
     axios.post(`${global.API_URL}/login`, { email: this.state.user, password: this.state.password },)
       .then((response) => {
@@ -25,7 +24,7 @@ export default class Login extends Component {
         this.props.navigation.replace('Home');
       })
       .catch((error) => {
-        console.log(error);
+        ToastService.showToast('Wrong email or password');
       });
   }
 
@@ -42,7 +41,6 @@ export default class Login extends Component {
               <Label>Email</Label>
               <Input
                 id='user'
-                autoFocus={ true }
                 onChangeText={ (text) => this.setState({user: text}) }
                 keyboardType={ 'email-address' }
                 onBlur={ Keyboard.dismiss } />

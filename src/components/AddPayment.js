@@ -3,6 +3,7 @@ import { View, StyleSheet, TextInput } from 'react-native';
 import { Card, CardItem, Thumbnail, Text, Left, Body, Button } from 'native-base';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
+import ToastService from '../services/ToastService.js';
 
 export default class AddPayment extends Component {
   constructor(props){
@@ -50,7 +51,7 @@ export default class AddPayment extends Component {
         this.props.navigation.goBack();
       })
       .catch((error)=>{
-        console.log(error);
+        ToastService.showToast(error.response.data.errors);
       })
   }
 
@@ -60,7 +61,7 @@ export default class AddPayment extends Component {
         this.props.navigation.goBack();
       })
       .catch((error)=>{
-        console.log(error);
+        ToastService.showToast(error.response.data.errors);
       })
   }
 
@@ -72,7 +73,7 @@ export default class AddPayment extends Component {
             <Left>
               <Thumbnail source={{uri: 'https://picsum.photos/100/100.jpg'}} />
               <Body>
-                <Text>Sending to JOSE ANGEL</Text>
+                <Text>Sending to {this.props.navigation.getParam('recipientName')}</Text>
               </Body>
             </Left>
           </CardItem>

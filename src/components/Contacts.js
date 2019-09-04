@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavigationEvents } from 'react-navigation';
 import { ScrollView, Text } from 'react-native';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
@@ -46,6 +47,7 @@ export default class Contacts extends Component {
     return(
       <ScrollView>
         { this.renderContacts() }
+        <NavigationEvents onWillFocus={() => this.getFriends()} />
       </ScrollView>
     )
   }

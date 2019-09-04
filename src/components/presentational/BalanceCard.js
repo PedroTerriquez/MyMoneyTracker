@@ -11,15 +11,14 @@ class BalanceCard extends Component {
         <Card>
           <CardItem>
             <Left>
-              <Thumbnail source={{uri: 'http://cronicadexalapa.com/wp-content/uploads/2016/11/popo-caca.jpg'}} />
+              <Thumbnail source={{uri: 'https://picsum.photos/50/50.jpg'}} />
               <Body>
-                <Text>{ id }</Text>
-                <Text>{ name1 }</Text>
-                <Text>{ name2 }</Text>
+                {/*<Text>{ id }</Text>*/}
+                <Text>{ name1 } con { name2 }</Text>
               </Body>
             </Left>
             <Right>
-              <Text>{ total1 }/{total2}</Text>
+              <Text>{ total1 || 0}/{total2 || 0}</Text>
             </Right>
           </CardItem>
         </Card>

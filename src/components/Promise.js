@@ -63,7 +63,15 @@ export default class Promise extends Component {
           creator={info.creator_name}
         />
         {
-          !info.mine && <Button title='Add Payment' onPress={ () => navigation.navigate('AddPayment', { id: navigation.getParam('id'), type: 'Promise', recipient: info.administrator_id }) } />
+          !info.mine && <Button
+            title='Add Payment'
+            onPress={ () => navigation.navigate('AddPayment', {
+              id: navigation.getParam('id'),
+              type: 'Promise',
+              recipient: info.administrator_id,
+              recipientName: info.creator_name
+              })
+            } />
         }
         { this.renderPayments() }
         <NavigationEvents onWillFocus={() => this.getPayments(info.id)} />

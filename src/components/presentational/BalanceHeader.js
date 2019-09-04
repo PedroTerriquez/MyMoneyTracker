@@ -7,19 +7,19 @@ import { Circle, G, Image, Line } from 'react-native-svg'
 export default class BalanceHeader extends Component {
   render() {
     const { user1, user2, name1, name2, total1, total2 } = this.props
-    let numberMayor = total1 > total2 ? 1 : 2
-    let nameMayor = numberMayor == 1 ? name1: name2
-    let debt = numberMayor == 1 ? total1-total2 : total2-total1
+    let major       = total1 > total2 ? 1 : 2
+    let debtorName  = major == 1 ? name2 : name1
+    let debt        = major == 1 ? total1-total2 : total2-total1
 
 		const data = [
 			{
 				key: 1,
-				amount: total1,
+				amount: total1 || 1,
 				svg: { fill: 'green' },
 			},
 			{
 				key: 2,
-				amount: total2,
+				amount: total2 || 1,
 				svg: { fill: 'blue' }
 			},
 		]
@@ -67,7 +67,7 @@ export default class BalanceHeader extends Component {
 					outerRadius={'95%'} >
 					<Labels/>
 				</PieChart>
-				<Text>{nameMayor} has pagado menos, debes ${debt} pesos.</Text>
+        { debt > 0 && <Text>{debtorName} has pagado menos, debes ${debt} pesos en la balanza.</Text> }
       </View>
     )
   }

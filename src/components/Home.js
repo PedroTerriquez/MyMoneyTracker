@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavigationEvents } from 'react-navigation';
 import { Container, Button, Segment, Content, Text, Header, Body, Title } from 'native-base';
 import Links from './Links'
 import Payment from './presentational/Payment'
@@ -72,6 +73,7 @@ export default class Home extends Component {
         <Content padder>
           {payments}
         </Content>
+        <NavigationEvents onWillFocus={() => this.getPayments()} />
       </Container>
     )
   }

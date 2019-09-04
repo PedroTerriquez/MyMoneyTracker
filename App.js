@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import { Root } from 'native-base';
 import Login from './src/components/Login.js'
 import Signup from './src/components/Signup.js'
 import Home from './src/components/Home.js'
@@ -10,6 +10,7 @@ import Notifications from './src/components/Notifications.js'
 import Links from './src/components/Links.js'
 import Balance from './src/components/Balance.js'
 import Promise from './src/components/Promise.js'
+import Profile from './src/components/Profile.js'
 import AddPayment from './src/components/AddPayment.js'
 import AddPromise from './src/components/AddPromise.js'
 import PromisesList from './src/components/PromisesList.js'
@@ -43,14 +44,22 @@ const Menu = createDrawerNavigator(
     Notifications: Notifications,
     BalancesList: BalancesList,
     PromisesList: PromisesList,
+    Profile: Profile,
   },
   {
     contentComponent: Links
   }
 );
 
-export default createAppContainer(Menu);
+const AppContainer =  createAppContainer(Menu);
 
+const App = () => (
+  <Root>
+    <AppContainer />
+  </Root>
+);
+
+export default App
 //global.API_URL = 'https://presta-mesta.herokuapp.com/v1'
 global.API_URL = 'http://localhost:3002/v1'
 global.JWT = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMH0.pp2olRlNc7zAOfIWWxl7e_dxazTtdu8p6i3XGGJEOIE"

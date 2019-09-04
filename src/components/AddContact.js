@@ -3,6 +3,7 @@ import { View, ScrollView } from 'react-native';
 import { Item, Input, Icon, Text, Card, CardItem, Button, Right, Body, Left, Thumbnail } from 'native-base';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
+import ToastService from '../services/ToastService.js';
 
 export default class AddContact extends Component {
   constructor(props){
@@ -19,7 +20,7 @@ export default class AddContact extends Component {
         this.setState({ people: response.data })
       })
       .catch((error)=>{
-        console.log(error);
+        ToastService.showToast(error.response.data.errors);
       })
   }
 
@@ -29,7 +30,7 @@ export default class AddContact extends Component {
         this.removeButton(id)
       })
       .catch((error)=>{
-        console.log(error);
+        ToastService.showToast(error.response.data.errors);
       })
   }
 

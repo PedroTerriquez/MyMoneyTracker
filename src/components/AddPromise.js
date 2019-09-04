@@ -47,14 +47,14 @@ export default class AddPromise extends Component {
         this.props.navigation.goBack()
       })
       .catch((error)=>{
-        console.log(error);
+        ToastService.showToast(error.response.data.errors);
       })
   }
 
   newPromise() {
     axios.post(`${global.API_URL}/promises/`, this.promiseValues() , deviceStorage.loadToken() )
       .then((response) => {
-        this.props.navigation.goBack()
+        this.props.navigation.navigate('PromisesList')
       })
       .catch((error)=>{
         console.log(error);

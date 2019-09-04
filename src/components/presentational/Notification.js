@@ -3,6 +3,7 @@ import { TouchableOpacity, View } from 'react-native';
 import { Card, CardItem, Item, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
 import { withNavigation } from 'react-navigation';
 import { deviceStorage } from '../../services/deviceStorage';
+import ToastService from '../../services/ToastService.js';
 import axios from 'axios';
 
 class Notification extends Component {
@@ -13,7 +14,7 @@ class Notification extends Component {
         this.props.remove(id)
       })
       .catch((error)=>{
-        console.log(error);
+        ToastService.showToast(error.response.data.errors);
       })
   }
 
@@ -24,7 +25,7 @@ class Notification extends Component {
         this.props.remove(id)
       })
       .catch((error)=>{
-        console.log(error);
+        ToastService.showToast(error.response.data.errors);
       })
   }
 
@@ -35,16 +36,16 @@ class Notification extends Component {
         <Card>
           <CardItem>
             <Left>
-              <Thumbnail source={{uri: 'http://cronicadexalapa.com/wp-content/uploads/2016/11/popo-caca.jpg'}} />
+              <Thumbnail source={{uri: 'https://picsum.photos/50/50.jpg'}} />
               <Body>
-                <Text>id: { id }</Text>
-                <Text>Creator: { creator }</Text>
-                <Text>You receive a {type} request from {creatorName}</Text>
+                {/*<Text>id: { id }</Text>
+                <Text>Creator: { creator }</Text>*/}
+                <Text>{type} request from {creatorName}</Text>
                 <Text note>{date}</Text>
               </Body>
             </Left>
             <Right>
-              <Text>${amount}</Text>
+              { amount && <Text>${amount}</Text> }
               <Item>
                 { (status == 'pending') && <View>
                     <Button

@@ -29,6 +29,7 @@ class Payment extends Component {
             <Right>
               <Text note>{date}</Text>
               <Text>${amount}</Text>
+              { (status == 'pending') && <Body><Icon style={{fontSize: 20, color: '#fab005'}} type='FontAwesome' name='warning' /><Text>Pending</Text></Body>}
               { (mine == true && status == 'pending') &&
               <Button small success onPress={()=> this.props.navigation.navigate('AddPayment', { props: this.props }) }>
                 <Icon type='FontAwesome' name='edit' />

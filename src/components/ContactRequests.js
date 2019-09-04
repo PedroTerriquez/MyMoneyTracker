@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { NavigationEvents } from 'react-navigation';
 import { ScrollView } from 'react-native';
 import { Segment, Container, Header, Button, Text, Body, Title } from 'native-base';
 import axios from 'axios';
@@ -87,7 +88,7 @@ export default class Contacts extends Component {
   }
 
   render() {
-    contacts = this.state.tab == 0 ? this.renderPendingFriendships() : this.renderRequestFriendships()
+    contacts = this.state.tab == 0 ? this.renderRequestFriendships() : this.renderPendingFriendships()
     return(
       <ScrollView>
         <Container>
@@ -98,14 +99,15 @@ export default class Contacts extends Component {
           </Header>
           <Segment>
             <Button active={this.state.tab == 0} onPress={ ()=> this.setState({tab: 0}) }>
-              <Text>Sent Requests</Text>
+              <Text>Pending Accept</Text>
             </Button>
             <Button last active={this.state.tab == 1} onPress={ ()=> this.setState({tab: 1}) }>
-              <Text>Pending Accept</Text>
+              <Text>Sent Requests</Text>
             </Button>
           </Segment>
           { contacts }
         </Container>
+        <NavigationEvents onWillFocus={() => this.componentDidMount()} />
       </ScrollView>
     )
   }

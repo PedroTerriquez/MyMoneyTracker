@@ -3,6 +3,7 @@ import axios from 'axios';
 import { View, Keyboard } from 'react-native';
 import { Container, Content, CardItem, Form, Item, Input, Label, Button, Text, Right, Thumbnail } from 'native-base';
 import { deviceStorage } from '../services/deviceStorage';
+import ToastService from '../services/ToastService.js';
 
 export default class Signup extends Component {
   constructor(){
@@ -24,7 +25,7 @@ export default class Signup extends Component {
         this.props.navigation.replace('Home');
       })
       .catch((error) => {
-        console.log(error);
+        ToastService.showToast(error.response.data.errors);
       });
   }
 
@@ -36,7 +37,7 @@ export default class Signup extends Component {
         this.login();
       })
       .catch((error) => {
-        console.log(error);
+        ToastService.showToast(error.response.data.errors);
       });
   }
 
