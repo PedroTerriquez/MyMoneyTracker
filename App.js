@@ -31,6 +31,7 @@ const MainNavigator = createStackNavigator(
     AddPromise: AddPromise,
     BalancesList: BalancesList,
     PromisesList: PromisesList,
+    Profile: Profile,
   }
 );
 

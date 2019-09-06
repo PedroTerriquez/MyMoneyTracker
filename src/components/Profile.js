@@ -29,14 +29,15 @@ export default class Profile extends Component {
   render() {
     return(
       <Container>
-        <Content>
+        <View style={{alignItems: 'center'}}>
           <Thumbnail
             style={{width: 200, height: 200, borderRadius: 100}}
             source={{uri: 'https://picsum.photos/300/300.jpg'}} />
           <Text style={{ fontSize: 20, fontWeight: 'bold' }}> {this.state.info.name} </Text>
-          <Text style={{ fontSize: 20 }}> Miembro desde {this.state.info.created_at} </Text>
-          <Text style={{ fontSize: 20 }}>%{this.state.info.percentage} de pagos a tiempo.</Text>
-        </Content>
+          <Text style={{ fontSize: 14 }}> Miembro desde {this.state.info.created_at} </Text>
+          <Text style={{ fontSize: 20 }}>{this.state.info.percentage}%</Text>
+          <Text style={{ fontSize: 14 }}>Prestamos pagados a tiempo.</Text>
+        </View>
       </Container>
     )}
 }

@@ -8,11 +8,11 @@ export default class Links extends React.Component {
         <Button title='-' />
         <Button title='Home' onPress={() => this.props.navigation.navigate('Home')} />
         <Button title='Contacts' onPress={() => this.props.navigation.navigate('Contacts')} />
-        <Button title='Add Contact' onPress={() => this.props.navigation.navigate('AddContact')} />
         <Button title='Requests' onPress={()=> this.props.navigation.navigate('ContactRequests')}/>
+        <Button title='Add Contact' onPress={() => this.props.navigation.navigate('AddContact')} />
         <Button title='Notifications' onPress={() => this.props.navigation.navigate('Notifications')} />
-        <Button title='Balances' onPress={() => this.props.navigation.navigate('BalancesList')} />
-        <Button title='Promises' onPress={() => this.props.navigation.navigate('PromisesList')} />
+        <Button title='All Balances' onPress={() => this.props.navigation.navigate('BalancesList')} />
+        <Button title='All Promises' onPress={() => this.props.navigation.navigate('PromisesList')} />
       </View>
     )
   }
