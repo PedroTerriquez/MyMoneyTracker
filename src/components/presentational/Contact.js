@@ -40,7 +40,7 @@ class Contact extends Component {
   createBalance(id){
     axios.post(`${global.API_URL}/balances/`, {user2_id: id}, deviceStorage.loadToken() )
       .then((response) => {
-        this.props.navigation.navigate('BalancesList')
+        this.props.navigation.navigate('Balance', {id: response.data.id})
       })
       .catch((error)=>{
         ToastService.showToast(error.response.data.errors);

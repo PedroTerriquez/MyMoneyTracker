@@ -29,10 +29,14 @@ class Notification extends Component {
       })
   }
 
+  redirect = (id, type) => {
+    this.props.navigation.navigate(type, {id: id})
+  }
+
   render() {
     const { id, creator, creatorName, type, amount, date, status } = this.props
     return(
-      <TouchableOpacity onPress={ () => this.props.navigation.navigate('Home') }>
+      <TouchableOpacity onPress={ () => this.redirect(id, type) }>
         <Card>
           <CardItem>
             <Left>
