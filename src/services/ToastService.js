@@ -1,7 +1,6 @@
 import { Toast } from 'native-base';
 
 function showToast(message) {
-  debugger;
   return (
     Toast.show({
       text: message,

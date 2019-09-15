@@ -8,7 +8,7 @@ import axios from 'axios';
 
 class Notification extends Component {
   accept = (id) => {
-    axios.patch(`${global.API_URL}/notifications/${id}`, { status: 'accept' }, deviceStorage.loadToken() )
+    axios.patch(`${global.API_URL}/notifications/${id}`, { status: 'accepted' }, deviceStorage.loadToken() )
       .then((response) => {
         console.log(response.data)
         this.props.remove(id)
