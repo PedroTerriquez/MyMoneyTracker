@@ -14,17 +14,6 @@ import AddPayment from './src/components/AddPayment.js'
 import AddPromise from './src/components/AddPromise.js'
 import {createStackNavigator, createAppContainer, createSwitchNavigator, createBottomTabNavigator} from 'react-navigation';
 
-class Header extends React.Component {
-  render() {
-    return (
-      <Fragment>
-        <Icon style={{padding: 4}} type='FontAwesome5' name="user-friends" onPress={()=> navigation.navigate('ContactRequests')} />
-        <Icon style={{padding: 4}} type='Ionicons' name="ios-notifications" onPress={() => navigation.navigate('Notifications')} />
-      </Fragment>
-    );
-  }
-}
-
 const AuthStack = createStackNavigator({
   Login: Login,
   Signup: Signup,
@@ -32,7 +21,7 @@ const AuthStack = createStackNavigator({
 
 const AppStack = createStackNavigator({
   Tabs: Tabs,
-  AddContact: { screen: AddContact, navigationOptions: { title: 'Add Contact' } },
+  AddContact: { screen: AddContact, navigationOptions: { header: null } },
   ContactRequests: { screen: ContactRequests, navigationOptions: { title: 'Requests' } },
   Notifications: { screen: Notifications, navigationOptions: { title: 'Notifications' } },
   Balance: { screen: Balance, navigationOptions: { title: 'Balance' } },
@@ -41,9 +30,15 @@ const AppStack = createStackNavigator({
   AddPromise: { screen: AddPromise, navigationOptions: { title: 'Add Promise' } },
   Profile: { screen: Profile, navigationOptions: { title: 'Profile\'s' } },
 },{
-  defaultNavigationOptions: {
-		headerRight: <Header />
-  }
+  defaultNavigationOptions: ({ navigation }) => ({
+    headerRight: (
+      <Fragment>
+        <Icon style={{padding: 4}} type='FontAwesome5' name="user-friends" onPress={()=> navigation.navigate('ContactRequests')} />
+        <Icon style={{padding: 4}} type='Ionicons' name="ios-notifications" onPress={() => navigation.navigate('Notifications')} />
+        <Icon style={{padding: 4}} name="contacts" onPress={() => navigation.navigate('AddContact')} />
+      </Fragment>
+    )
+  })
 });
 
 const AppContainer =  createAppContainer(

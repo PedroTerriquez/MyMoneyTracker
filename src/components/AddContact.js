@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, ScrollView } from 'react-native';
-import { Item, Input, Icon, Text, Card, CardItem, Button, Right, Body, Left, Thumbnail } from 'native-base';
+import { Header, Item, Input, Icon, Text, Card, CardItem, Button, Right, Body, Left, Thumbnail } from 'native-base';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import ToastService from '../services/ToastService.js';
@@ -70,15 +70,16 @@ export default class AddContact extends Component {
   render() {
     return(
       <View>
-        <Item rounded>
-          <Input
-            placeholder='Search by name or email'
-            autoFocus={ true }
-            onChangeText={ (text) => this.getPeople(text) }
-            ref={(ref) => this.SearchInput = ref }
-            keyboardType={ 'email-address' } />
-          <Icon type='AntDesign' name='close' onPress={ ()=> this.SearchInput._root.clear() } />
-        </Item>
+        <Header searchBar rounded>
+          <Item>
+            <Icon name="ios-search" />
+            <Input placeholder="Search" onChangeText={ (text) => this.getPeople(text) } autoFocus={ true }/>
+            <Icon name="ios-people" />
+          </Item>
+          <Button transparent>
+            <Text>Search</Text>
+          </Button>
+        </Header>
         <ScrollView>
           { this.renderPeople() }
         </ScrollView>
