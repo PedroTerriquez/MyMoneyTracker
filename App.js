@@ -1,58 +1,62 @@
-import React, {Component} from 'react';
-import { Root } from 'native-base';
+import React, { Component } from 'react';
+import { Fragment } from 'react'
+import { Root, Icon } from 'native-base';
 import Login from './src/components/Login.js'
 import Signup from './src/components/Signup.js'
-import Home from './src/components/Home.js'
-import Contacts from './src/components/Contacts.js'
 import ContactRequests from './src/components/ContactRequests.js'
 import AddContact from './src/components/AddContact.js'
 import Notifications from './src/components/Notifications.js'
-import Links from './src/components/Links.js'
+import Tabs from './src/routes/FooterTabs.js'
 import Balance from './src/components/Balance.js'
 import Promise from './src/components/Promise.js'
 import Profile from './src/components/Profile.js'
 import AddPayment from './src/components/AddPayment.js'
 import AddPromise from './src/components/AddPromise.js'
-import PromisesList from './src/components/PromisesList.js'
-import BalancesList from './src/components/BalancesList.js'
-import {createStackNavigator, createAppContainer, createDrawerNavigator} from 'react-navigation';
+import {createStackNavigator, createAppContainer, createSwitchNavigator, createBottomTabNavigator} from 'react-navigation';
 
-const MainNavigator = createStackNavigator(
-  {
-    Login: Login,
-    Signup: Signup,
-    Home: Home,
-    Contacts: Contacts,
-    AddContact: AddContact,
-    Notifications: Notifications,
-    Balance: Balance,
-    Promise: Promise,
-    AddPayment: AddPayment,
-    AddPromise: AddPromise,
-    BalancesList: BalancesList,
-    PromisesList: PromisesList,
-    Profile: Profile,
+class Header extends React.Component {
+  render() {
+    return (
+      <Fragment>
+        <Icon style={{padding: 4}} type='FontAwesome5' name="user-friends" onPress={()=> navigation.navigate('ContactRequests')} />
+        <Icon style={{padding: 4}} type='Ionicons' name="ios-notifications" onPress={() => navigation.navigate('Notifications')} />
+      </Fragment>
+    );
   }
-);
+}
 
-const Menu = createDrawerNavigator(
-  {
-    MainNavigator: MainNavigator,
-    Home: Home,
-    Contacts: Contacts,
-    ContactRequests: ContactRequests,
-    AddContact: AddContact,
-    Notifications: Notifications,
-    BalancesList: BalancesList,
-    PromisesList: PromisesList,
-    Profile: Profile,
-  },
-  {
-    contentComponent: Links
+const AuthStack = createStackNavigator({
+  Login: Login,
+  Signup: Signup,
+},{ headerMode: 'none'})
+
+const AppStack = createStackNavigator({
+  Tabs: Tabs,
+  AddContact: { screen: AddContact, navigationOptions: { title: 'Add Contact' } },
+  ContactRequests: { screen: ContactRequests, navigationOptions: { title: 'Requests' } },
+  Notifications: { screen: Notifications, navigationOptions: { title: 'Notifications' } },
+  Balance: { screen: Balance, navigationOptions: { title: 'Balance' } },
+  Promise: { screen: Promise, navigationOptions: { title: 'Promise' } },
+  AddPayment: { screen: AddPayment, navigationOptions: { title: 'Add Payment' } },
+  AddPromise: { screen: AddPromise, navigationOptions: { title: 'Add Promise' } },
+  Profile: { screen: Profile, navigationOptions: { title: 'Profile\'s' } },
+},{
+  defaultNavigationOptions: {
+		headerRight: <Header />
   }
-);
+});
 
-const AppContainer =  createAppContainer(Menu);
+const AppContainer =  createAppContainer(
+  createSwitchNavigator(
+    {
+      App: AppStack,
+      Auth: AuthStack,
+    },
+    {
+      initialRouteName: 'Auth',
+    }
+  )
+);
 
 const App = () => (
   <Root>

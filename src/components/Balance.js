@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import Payment from './presentational/Payment'
 import BalanceHeader from './presentational/BalanceHeader'
-import { Button, Text, ScrollView, View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { Fab, Container, Icon } from 'native-base';
 import { deviceStorage } from '../services/deviceStorage';
 import { NavigationEvents } from 'react-navigation';
 import axios from 'axios';
 
 export default class Balance extends Component {
+
   constructor(props){
     super(props);
     this.state = {

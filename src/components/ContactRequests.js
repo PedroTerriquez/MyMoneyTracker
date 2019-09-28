@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavigationEvents } from 'react-navigation';
 import { ScrollView } from 'react-native';
-import { Segment, Container, Header, Button, Text, Body, Title } from 'native-base';
+import { Segment, Container, Button, Text } from 'native-base';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import Contact from './presentational/Contact'
@@ -92,11 +92,6 @@ export default class Contacts extends Component {
     return(
       <ScrollView>
         <Container>
-          <Header>
-            <Body>
-              <Title></Title>
-            </Body>
-          </Header>
           <Segment>
             <Button active={this.state.tab == 0} onPress={ ()=> this.setState({tab: 0}) }>
               <Text>Pending Accept</Text>

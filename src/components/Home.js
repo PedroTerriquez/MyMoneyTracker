@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { NavigationEvents } from 'react-navigation';
-import { Container, Button, Segment, Content, Text, Header, Body, Title } from 'native-base';
-import Links from './Links'
+import { Container, Button, Segment, Content, Text } from 'native-base';
 import Payment from './presentational/Payment'
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 
 export default class Home extends Component {
+
   constructor(props){
     super(props);
     this.state = {
@@ -57,11 +57,6 @@ export default class Home extends Component {
     payments = this.state.tab == 0 ? this.renderPayments(this.state.promise_payments) : this.renderPayments(this.state.balance_payments)
     return(
       <Container>
-        <Header>
-          <Body>
-            <Title>Last Payments</Title>
-          </Body>
-        </Header>
         <Segment>
           <Button active={this.state.tab == 0} onPress={ ()=> this.setState({tab: 0}) }>
             <Text>Payment Promises</Text>
