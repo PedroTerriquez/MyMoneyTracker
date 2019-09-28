@@ -52,7 +52,7 @@ export default class PromisesList extends Component {
     return(
 			<Container>
 				<Segment>
-					<Button active={this.state.tab == 0} onPress={ ()=> this.setState({tab: 0}) }>
+					<Button first active={this.state.tab == 0} onPress={ ()=> this.setState({tab: 0}) }>
 						<Text>My Promises</Text>
 					</Button>
 					<Button last active={this.state.tab == 1} onPress={ ()=> this.setState({tab: 1}) }>
