@@ -40,7 +40,7 @@ export default class Promise extends Component {
         creatorName = { payment.creator_name }
         method  ='Cash'
         date    = { payment.agreement_date }
-        amount = { payment.amount }
+        amount  = { payment.amount }
         status  = { payment.status }
         title   = { payment.title }
         mine    = { payment.mine }

@@ -31,7 +31,7 @@ export default class PromisesList extends Component {
       })
   }
 
-  renderPromises(promises) {
+  renderPromises(promises, type) {
     if (promises.length == 0) {
       return <Text>No promises yet.</Text>
     }
@@ -42,13 +42,14 @@ export default class PromisesList extends Component {
          title={promise.title}
          paid={promise.paid_amount}
          total={promise.total}
-         adminName={promise.administrator_name}
+         percentage={promise.percentage}
+         user={promise.user}
       />
     ))
   }
 
   render() {
-		promises = this.state.tab == 0 ? this.renderPromises(this.state.myPromises) : this.renderPromises(this.state.pendingPromises)
+    promises = this.state.tab == 0 ? this.renderPromises(this.state.myPromises, 'mine') : this.renderPromises(this.state.pendingPromises, 'owe')
     return(
 			<Container>
 				<Segment>
