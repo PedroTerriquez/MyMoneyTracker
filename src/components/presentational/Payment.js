@@ -17,7 +17,7 @@ class Payment extends Component {
     this.props.navigation.navigate(type,  { id: id})
   }
 
-  handleLongPress = (id) => {
+  acceptPaymentButton = (id) => {
     if (this.props.status != 'pending' || this.props.mine) return
     Alert.alert(
       'Payment Acceptance',
@@ -33,7 +33,7 @@ class Payment extends Component {
   accept = (id) => {
     axios.patch(`${global.API_URL}/payments/${id}/accept`, { status: 'accepted' }, deviceStorage.loadToken() )
       .then((response) => {
-        this.setState({statusChanged: response.status})
+        this.setState({statusChanged: 'accepted'})
       })
       .catch((error)=>{
         ToastService.showToast(error.response.data.errors);
@@ -42,8 +42,11 @@ class Payment extends Component {
 
   render() {
     const { id, title, creator, creatorName, method, amount, date, paymentable_id, type, status, mine } = this.props
+    const pending = (mine == false && status == 'pending' && this.state.statusChanged == 'pending')
+    const editable = (mine == true && status == 'pending')
+    const accepted = (status == 'accepted' || this.state.statusChanged == 'accepted')
     return(
-      <TouchableOpacity onPress={() => this.handleClick(paymentable_id, type)} onLongPress={() => this.handleLongPress(id)}>
+      <TouchableOpacity onPress={() => this.handleClick(paymentable_id, type)}>
         <Card>
           <CardItem>
             <Left>
@@ -56,17 +59,21 @@ class Payment extends Component {
 								*/}
                 <Text>{creatorName}</Text>
                 <Text note>{method}</Text>
+                <Text note>{date}</Text>
               </Body>
             </Left>
             <Right>
-              <Text note>{date}</Text>
-              <Text>${amount}</Text>
-              { (status == 'pending' && this.state.statusChanged == 'pending') && <Body><Icon style={{fontSize: 20, color: '#fab005'}} type='FontAwesome' name='warning' /><Text>Pending</Text></Body>}
-              { (mine == true && status == 'pending') &&
-              <Button small success onPress={()=> this.props.navigation.navigate('AddPayment', { props: this.props }) }>
-                <Icon type='FontAwesome' name='edit' />
-              </Button>
-              }
+              <Text style={{color: (mine==true ? 'green' : 'red')}}>{amount}</Text>
+              <Text />
+              { pending && <Button small warning onPress={()=> this.acceptPaymentButton(id) } style={{height: 52,width: 52, borderRadius:35}} >
+                <Icon type='FontAwesome' name='warning' />
+              </Button> }
+              { editable && <Button small warning onPress={()=> this.props.navigation.navigate('AddPayment', { props: this.props }) } style={{height: 50,width: 50, borderRadius:35}} >
+                <Icon type='MaterialIcons' name='edit' />
+              </Button> }
+              { accepted && <Button small success style={{height: 50,width: 50, borderRadius:35}} >
+                <Icon type='FontAwesome' name='check' />
+              </Button> }
             </Right>
           </CardItem>
         </Card>
