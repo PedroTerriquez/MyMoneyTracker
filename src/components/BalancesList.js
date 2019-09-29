@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { ScrollView, Text } from 'react-native';
+import { List } from 'native-base'
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import BalanceCard from './presentational/BalanceCard'
@@ -49,7 +50,9 @@ export default class BalancesList extends Component {
   render() {
     return(
       <ScrollView>
-        { this.renderBalances() }
+        <List>
+          { this.renderBalances() }
+        </List>
       </ScrollView>
     )
   }

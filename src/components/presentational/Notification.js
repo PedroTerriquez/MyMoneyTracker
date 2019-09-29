@@ -35,7 +35,7 @@ class Notification extends Component {
 
   list_elements(type, amount, sender){
     if(type === 'Payment')
-      return (<Text style={{ fontSize: 15 }}>Payment received of { amount && <Text style={{ fontSize: 15, fontWeight: 'bold' }}>${amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</Text> } from {sender}.</Text>)
+      return (<Text style={{ fontSize: 15 }}>Payment received of { amount && <Text style={{ fontSize: 15, fontWeight: 'bold' }}>{amount}</Text> } from {sender}.</Text>)
     else if (type === 'Balance')
       return (<Text>{sender} want to start a Balance with you.</Text>)
     else if (type === 'Promise')
