@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, View } from 'react-native';
-import { Card, CardItem, Item, Thumbnail, Text, Button, Icon, Left, Body, Right } from 'native-base';
+import { ListItem, Thumbnail, Text, Button, Left, Body } from 'native-base';
 import { withNavigation } from 'react-navigation';
 import { deviceStorage } from '../../services/deviceStorage';
 import ToastService from '../../services/ToastService.js';
@@ -33,46 +33,49 @@ class Notification extends Component {
     this.props.navigation.navigate(type, {id: id})
   }
 
+  list_elements(type, amount, sender){
+    if(type === 'Payment')
+      return (<Text style={{ fontSize: 15 }}>Payment received of { amount && <Text style={{ fontSize: 15, fontWeight: 'bold' }}>${amount.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,')}</Text> } from {sender}.</Text>)
+    else if (type === 'Balance')
+      return (<Text>{sender} want to start a Balance with you.</Text>)
+    else if (type === 'Promise')
+      return (<Text>{sender} is promising you pay this amount.</Text>)
+    else if (type === 'Friendship')
+      return (<Text>{sender} wants contact with you.</Text>)
+  }
+
   render() {
     const { id, creator, creatorName, type, amount, date, status } = this.props
     return(
-      <TouchableOpacity onPress={ () => this.redirect(id, type) }>
-        <Card>
-          <CardItem>
-            <Left>
-              <Thumbnail source={{uri: 'https://picsum.photos/50/50.jpg'}} />
-              <Body>
-                {/*<Text>id: { id }</Text>
-                <Text>Creator: { creator }</Text>*/}
-                <Text>{type} request from {creatorName}</Text>
-                <Text note>{date}</Text>
-              </Body>
-            </Left>
-            <Right>
-              { amount && <Text>${amount}</Text> }
-              <Item>
-                { (status == 'pending') && <View>
-                    <Button
-                      success
-                      small
-                      rounded
-                      onPress={ () => this.accept(id) }>
-                      <Icon type='FontAwesome' name='check' />
-                    </Button>
-                    <Button
-                      danger
-                      rounded
-                      small
-                      onPress={ () => this.reject(id) }>
-                      <Icon type='FontAwesome' name='remove' />
-                    </Button>
-                  </View>
-                }
-              </Item>
-            </Right>
-          </CardItem>
-        </Card>
-      </TouchableOpacity>
+      <ListItem thumbnail onPress={ () => this.redirect(id, type) }>
+        <Left>
+          <Thumbnail source={{ uri: 'https://picsum.photos/50/50.jpg' }} />
+        </Left>
+        <Body>
+          {this.list_elements(type, amount, creatorName)}
+          <Text note>{date}</Text>
+          <Text/>
+          { (status == 'pending') && <View style={{flexDirection:'row'}}>
+            <Button
+              success
+              primary
+              small
+              style={{margin: 2}}
+              onPress={ () => this.accept(id) }>
+              <Text>Accept</Text>
+            </Button>
+            <Button
+              danger
+              bordered
+              small
+              style={{margin: 2}}
+              onPress={ () => this.reject(id) }>
+              <Text>Decline</Text>
+            </Button>
+          </View>
+          }
+        </Body>
+      </ListItem>
     )
   }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { NavigationEvents } from 'react-navigation';
 import { ScrollView, Text } from 'react-native';
+import { List } from 'native-base'
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import Notification from './presentational/Notification'
@@ -59,7 +60,9 @@ export default class Notifications extends Component {
   render() {
     return(
       <ScrollView>
-        { this.renderNotifications() }
+        <List>
+          { this.renderNotifications() }
+        </List>
         <NavigationEvents onWillFocus={() => this.getNotifications()} />
       </ScrollView>
     )
