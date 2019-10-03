@@ -5,7 +5,7 @@ import { withNavigation } from 'react-navigation';
 
 class BalanceCard extends Component {
   render() {
-    const { id, user1, user2, name1, name2, total1, total2 } = this.props
+    const { id, user1, user2, counterpart, total1, total2, percetage1, percetage2 } = this.props
     return(
       <ListItem thumbnail onPress={ () => this.props.navigation.navigate('Balance',  { id: id} )}>
         <Left>
@@ -13,10 +13,10 @@ class BalanceCard extends Component {
         </Left>
         <Body>
           {/*<Text>{ id }</Text>*/}
-          <Text>{ name1 } con { name2 }</Text>
+          <Text>{ counterpart }</Text>
         </Body>
         <Right>
-          <Text note>{ total1 || "0%"} / {total2 || "0%"}</Text>
+          <Text note>{ percetage1 || "0%"} / { percetage2 || "0%"}</Text>
         </Right>
       </ListItem>
     )

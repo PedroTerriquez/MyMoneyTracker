@@ -93,7 +93,7 @@ export default class Contacts extends Component {
       <ScrollView>
         <Container>
           <Segment>
-            <Button active={this.state.tab == 0} onPress={ ()=> this.setState({tab: 0}) }>
+            <Button first active={this.state.tab == 0} onPress={ ()=> this.setState({tab: 0}) }>
               <Text>Pending Accept</Text>
             </Button>
             <Button last active={this.state.tab == 1} onPress={ ()=> this.setState({tab: 1}) }>

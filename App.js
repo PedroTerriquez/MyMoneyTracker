@@ -33,9 +33,8 @@ const AppStack = createStackNavigator({
   defaultNavigationOptions: ({ navigation }) => ({
     headerRight: (
       <Fragment>
-        <Icon style={{padding: 4}} type='FontAwesome5' name="user-friends" onPress={()=> navigation.navigate('ContactRequests')} />
+        <Icon style={{padding: 4}} type='Ionicons' name="ios-person-add" onPress={()=> navigation.navigate('ContactRequests')} />
         <Icon style={{padding: 4}} type='Ionicons' name="ios-notifications" onPress={() => navigation.navigate('Notifications')} />
-        <Icon style={{padding: 4}} name="contacts" onPress={() => navigation.navigate('AddContact')} />
       </Fragment>
     )
   })

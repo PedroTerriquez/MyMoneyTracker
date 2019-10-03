@@ -43,6 +43,9 @@ export default class BalancesList extends Component {
         name2= { balance.user2_name }
         total1= { balance.user1_money }
         total2= { balance.user2_money }
+        counterpart= { balance.counterpart }
+        percentage1= { balance.percetage1 }
+        percentage2= { balance.percetage2 }
       />
     ))
   }

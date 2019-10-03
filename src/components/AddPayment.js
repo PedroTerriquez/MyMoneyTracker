@@ -3,6 +3,7 @@ import { View, StyleSheet, TextInput } from 'react-native';
 import { Card, CardItem, Thumbnail, Text, Left, Body, Button } from 'native-base';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
+import { Money } from '../services/moneyDecorator'
 import ToastService from '../services/ToastService.js';
 
 export default class AddPayment extends Component {
@@ -22,7 +23,7 @@ export default class AddPayment extends Component {
   paymentCreationValues() {
     return values = {
       title: this.state.title,
-      amount: this.state.amount,
+      amount: Money.currency_to_number(this.state.amount),
       paymentable_id: this.props.navigation.getParam('id'),
       paymentable_type: this.props.navigation.getParam('type'),
       recipient_id: this.props.navigation.getParam('recipient'),
@@ -66,6 +67,7 @@ export default class AddPayment extends Component {
   }
 
   render() {
+    recipientName = this.props.navigation.getParam('recipientName') || this.state.recipientName
     return(
       <View>
         <Card>
@@ -73,7 +75,7 @@ export default class AddPayment extends Component {
             <Left>
               <Thumbnail source={{uri: 'https://picsum.photos/100/100.jpg'}} />
               <Body>
-                <Text>Sending to {this.props.navigation.getParam('recipientName')}</Text>
+                <Text>Sending to { recipientName }</Text>
               </Body>
             </Left>
           </CardItem>

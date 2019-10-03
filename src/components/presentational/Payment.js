@@ -41,7 +41,7 @@ class Payment extends Component {
   }
 
   render() {
-    const { id, title, creator, creatorName, method, amount, date, paymentable_id, type, status, mine } = this.props
+    const { id, title, creator, creatorName, method, amount, date, paymentable_id, type, status, mine, recipientName } = this.props
     const pending = (mine == false && status == 'pending' && this.state.statusChanged == 'pending')
     const editable = (mine == true && status == 'pending')
     const accepted = (status == 'accepted' || this.state.statusChanged == 'accepted')
@@ -58,12 +58,12 @@ class Payment extends Component {
                 <Text>Status: { status }</Text>
 								*/}
                 <Text>{creatorName}</Text>
-                <Text note>{method}</Text>
+                <Text note>{title}</Text>
                 <Text note>{date}</Text>
               </Body>
             </Left>
             <Right>
-              <Text style={{color: (mine==true ? 'green' : 'red')}}>{amount}</Text>
+              <Text style={{color: (mine==true ? 'green' : 'gray')}}>{amount}</Text>
               <Text />
               { pending && <Button small warning onPress={()=> this.acceptPaymentButton(id) } style={{height: 52,width: 52, borderRadius:35}} >
                 <Icon type='FontAwesome' name='warning' />

@@ -34,7 +34,7 @@ export default class Login extends Component {
         <Content>
           <Form style={{alignItems: 'center'}}>
             <Thumbnail
-              style={{width: 200, height: 200, borderRadius: 100}}
+              style={{width: 200, height: 200, borderRadius: 100, margin: 10}}
               source={{uri: 'https://picsum.photos/300/300.jpg'}} />
             <Text style={{fontSize: 20, fontWeight: 'bold'}}> Login </Text>
             <Item floatingLabel>
@@ -67,11 +67,11 @@ export default class Login extends Component {
             </Button>
           </Form>
           {/* <Text>or login with</Text>*/}
-          {/* <Text>Testing buttons</Text>
+          <Text>Testing buttons</Text>
           <Button small onPress={ ()=>this.setState({user: 'test2@example.com'})}><Text>User2</Text></Button>
-          <Button small onPress={ ()=>this.setState({user: 'test3@example.com'})}><Text>User3</Text></Button>*/}
+          <Button small onPress={ ()=>this.setState({user: 'test3@example.com'})}><Text>User3</Text></Button>
         </Content>
-        <View style={{flexDirection:'row', flexWrap:'wrap', justifyContent: 'center', alignItems: 'center', marginBottom: 1 }} >
+        <View style={{flexDirection:'row', flexWrap:'wrap', justifyContent: 'center', alignItems: 'center', marginBottom: 10 }} >
           <Text>Don’t have an account?</Text>
           <Button transparent onPress={()=>this.props.navigation.replace('Signup')}>
             <Text>Sign Up</Text>

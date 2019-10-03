@@ -39,7 +39,6 @@ export default class Balance extends Component {
         key    = { payment.id }
         id     = { payment.id }
         creator= { payment.creator_id }
-        creatorName= { payment.creator_name }
         method ='Cash'
         date   = { payment.agreement_date }
         amount = { payment.amount }
@@ -47,6 +46,8 @@ export default class Balance extends Component {
         title  = { payment.title }
         mine   = { payment.mine }
         type   = { payment.paymentable_type }
+        creatorName= { payment.creator_name }
+        recipientName={ this.state.info.counterpart }
         paymentable_id = { payment.paymentable_id }
       />
     ))
@@ -76,6 +77,7 @@ export default class Balance extends Component {
                 onPress={ () => navigation.navigate('AddPayment', {
                   id: info.id,
                   type: 'Balance',
+                  recipientName: info.counterpart
                 })}
                 position="bottomRight" >
                 <Icon type='Ionicons' name="ios-add" />

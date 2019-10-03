@@ -31,7 +31,7 @@ export default class Profile extends Component {
       <Container>
         <View style={{alignItems: 'center'}}>
           <Thumbnail
-            style={{width: 200, height: 200, borderRadius: 100}}
+            style={{width: 200, height: 200, borderRadius: 100, margin: 20}}
             source={{uri: 'https://picsum.photos/300/300.jpg'}} />
           <Text style={{ fontSize: 20, fontWeight: 'bold' }}> {this.state.info.name} </Text>
           <Text style={{ fontSize: 14 }}> Miembro desde {this.state.info.created_at} </Text>

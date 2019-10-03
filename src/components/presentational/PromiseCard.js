@@ -11,7 +11,7 @@ class PromiseCard extends Component {
         <Card>
           <CardItem>
             <Left>
-              <Thumbnail source={{uri: 'http://cronicadexalapa.com/wp-content/uploads/2016/11/popo-caca.jpg'}} />
+              <Thumbnail source={{uri: 'https://picsum.photos/50/50.jpg'}} />
               <Body>
                 {/*<Text>{ id }</Text>*/}
                 <Text>{ user }</Text>

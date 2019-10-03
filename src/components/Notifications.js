@@ -46,7 +46,10 @@ export default class Notifications extends Component {
         id     = {notification.id}
         key    = {notification.id}
         creator= {notification.sender_id}
-        type   = {notification.notifiable_type}
+        nId    = {notification.notifiable_id}
+        nType  = {notification.notifiable_type}
+        eId    = {notification.element_id}
+        eType  = {notification.element_type}
         date   = {notification.updated_at}
         amount = {notification.amount}
         status = {notification.status}

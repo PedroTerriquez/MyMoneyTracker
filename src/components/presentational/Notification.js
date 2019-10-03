@@ -10,7 +10,6 @@ class Notification extends Component {
   accept = (id) => {
     axios.patch(`${global.API_URL}/notifications/${id}`, { status: 'accepted' }, deviceStorage.loadToken() )
       .then((response) => {
-        console.log(response.data)
         this.props.remove(id)
       })
       .catch((error)=>{
@@ -45,14 +44,15 @@ class Notification extends Component {
   }
 
   render() {
-    const { id, creator, creatorName, type, amount, date, status } = this.props
+    const { id, creator, creatorName, nId, nType, eType, eId, amount, date, status } = this.props
+    debugger;
     return(
-      <ListItem thumbnail onPress={ () => this.redirect(id, type) }>
+      <ListItem thumbnail onPress={ () => this.redirect(eId || nId, eType || nType) }>
         <Left>
           <Thumbnail source={{ uri: 'https://picsum.photos/50/50.jpg' }} />
         </Left>
         <Body>
-          {this.list_elements(type, amount, creatorName)}
+          {this.list_elements(nType, amount, creatorName)}
           <Text note>{date}</Text>
           <Text/>
           { (status == 'pending') && <View style={{flexDirection:'row'}}>
