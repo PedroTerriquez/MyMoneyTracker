@@ -45,12 +45,14 @@ export default class Signup extends Component {
     return(
       <Container>
         <Content>
-          <Form style={{alignItems: 'center'}}>
+          <Form>
+            <View style={{alignItems: 'center'}}>
             <Thumbnail
-              style={{width: 200, height: 200, borderRadius: 100}}
+              style={{width: 200, height: 200, borderRadius: 100, margin: 10}}
               source={{uri: 'https://picsum.photos/300/300.jpg'}} />
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}> Sign up </Text>
-            <Item floatingLabel>
+            <Text style={{fontSize: 20, fontWeight: 'bold'}}> Sign Up </Text>
+            </View>
+            <Item stackedLabel>
               <Label>First name</Label>
               <Input
                 id='first_name'
@@ -58,7 +60,7 @@ export default class Signup extends Component {
                 onChangeText={ (text) => this.setState({first_name: text}) }
                 onBlur={ Keyboard.dismiss } />
             </Item>
-            <Item floatingLabel>
+            <Item stackedLabel>
               <Label>Last name</Label>
               <Input
                 id='last_name'
@@ -66,7 +68,7 @@ export default class Signup extends Component {
                 onChangeText={ (text) => this.setState({last_name: text}) }
                 onBlur={ Keyboard.dismiss } />
             </Item>
-            <Item floatingLabel>
+            <Item stackedLabel>
               <Label>Email</Label>
               <Input
                 id='user'
@@ -74,7 +76,7 @@ export default class Signup extends Component {
                 keyboardType={ 'email-address' }
                 onBlur={ Keyboard.dismiss } />
             </Item>
-            <Item floatingLabel>
+            <Item stackedLabel>
               <Label>Password</Label>
               <Input
                 id='password'
@@ -82,12 +84,15 @@ export default class Signup extends Component {
                 onChangeText={ (text) => this.setState({password: text}) }
                 secureTextEntry={ true } />
             </Item>
-            <Button
-              rounded
-              dark
-              onPress={ this.handleSubmit } >
-              <Text>Sign up</Text>
-            </Button>
+            <View style={{alignItems: 'center'}}>
+              <Button
+                rounded
+                dark
+                style={{margin: 12}}
+                onPress={ this.handleSubmit } >
+                <Text>Sign Up</Text>
+              </Button>
+            </View>
           </Form>
         </Content>
       </Container>

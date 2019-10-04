@@ -32,12 +32,14 @@ export default class Login extends Component {
     return(
       <Container>
         <Content>
-          <Form style={{alignItems: 'center'}}>
-            <Thumbnail
-              style={{width: 200, height: 200, borderRadius: 100, margin: 10}}
-              source={{uri: 'https://picsum.photos/300/300.jpg'}} />
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}> Login </Text>
-            <Item floatingLabel>
+          <Form>
+            <View style={{alignItems: 'center'}}>
+              <Thumbnail
+                style={{width: 200, height: 200, borderRadius: 100, margin: 10}}
+                source={{uri: 'https://picsum.photos/300/300.jpg'}} />
+              <Text style={{fontSize: 20, fontWeight: 'bold'}}> Login </Text>
+            </View>
+            <Item stackedLabel>
               <Label>Email</Label>
               <Input
                 id='user'
@@ -45,7 +47,7 @@ export default class Login extends Component {
                 keyboardType={ 'email-address' }
                 onBlur={ Keyboard.dismiss } />
             </Item>
-            <Item floatingLabel>
+            <Item stackedLabel>
               <Label>Password</Label>
               <Input
                 id='password'
@@ -53,18 +55,20 @@ export default class Login extends Component {
                 onChangeText={ (text) => this.setState({password: text}) }
                 secureTextEntry={ true } />
             </Item>
-            <CardItem style={{marginTop: 20}}>
-              <Right>
-                <Text>Forgot your password?</Text>
-              </Right>
-            </CardItem>
-            <Button
-              style={{width: 200, justifyContent: 'center', marginTop: 30}}
-              rounded
-              dark
-              onPress={ this.handleSubmit } >
-              <Text>LOGIN</Text>
-            </Button>
+            <View style={{alignItems: 'center'}}>
+              <CardItem style={{marginTop: 20}}>
+                <Right>
+                  <Text>Forgot your password?</Text>
+                </Right>
+              </CardItem>
+              <Button
+                style={{width: 200, justifyContent: 'center', marginTop: 30}}
+                rounded
+                dark
+                onPress={ this.handleSubmit } >
+                <Text>LOGIN</Text>
+              </Button>
+            </View>
           </Form>
           {/* <Text>or login with</Text>*/}
           <Text>Testing buttons</Text>
