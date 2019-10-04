@@ -9,16 +9,18 @@ class PromiseHeader extends Component {
     const { id, title, creator, paid, total, navigation, status } = this.props
     return(
       <View>
-        <Card >
+        <Card transparent>
           <CardItem>
-            <Body style={{alignItems: 'center'}}>
-              <Thumbnail source={{uri: 'http://cronicadexalapa.com/wp-content/uploads/2016/11/popo-caca.jpg'}} />
-              <Text note style={{textAlign:'center'}} >{ creator }</Text>
-            </Body>
-          </CardItem>
-          <CardItem>
-            <Body style={{alignItems: 'center'}}>
-              <Speedometer value={paid} totalValue={total} showPercent showLabels/>
+            <Body style={{alignItems: 'center', justifyContent: 'center'}}>
+              <Thumbnail source={{uri: 'https://picsum.photos/100/100.jpg'}} />
+              <Text style={{textAlign:'center'}} >{ creator }</Text>
+              <Speedometer
+                style={{padding: 10}}
+                size={300}
+                value={paid}
+                totalValue={total}
+                showPercent
+                showLabels/>
             </Body>
           </CardItem>
         </Card>

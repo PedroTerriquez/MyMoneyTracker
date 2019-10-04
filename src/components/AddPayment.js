@@ -23,7 +23,7 @@ export default class AddPayment extends Component {
   paymentCreationValues() {
     return values = {
       title: this.state.title,
-      amount: Money.currency_to_number(this.state.amount),
+      amount: this.state.amount,
       paymentable_id: this.props.navigation.getParam('id'),
       paymentable_type: this.props.navigation.getParam('type'),
       recipient_id: this.props.navigation.getParam('recipient'),
@@ -94,7 +94,7 @@ export default class AddPayment extends Component {
             placeholder='0.0'
             adjustsFontSizeToFit={true}
             style={style.money}
-            value={this.state.amount.toString()}
+            value={Money.currency_to_number(this.state.amount).toString()}
             onChangeText={ (text) => this.setState({amount: text}) }
             keyboardType={ 'numeric' }
           />

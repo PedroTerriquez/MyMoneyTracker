@@ -67,7 +67,9 @@ export default class BalanceHeader extends Component {
 					outerRadius={'95%'} >
 					<Labels/>
 				</PieChart>
-        { debt > 0 && <Text>{debtorName} has pagado menos, debes ${debt} pesos en la balanza.</Text> }
+        <View style={{alignItems: 'center', justifyContent: 'center'}} >
+        { debt > 0 && <Text style={{fontSize: 15}}>{debtorName} debes ${debt} pesos en la balanza.</Text> }
+        </View>
       </View>
     )
   }
