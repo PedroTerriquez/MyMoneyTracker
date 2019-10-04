@@ -42,7 +42,7 @@ export default class Home extends Component {
         id      = { payment.id }
         creator = { payment.creator_id }
         method  ='Cash'
-        date    = { payment.agreement_date }
+        date    = { payment.created_at }
         amount  = { payment.amount }
         title   = { payment.title }
         status  = { payment.status}

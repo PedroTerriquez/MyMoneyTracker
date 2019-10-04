@@ -40,7 +40,7 @@ export default class Balance extends Component {
         id     = { payment.id }
         creator= { payment.creator_id }
         method ='Cash'
-        date   = { payment.agreement_date }
+        date   = { payment.created_at }
         amount = { payment.amount }
         status = { payment.status }
         title  = { payment.title }

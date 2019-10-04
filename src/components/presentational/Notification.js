@@ -5,6 +5,7 @@ import { withNavigation } from 'react-navigation';
 import { deviceStorage } from '../../services/deviceStorage';
 import ToastService from '../../services/ToastService.js';
 import axios from 'axios';
+import TimeAgo from 'react-native-timeago';
 
 class Notification extends Component {
   accept = (id) => {
@@ -53,7 +54,9 @@ class Notification extends Component {
         </Left>
         <Body>
           {this.list_elements(nType, amount, creatorName)}
-          <Text note>{date}</Text>
+          <Text note>
+            <TimeAgo time={date} />
+          </Text>
           <Text/>
           { (status == 'pending') && <View style={{flexDirection:'row'}}>
             <Button

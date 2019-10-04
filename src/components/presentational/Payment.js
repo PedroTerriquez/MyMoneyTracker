@@ -5,7 +5,7 @@ import { withNavigation } from 'react-navigation';
 import { deviceStorage } from '../../services/deviceStorage';
 import ToastService from '../../services/ToastService.js';
 import axios from 'axios';
-
+import TimeAgo from 'react-native-timeago';
 
 class Payment extends Component {
   constructor(props){
@@ -45,6 +45,7 @@ class Payment extends Component {
     const pending = (mine == false && status == 'pending' && this.state.statusChanged == 'pending')
     const editable = (mine == true && status == 'pending')
     const accepted = (status == 'accepted' || this.state.statusChanged == 'accepted')
+    debugger;
     return(
       <TouchableOpacity onPress={() => this.handleClick(paymentable_id, type)}>
         <Card>
@@ -59,7 +60,9 @@ class Payment extends Component {
 								*/}
                 <Text>{creatorName}</Text>
                 <Text note>{title}</Text>
-                <Text note>{date}</Text>
+                <Text note>
+                  <TimeAgo time={date} />
+                </Text>
               </Body>
             </Left>
             <Right>
