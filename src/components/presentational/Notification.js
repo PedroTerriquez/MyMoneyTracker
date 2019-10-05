@@ -46,7 +46,6 @@ class Notification extends Component {
 
   render() {
     const { id, creator, creatorName, nId, nType, eType, eId, amount, date, status } = this.props
-    debugger;
     return(
       <ListItem thumbnail onPress={ () => this.redirect(eId || nId, eType || nType) }>
         <Left>

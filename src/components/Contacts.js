@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavigationEvents } from 'react-navigation';
 import { ScrollView, View, Text } from 'react-native';
-import { Container, Fab, Icon } from 'native-base';
+import { Container, Fab, Icon, List } from 'native-base';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import Contact from './presentational/Contact'
@@ -38,6 +38,7 @@ export default class Contacts extends Component {
       <Contact
         id={friend.id}
         key={friend.id}
+        email={friend.email}
         name={friend.first_name}
         type='normal'
       />
@@ -49,7 +50,9 @@ export default class Contacts extends Component {
     return(
       <Container>
         <ScrollView>
-          { this.renderContacts() }
+          <List>
+            { this.renderContacts() }
+          </List>
           <NavigationEvents onWillFocus={() => this.getFriends()} />
         </ScrollView>
         <View style={{ flex: 1 }}>

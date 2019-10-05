@@ -45,7 +45,6 @@ class Payment extends Component {
     const pending = (mine == false && status == 'pending' && this.state.statusChanged == 'pending')
     const editable = (mine == true && status == 'pending')
     const accepted = (status == 'accepted' || this.state.statusChanged == 'accepted')
-    debugger;
     return(
       <TouchableOpacity onPress={() => this.handleClick(paymentable_id, type)}>
         <Card>
