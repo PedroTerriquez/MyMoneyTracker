@@ -57,9 +57,9 @@ export default class AddContact extends Component {
                   success
                   small
                   rounded
+                  style={{height: 40,width: 40, borderRadius:30, justifyContent: 'center'}}
                   onPress={ () => this.addFriend(person.id) }>
-                  <Text>Add</Text>
-                  <Icon type='FontAwesome' name='check' />
+                  <Icon type='FontAwesome' name="check" style={{fontSize: 21, width: 20}} />
                 </Button>}
               </Right>
           </CardItem>
@@ -76,8 +76,8 @@ export default class AddContact extends Component {
             <Input placeholder="Search" onChangeText={ (text) => this.getPeople(text) } autoFocus={ true }/>
             <Icon name="ios-people" />
           </Item>
-          <Button transparent>
-            <Text>Search</Text>
+          <Button transparent onPress={()=> this.props.navigation.goBack() }>
+            <Text>Cancel</Text>
           </Button>
         </Header>
         <ScrollView>
