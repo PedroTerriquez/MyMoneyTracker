@@ -17,7 +17,11 @@ export default class AddPayment extends Component {
   }
 
   componentDidMount() {
-    this.setState({ ...this.props.navigation.getParam('props') })
+    let props = this.props.navigation.getParam('props')
+    this.setState({ ...props })
+    if (props) {
+      this.setState({amount: Money.currency_to_number(props.amount).toString()})
+    }
   }
 
   paymentCreationValues() {
@@ -69,39 +73,38 @@ export default class AddPayment extends Component {
   render() {
     recipientName = this.props.navigation.getParam('recipientName') || this.state.recipientName
     return(
-      <View>
-        <Card>
-          <CardItem>
-            <Left>
-              <Thumbnail source={{uri: 'https://picsum.photos/100/100.jpg'}} />
-              <Body>
-                <Text>Sending to { recipientName }</Text>
-              </Body>
-            </Left>
-          </CardItem>
-        </Card>
+      <View style={{alignItems: 'center'}}>
+        <Thumbnail
+          style={{width: 100, height: 100, borderRadius: 50, margin: 10}}
+          source={{uri: 'https://picsum.photos/100/100.jpg'}} />
+          <Text>You are sending to { recipientName }</Text>
+          <Text note>{ this.props.email }</Text>
         <TextInput
           autoFocus={ true }
           adjustsFontSizeToFit={true}
           value={this.state.title}
           style={style.title}
-          placeholder='Untitled'
+          placeholder='+ Add a note'
           onChangeText={ (text) => this.setState({title: text}) }
         />
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-          <Text style={{ fontSize: 30 }}>$</Text>
+          <Text style={{ fontSize: 60, fontWeight: 'bold' }}>$ </Text>
           <TextInput
-            placeholder='0.0'
-            adjustsFontSizeToFit={true}
+            placeholder='0'
+          adjustsFontSizeToFit={true}
             style={style.money}
-            value={Money.currency_to_number(this.state.amount).toString()}
+            value={this.state.amount}
             onChangeText={ (text) => this.setState({amount: text}) }
             keyboardType={ 'numeric' }
           />
         </View>
         <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-          <Button rounded danger onPress={ () => this.handleSubmit() }>
-            <Text>Pay</Text>
+          <Button
+            style={{width: 200, justifyContent: 'center', marginTop: 30}}
+            rounded
+            danger
+            onPress={ () => this.handleSubmit() }>
+            <Text>{ (this.state.id) ? 'Update Payment' : 'Pay Pay' }</Text>
           </Button>
         </View>
       </View>
@@ -121,10 +124,8 @@ const style = StyleSheet.create({
     paddingLeft: 6
   },
   money: {
-    height: 100,
     fontSize: 70,
     fontWeight: 'bold',
     textAlign: 'center',
-    paddingLeft: 6
   }
 })
