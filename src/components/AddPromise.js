@@ -67,15 +67,27 @@ export default class AddPromise extends Component {
       <Container>
         <Content>
           <Form>
+            <Item stackedLabel>
+              <Label>Total</Label>
+              <Input
+                value={ total.toString() }
+                onChangeText={ (text) => this.setState({total: text}) }
+                keyboardType={ 'numeric' } />
+            </Item>
+            <Item stackedLabel>
+              <Label>Money per payment</Label>
+              <Input
+                value={ amount_payments.toString() }
+                onChangeText={ (text) => this.setState({amount_payments: text}) }
+                keyboardType={ 'numeric' } />
+            </Item>
             <Item picker>
               <Picker
                 mode="dropdown"
                 iosIcon={<Icon name="arrow-down" />}
-                style={{ width: 10 }}
-                placeholder="Select a period"
+                placeholder="Select a period per payment"
                 placeholderStyle={{ color: "#bfc6ea" }}
                 placeholderIconColor="#007aff"
-                placeholder="Select a period"
                 selectedValue={period}
                 onValueChange={(itemValue, itemIndex) => this.setState({period: itemValue})} >
                 <Picker.Item label="Daily" value="day" />
@@ -83,36 +95,23 @@ export default class AddPromise extends Component {
                 <Picker.Item label="Monthly" value="month" />
               </Picker>
             </Item>
-            <Item floatingLabel>
-              <Label>Money per payment</Label>
-              <Input
-                value={ amount_payments.toString() }
-                onChangeText={ (text) => this.setState({amount_payments: text}) }
-                keyboardType={ 'numeric' } />
-            </Item>
-            <Item floatingLabel>
-              <Label>Concept</Label>
-              <Input
-                value={ title }
-                onChangeText={ (text) => this.setState({title: text}) } />
-            </Item>
-            <Item floatingLabel>
+            <Item stackedLabel>
               <Label>Interest</Label>
               <Input
                 value={ interest.toString() }
                 onChangeText={ (text) => this.setState({interest: text}) }
                 keyboardType={ 'numeric' } />
             </Item>
-            <Item floatingLabel>
-              <Label>Total finance</Label>
+            <Item stackedLabel>
+              <Label>Concept</Label>
               <Input
-                value={ total.toString() }
-                onChangeText={ (text) => this.setState({total: text}) }
-                keyboardType={ 'numeric' } />
+                value={ title }
+                onChangeText={ (text) => this.setState({title: text}) } />
             </Item>
-            <Item floatingLabel disabled>
-              <Label>Total amount of payments</Label>
+            <Item stackedLabel success>
+              <Label>Total payments to complete</Label>
               <Input
+                disabled
                 value={ parseInt((total*((100+parseInt(interest))/100))/amount_payments).toString() } />
             </Item>
             <Item style={{borderColor: 'transparent', alignSelf: 'center', padding: '10%'}}>
