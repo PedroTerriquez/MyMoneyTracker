@@ -8,23 +8,29 @@ import ToastService from '../services/ToastService.js';
 export default class AddContact extends Component {
   constructor(props){
     super(props);
-    this.state = { people : [] }
+    this.state = {
+      people: [],
+      text: '' }
     this.getPeople = this.getPeople.bind(this);
     this.addFriend = this.addFriend.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
     this.renderPeople = this.renderPeople.bind(this);
   }
 
   getPeople(text) {
-    axios.post(`${global.API_URL}/user/find`, { search: text}, deviceStorage.loadToken() )
-      .then((response) => {
-        this.setState({ people: response.data })
-      })
-      .catch((error)=>{
-        ToastService.showToast(error.response.data.errors);
-      })
+    this.setState({text: text});
+    if (text.length > 2 ) {
+      axios.post(`${global.API_URL}/user/find`, { search: text}, deviceStorage.loadToken() )
+        .then((response) => {
+          this.setState({ people: response.data })
+        })
+        .catch((error)=>{
+          ToastService.showToast(error.response.data.errors);
+        })
+    }
   }
 
-  addFriend(id){
+  addFriend(id) {
     axios.post(`${global.API_URL}/friendships`, { user2_id: id }, deviceStorage.loadToken() )
       .then((response) => {
         this.removeButton(id)
@@ -34,11 +40,19 @@ export default class AddContact extends Component {
       })
   }
 
-  removeButton(id){
+  removeButton(id) {
     clone = this.state.people.slice()
     let index = clone.findIndex(el => el.id == id);
     clone[index].id = null
     this.setState({people: clone})
+  }
+
+  handleCancel() {
+    if(this.state.text.length == 0) {
+      this.props.navigation.goBack()
+    } else {
+      this.setState({text: ''})
+    }
   }
 
   renderPeople() {
@@ -73,10 +87,10 @@ export default class AddContact extends Component {
         <Header searchBar rounded>
           <Item>
             <Icon name="ios-search" />
-            <Input placeholder="Search" onChangeText={ (text) => this.getPeople(text) } autoFocus={ true }/>
+            <Input placeholder="Search" value={this.state.text} onChangeText={ (text) => this.getPeople(text) } autoFocus={ true }/>
             <Icon name="ios-people" />
           </Item>
-          <Button transparent onPress={()=> this.props.navigation.goBack() }>
+          <Button transparent onPress={()=> this.handleCancel() }>
             <Text>Cancel</Text>
           </Button>
         </Header>
