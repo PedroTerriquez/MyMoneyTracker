@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, Text } from 'react-native';
+import { ScrollView, Text, StyleSheet } from 'react-native';
 import { List } from 'native-base'
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
@@ -52,11 +52,18 @@ export default class BalancesList extends Component {
 
   render() {
     return(
-      <ScrollView>
-        <List>
-          { this.renderBalances() }
-        </List>
+      <ScrollView contentContainerStyle={styles.container}>
+        { this.renderBalances() }
       </ScrollView>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignItems: 'flex-start'
+  }
+})
