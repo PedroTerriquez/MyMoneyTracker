@@ -33,7 +33,13 @@ export default withNavigation(BalanceCard)
 
 const styles = StyleSheet.create({
   item: {
-    width: '50%',
+    width: '45%',
+    margin: 8,
+    shadowRadius: 3,
+    shadowOpacity: 0.5,
+    shadowOffset: { width: 0, height: 3 },
+    borderRadius: 5,
+    backgroundColor: '#F5F4F0',
   },
   headerRow: {
     flexDirection: 'row',
