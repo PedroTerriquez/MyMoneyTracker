@@ -59,10 +59,10 @@ export default class Home extends Component {
       <Container>
         <Segment>
           <Button first active={this.state.tab == 0} onPress={ ()=> this.setState({tab: 0}) }>
-            <Text>Payment Promises</Text>
+            <Text>Promise</Text>
           </Button>
           <Button last active={this.state.tab == 1} onPress={ ()=> this.setState({tab: 1}) }>
-            <Text>Payment Balance</Text>
+            <Text>Balance</Text>
           </Button>
         </Segment>
         <Content padder>

@@ -7,7 +7,7 @@ import PromisesList from '../components/PromisesList.js'
 import BalancesList from '../components/BalancesList.js'
 
 const Tabs = createBottomTabNavigator({
-  Home: { screen: Home, navigationOptions: { title: 'Home' } },
+  Home: { screen: Home, navigationOptions: { title: 'Últimos pagos recibidos' } },
   Contacts: { screen: Contacts, navigationOptions: { title: 'Contacts' } },
   BalancesList: { screen: BalancesList, navigationOptions: { title: 'Balances' } },
   PromisesList: { screen: PromisesList, navigationOptions: { title: 'Promises' } },

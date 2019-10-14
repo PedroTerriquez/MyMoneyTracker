@@ -39,7 +39,7 @@ class Notification extends Component {
     else if (type === 'Balance')
       return (<Text>{sender} want to start a Balance with you.</Text>)
     else if (type === 'Promise')
-      return (<Text>{sender} is promising you pay this amount.</Text>)
+      return (<Text>{sender} is promising pay you {amount} .</Text>)
     else if (type === 'Friendship')
       return (<Text>{sender} wants contact with you.</Text>)
   }

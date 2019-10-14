@@ -8,8 +8,8 @@ class BalanceCard extends Component {
   render() {
     const { id, style, counterpart, total1, total2, percetage1, percetage2 } = this.props
     const data = [
-      { key: 1, amount: total1 || 1, svg: { fill: 'green' }, },
-			{ key: 2, amount: total2 || 1, svg: { fill: 'blue'  }, },
+      { key: 1, amount: total1 || 1, svg: { fill: '#2F66FF' }, },
+			{ key: 2, amount: total2 || 1, svg: { fill: '#7ECC10'  }, },
 		]
 
     return(
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowOffset: { width: 0, height: 3 },
     borderRadius: 5,
-    backgroundColor: '#F5F4F0',
+    backgroundColor: '#FFFFFF',
   },
   headerRow: {
     flexDirection: 'row',

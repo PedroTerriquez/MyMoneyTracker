@@ -28,7 +28,7 @@ export default class AddPromise extends Component {
       title: this.state.title,
       interest: this.state.interest,
       total: this.state.total,
-      debtor_id: this.props.navigation.getParam('id')
+      administrator_id: this.props.navigation.getParam('id')
     }
   }
 
@@ -119,7 +119,7 @@ export default class AddPromise extends Component {
                 rounded
                 success
                 onPress={ () => this.handleSave() }>
-                <Text>Save</Text>
+                <Text>I promiss pay you</Text>
               </Button>
               <Button
                 rounded
