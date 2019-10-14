@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View, StyleSheet } from 'react-native';
 import { ListItem, Thumbnail, Text, Button, Left, Body } from 'native-base';
 import { withNavigation } from 'react-navigation';
 import { deviceStorage } from '../../services/deviceStorage';
@@ -35,7 +35,7 @@ class Notification extends Component {
 
   list_elements(type, amount, sender){
     if(type === 'Payment')
-      return (<Text style={{ fontSize: 15 }}>Payment received of { amount && <Text style={{ fontSize: 15, fontWeight: 'bold' }}>{amount}</Text> } from {sender}.</Text>)
+      return (<Text style={style.text}>Payment received of { amount && <Text style={style.bold}>{amount}</Text> } from {sender}.</Text>)
     else if (type === 'Balance')
       return (<Text>{sender} want to start a Balance with you.</Text>)
     else if (type === 'Promise')
@@ -57,12 +57,12 @@ class Notification extends Component {
             <TimeAgo time={date} />
           </Text>
           <Text/>
-          { (status == 'pending') && <View style={{flexDirection:'row'}}>
+          { (status == 'pending') && <View style={style.row}>
             <Button
               success
               primary
               small
-              style={{margin: 2}}
+              style={style.margin2}
               onPress={ () => this.accept(id) }>
               <Text>Accept</Text>
             </Button>
@@ -70,7 +70,7 @@ class Notification extends Component {
               danger
               bordered
               small
-              style={{margin: 2}}
+              style={style.margin2}
               onPress={ () => this.reject(id) }>
               <Text>Decline</Text>
             </Button>
@@ -82,4 +82,10 @@ class Notification extends Component {
   }
 }
 
+const style = StyleSheet.create({
+  row: {flexDirection: 'row'},
+  text: { fontSize: 15 },
+  boldText: { fontSize: 15, fontWeight: 'bold' },
+  margin2: { margin: 2 },
+})
 export default withNavigation(Notification)

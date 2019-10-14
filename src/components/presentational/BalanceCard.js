@@ -19,7 +19,7 @@ class BalanceCard extends Component {
           <Text style={styles.name}>{ counterpart }</Text>
         </View>
         <PieChart
-          style={{ height: 100 }}
+          style={{ height: 80 }}
           valueAccessor={({ item }) => item.amount}
           data={data}
           spacing={0}
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
   item: {
     width: '45%',
     margin: 8,
+    padding: 15,
     shadowRadius: 3,
     shadowOpacity: 0.5,
     shadowOffset: { width: 0, height: 3 },

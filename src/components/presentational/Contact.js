@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, StyleSheet } from 'react-native';
 import { View, Icon, Text, ListItem, Button, Right, Left, Body, Thumbnail } from 'native-base';
 import { withNavigation } from 'react-navigation';
 import { deviceStorage } from '../../services/deviceStorage';
@@ -53,27 +53,27 @@ class Contact extends Component {
         danger
         small
         rounded
-        style={{height: 40,width: 40, borderRadius:50, justifyContent: 'center'}}
+        style={style.rejectButton}
         onPress={ () => this.cancel(id) }>
-        <Icon type='FontAwesome' name='remove' style={{fontSize: 21, width: 15}} />
+        <Icon type='FontAwesome' name='remove' style={style.bigIcon} />
       </Button>
     )
   }
 
   renderPedingButton(id){
     return(
-      <View style={{borderColor: 'transparent', flexDirection: 'row'}}>
+      <View style={style.rowButtons}>
         <Button
           success
-          style={{height: 40,width: 40, borderRadius:30, justifyContent: 'center'}}
+          style={style.checkButton}
           onPress={ () => this.accept(id) }>
-          <Icon type='FontAwesome' name='check' style={{fontSize: 20, height: 20,width: 20}} />
+          <Icon type='FontAwesome' name='check' style={style.midIcon} />
         </Button>
         <Button
           danger
-          style={{marginLeft: 8, height: 40,width: 40, borderRadius:30, justifyContent: 'center'}}
+          style={style.secondButton}
           onPress={ () => this.reject(id) }>
-          <Icon type='FontAwesome' name='remove' style={{fontSize: 21, width: 15}} />
+          <Icon type='FontAwesome' name='remove' style={style.bigIcon} />
         </Button>
       </View>
     )
@@ -81,29 +81,29 @@ class Contact extends Component {
 
   renderNormalButton(id){
     return(
-      <View style={{flexDirection: 'row'}} >
+      <View style={style.rowButtons} >
         <Button
           success
           small
           rounded
-          style={{height: 40,width: 40, borderRadius:30, justifyContent: 'center'}}
+          style={style.checkButton}
           onPress={ () => this.props.navigation.navigate('AddPromise', {id: id} )} >
-          <Icon type='FontAwesome' name="money" style={{fontSize: 19, height: 20,width: 20}}/>
+          <Icon type='FontAwesome' name="money" style={style.midIcon}/>
         </Button>
         <Button
           warning
           small
           rounded
-          style={{marginLeft: 8, height: 40,width: 40, borderRadius:30, justifyContent: 'center'}}
+          style={style.secondButton}
           onPress={ () => this.createBalance(id) } >
-          <Icon type='FontAwesome' name="balance-scale" style={{fontSize: 17, height: 20,width: 20}} />
+          <Icon type='FontAwesome' name="balance-scale" style={style.smallIcon} />
         </Button>
       </View>
     )
   }
 
   render() {
-    const { id, name, type, email } = this.props
+    const { id, name, type, email, navigation } = this.props
     let buttons;
     if (type == 'sent_request') {
       buttons = this.renderRequestButtons(id)
@@ -114,7 +114,7 @@ class Contact extends Component {
     }
 
     return(
-      <ListItem thumbnail onPress={()=> this.props.navigation.navigate('Profile', {id: id})}>
+      <ListItem thumbnail onPress={()=> navigation.navigate('Profile', {id: id})}>
         <Left>
           <Thumbnail source={{uri: 'https://picsum.photos/100/100.jpg'}} />
         </Left>
@@ -130,5 +130,16 @@ class Contact extends Component {
     )
   }
 }
+
+const style = StyleSheet.create({
+  rowButtons: {borderColor: 'transparent', flexDirection: 'row'},
+  smallIcon: {fontSize: 17, height: 20,width: 20},
+  midIcon: {fontSize: 19, height: 20,width: 20},
+  midIcon2: {fontSize: 20, height: 20,width: 20},
+  bigIcon: {fontSize: 21, width: 15},
+  rejectButton: {height: 40,width: 40, borderRadius:50, justifyContent: 'center'},
+  checkButton: {height: 40,width: 40, borderRadius:30, justifyContent: 'center'},
+  secondButton: {height: 40,width: 40, borderRadius:30, justifyContent: 'center', marginLeft: 8},
+})
 
 export default withNavigation(Contact)

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { NavigationEvents } from 'react-navigation';
-import { ScrollView, View, Text } from 'react-native';
+import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import { Container, Fab, Icon, List } from 'native-base';
-import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
+import axios from 'axios';
 import Contact from './presentational/Contact'
 
 export default class Contacts extends Component {
@@ -55,10 +55,10 @@ export default class Contacts extends Component {
           </List>
           <NavigationEvents onWillFocus={() => this.getFriends()} />
         </ScrollView>
-        <View style={{ flex: 1 }}>
+        <View>
           <Fab
             active={false}
-            style={{ backgroundColor: '#5067FF', flex: 1, zIndex: 999 }}
+            style={style.fab}
             onPress={ () => navigation.navigate('AddContact')}
             position="bottomRight" >
             <Icon type='Ionicons' name="md-person-add" />
@@ -68,3 +68,7 @@ export default class Contacts extends Component {
     )
   }
 }
+const style = StyleSheet.create({
+  fab: { backgroundColor: '#5067FF', flex: 1, zIndex: 999 },
+  flex: { flex: 1 }
+})

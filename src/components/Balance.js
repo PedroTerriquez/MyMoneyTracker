@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Payment from './presentational/Payment'
-import BalanceHeader from './presentational/BalanceHeader'
-import { ScrollView, View } from 'react-native';
+import { ScrollView, View, StyleSheet } from 'react-native';
 import { Fab, Container, Icon } from 'native-base';
 import { deviceStorage } from '../services/deviceStorage';
 import { NavigationEvents } from 'react-navigation';
+import Payment from './presentational/Payment'
+import BalanceHeader from './presentational/BalanceHeader'
 import axios from 'axios';
 
 export default class Balance extends Component {
@@ -70,10 +70,10 @@ export default class Balance extends Component {
               />
               { this.renderPayments() }
             </ScrollView>
-            <View style={{ flex: 1 }}>
+            <View style={styles.flex}>
               <Fab
                 active={false}
-                style={{ backgroundColor: '#5067FF', flex: 1, zIndex: 999 }}
+                style={styles.fab}
                 onPress={ () => navigation.navigate('AddPayment', {
                   id: info.id,
                   type: 'Balance',
@@ -88,3 +88,8 @@ export default class Balance extends Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  flex: { flex: 1 },
+  fab: { backgroundColor: '#5067FF', flex: 1, zIndex: 999 }
+})

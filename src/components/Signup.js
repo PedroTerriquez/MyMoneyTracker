@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { View, Keyboard } from 'react-native';
+import { View, StyleSheet, Keyboard } from 'react-native';
 import { Container, Content, CardItem, Form, Item, Input, Label, Button, Text, Right, Thumbnail } from 'native-base';
 import { deviceStorage } from '../services/deviceStorage';
 import ToastService from '../services/ToastService.js';
@@ -46,11 +46,11 @@ export default class Signup extends Component {
       <Container>
         <Content>
           <Form>
-            <View style={{alignItems: 'center'}}>
+            <View style={style.center}>
             <Thumbnail
-              style={{width: 200, height: 200, borderRadius: 100, margin: 10}}
+              style={style.thumbnail}
               source={{uri: 'https://picsum.photos/300/300.jpg'}} />
-            <Text style={{fontSize: 20, fontWeight: 'bold'}}> Sign Up </Text>
+            <Text style={style.title}> Sign Up </Text>
             </View>
             <Item stackedLabel>
               <Label>First name</Label>
@@ -84,11 +84,11 @@ export default class Signup extends Component {
                 onChangeText={ (text) => this.setState({password: text}) }
                 secureTextEntry={ true } />
             </Item>
-            <View style={{alignItems: 'center'}}>
+            <View style={style.center}>
               <Button
                 rounded
                 dark
-                style={{margin: 12}}
+                style={style.marginTop20}
                 onPress={ this.handleSubmit } >
                 <Text>Sign Up</Text>
               </Button>
@@ -98,3 +98,10 @@ export default class Signup extends Component {
       </Container>
     )}
 }
+
+const style = StyleSheet.create({
+  center: { alignItems: 'center' },
+  thumbnail: {width: 200, height: 200, borderRadius: 100, margin: 10},
+  title: {fontSize: 20, fontWeight: 'bold'},
+  marginTop20: {marginTop: 20},
+})

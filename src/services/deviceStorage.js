@@ -15,7 +15,7 @@ export const deviceStorage = {
   //console.log('AsyncStorage Error: ' + error.message);
   //}
   //},
-  //async loadJWT() {
+  //async loadToken() {
   //try {
   //const value = await AsyncStorage.getItem('token');
   //if (value !== null) {
