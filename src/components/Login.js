@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { View, StyleSheet, Keyboard } from 'react-native';
 import { Container, Content, CardItem, Form, Item, Input, Label, Button, Text, Right, Thumbnail } from 'native-base';
 import { deviceStorage } from '../services/deviceStorage';
 import ToastService from '../services/ToastService.js';
+import axios from 'axios';
 
 export default class Login extends Component {
   constructor(){

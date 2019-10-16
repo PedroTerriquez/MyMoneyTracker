@@ -3,8 +3,8 @@ import { NavigationEvents } from 'react-navigation';
 import { ScrollView, View, Text, StyleSheet } from 'react-native';
 import { Container, Fab, Icon, List } from 'native-base';
 import { deviceStorage } from '../services/deviceStorage';
-import axios from 'axios';
 import Contact from './presentational/Contact'
+import axios from 'axios';
 
 export default class Contacts extends Component {
   constructor(props){

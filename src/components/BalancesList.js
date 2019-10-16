@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, StyleSheet } from 'react-native';
-import { List } from 'native-base'
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import BalanceCard from './presentational/BalanceCard'

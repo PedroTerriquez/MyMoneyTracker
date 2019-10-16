@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TextInput } from 'react-native';
-import { Card, CardItem, Thumbnail, Text, Left, Body, Button } from 'native-base';
+import { Thumbnail, Text, Button } from 'native-base';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import { Money } from '../services/moneyDecorator'
@@ -73,9 +73,9 @@ export default class AddPayment extends Component {
   render() {
     recipientName = this.props.navigation.getParam('recipientName') || this.state.recipientName
     return(
-      <View style={{alignItems: 'center'}}>
+      <View style={style.center}>
         <Thumbnail
-          style={{width: 100, height: 100, borderRadius: 50, margin: 10}}
+          style={style.thumbnail}
           source={{uri: 'https://picsum.photos/100/100.jpg'}} />
           <Text>You are sending to { recipientName }</Text>
           <Text note>{ this.props.email }</Text>
@@ -87,20 +87,20 @@ export default class AddPayment extends Component {
           placeholder='+ Add a note'
           onChangeText={ (text) => this.setState({title: text}) }
         />
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-          <Text style={{ fontSize: 60, fontWeight: 'bold' }}>$ </Text>
+        <View style={style.inlineElements}>
+          <Text style={style.boldText60}>$ </Text>
           <TextInput
             placeholder='0'
-          adjustsFontSizeToFit={true}
+            adjustsFontSizeToFit={true}
             style={style.money}
             value={this.state.amount}
             onChangeText={ (text) => this.setState({amount: text}) }
             keyboardType={ 'numeric' }
           />
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
+        <View style={style.inlineElements}>
           <Button
-            style={{width: 200, justifyContent: 'center', marginTop: 30}}
+            style={style.centerButton}
             rounded
             danger
             onPress={ () => this.handleSubmit() }>
@@ -113,6 +113,11 @@ export default class AddPayment extends Component {
 }
 
 const style = StyleSheet.create({
+  centerButton: {width: 200, justifyContent: 'center', marginTop: 30}
+  inlineElements: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }
+  center:{alignItems: 'center'}
+  thumbnail: {width: 100, height: 100, borderRadius: 50, margin: 10}
+  boldText60: { fontSize: 60, fontWeight: 'bold' }
   label:{
     fontSize: 20,
     textAlign: 'center'

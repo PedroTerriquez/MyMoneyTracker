@@ -4,8 +4,8 @@ import { ListItem, Thumbnail, Text, Button, Left, Body } from 'native-base';
 import { withNavigation } from 'react-navigation';
 import { deviceStorage } from '../../services/deviceStorage';
 import ToastService from '../../services/ToastService.js';
-import axios from 'axios';
 import TimeAgo from 'react-native-timeago';
+import axios from 'axios';
 
 class Notification extends Component {
   accept = (id) => {

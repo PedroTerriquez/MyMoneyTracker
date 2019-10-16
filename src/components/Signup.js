@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { View, StyleSheet, Keyboard } from 'react-native';
-import { Container, Content, CardItem, Form, Item, Input, Label, Button, Text, Right, Thumbnail } from 'native-base';
+import { Container, Content, Form, Item, Input, Label, Button, Text, Thumbnail } from 'native-base';
 import { deviceStorage } from '../services/deviceStorage';
 import ToastService from '../services/ToastService.js';
+import axios from 'axios';
 
 export default class Signup extends Component {
   constructor(){
@@ -47,10 +47,10 @@ export default class Signup extends Component {
         <Content>
           <Form>
             <View style={style.center}>
-            <Thumbnail
-              style={style.thumbnail}
-              source={{uri: 'https://picsum.photos/300/300.jpg'}} />
-            <Text style={style.title}> Sign Up </Text>
+              <Thumbnail
+                style={style.thumbnail}
+                source={{uri: 'https://picsum.photos/300/300.jpg'}} />
+              <Text style={style.title}> Sign Up </Text>
             </View>
             <Item stackedLabel>
               <Label>First name</Label>

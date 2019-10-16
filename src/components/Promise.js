@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Button, ScrollView } from 'react-native';
-import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
-import Payment from './presentational/Payment'
-import PromiseHeader from './presentational/PromiseHeader'
 import { NavigationEvents } from 'react-navigation';
+import PromiseHeader from './presentational/PromiseHeader'
+import Payment from './presentational/Payment'
+import axios from 'axios';
 
 export default class Promise extends Component {
   constructor(props){

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { View, StyleSheet } from 'react-native';
-import { Container, Content, Text, Thumbnail } from 'native-base';
+import { Container, Text, Thumbnail } from 'native-base';
 import { deviceStorage } from '../services/deviceStorage';
 
 export default class Profile extends Component {

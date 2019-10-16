@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { NavigationEvents } from 'react-navigation';
 import { ScrollView } from 'react-native';
 import { Segment, Container, Button, Text } from 'native-base';
-import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import Contact from './presentational/Contact'
+import axios from 'axios';
 
 export default class Contacts extends Component {
   constructor(props){

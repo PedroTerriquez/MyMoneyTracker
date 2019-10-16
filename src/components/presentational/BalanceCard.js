@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, View, StyleSheet } from 'react-native';
-import { ListItem, Thumbnail, Text, Left, Body, Right } from 'native-base';
+import { Thumbnail, Text } from 'native-base';
 import { withNavigation } from 'react-navigation';
 import { PieChart } from 'react-native-svg-charts'
 

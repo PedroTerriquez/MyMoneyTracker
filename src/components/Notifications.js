@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import { NavigationEvents } from 'react-navigation';
 import { ScrollView, Text } from 'react-native';
 import { List } from 'native-base'
-import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import Notification from './presentational/Notification'
+import axios from 'axios';
 
 export default class Notifications extends Component {
   constructor(props){

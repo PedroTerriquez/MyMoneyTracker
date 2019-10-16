@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, View} from 'react-native';
-import { Card, CardItem, Thumbnail, Text, Left, Body, Right } from 'native-base';
+import { Card, CardItem, Thumbnail, Text, Left, Body } from 'native-base';
 import { withNavigation } from 'react-navigation';
 
 class PromiseCard extends Component {

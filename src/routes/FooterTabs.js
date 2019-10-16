@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Footer, FooterTab, Button, Icon, Text, Badge } from 'native-base'
+import { Footer, FooterTab, Button, Icon, Text } from 'native-base'
 import { createBottomTabNavigator, getActiveChildNavigationOptions, NavigationScreenProp } from 'react-navigation'
 import Home from '../components/Home.js'
 import Contacts from '../components/Contacts.js'
@@ -18,19 +18,31 @@ const Tabs = createBottomTabNavigator({
     return (
       <Footer>
         <FooterTab>
-          <Button active={props.navigation.state.index === 0} vertical onPress={ () => props.navigation.navigate('Home') }>
+          <Button
+            active={props.navigation.state.index === 0}
+            vertical
+            onPress={ () => props.navigation.navigate('Home') }>
             <Icon name="home" />
             <Text>Home</Text>
           </Button>
-          <Button active={props.navigation.state.index === 1} vertical onPress={() => props.navigation.navigate('Contacts')}>
+          <Button
+            active={props.navigation.state.index === 1}
+            vertical
+            onPress={() => props.navigation.navigate('Contacts')}>
             <Icon name="contacts" />
             <Text>Contacts</Text>
           </Button>
-          <Button active={props.navigation.state.index === 2} vertical onPress={() => props.navigation.navigate('BalancesList')}>
+          <Button
+            active={props.navigation.state.index === 2}
+            vertical
+            onPress={() => props.navigation.navigate('BalancesList')}>
             <Icon active type='FontAwesome' name="balance-scale" />
             <Text>Balances</Text>
           </Button>
-          <Button active={props.navigation.state.index === 3}vertical onPress={() => props.navigation.navigate('PromisesList')}>
+          <Button
+            active={props.navigation.state.index === 3}
+            vertical
+            onPress={() => props.navigation.navigate('PromisesList')}>
             <Icon type='FontAwesome' name="money" />
             <Text>Promises</Text>
           </Button>

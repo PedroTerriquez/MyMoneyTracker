@@ -4,8 +4,8 @@ import { Card, CardItem, Thumbnail, Text, Button, Icon, Left, Body, Right } from
 import { withNavigation } from 'react-navigation';
 import { deviceStorage } from '../../services/deviceStorage';
 import ToastService from '../../services/ToastService.js';
-import axios from 'axios';
 import TimeAgo from 'react-native-timeago';
+import axios from 'axios';
 
 class Payment extends Component {
   constructor(props){

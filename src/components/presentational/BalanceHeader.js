@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { Card, CardItem, Thumbnail, Text, Left, Body, Right } from 'native-base';
+import { Text } from 'native-base';
 import { PieChart } from 'react-native-svg-charts'
 import { Circle, G, Image, Line } from 'react-native-svg'
 
