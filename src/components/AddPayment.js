@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
-import { Text, TextInput, Button, View } from 'react-native';
+import { View, StyleSheet, TextInput } from 'react-native';
+import { Thumbnail, Text, Button } from 'native-base';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
+import { Money } from '../services/moneyDecorator'
+import ToastService from '../services/ToastService.js';
 
 export default class AddPayment extends Component {
   constructor(props){
@@ -14,48 +17,120 @@ export default class AddPayment extends Component {
   }
 
   componentDidMount() {
-    this.setState({ ...this.props.navigation.getParam('props') })
+    let props = this.props.navigation.getParam('props')
+    this.setState({ ...props })
+    if (props) {
+      this.setState({amount: Money.currency_to_number(props.amount).toString()})
+    }
   }
 
-  paymentValues() {
+  paymentCreationValues() {
     return values = {
       title: this.state.title,
       amount: this.state.amount,
-      balance_id: this.props.navigation.getParam('id'),
-      payment_type: this.props.navigation.getParam('type'),
+      paymentable_id: this.props.navigation.getParam('id'),
+      paymentable_type: this.props.navigation.getParam('type'),
       recipient_id: this.props.navigation.getParam('recipient'),
     }
   }
-  newPayment() {
-    axios.post(`${global.API_URL}/payments/`, this.paymentValues(), deviceStorage.loadToken() )
+
+  paymentUpdateValues() {
+    return values = {
+      id: this.props.navigation.getParam('props').id,
+      title: this.state.title,
+      amount: this.state.amount,
+    }
+  }
+
+  handleSubmit() {
+    if (this.props.navigation.getParam('props')) {
+      this.updatePayment(this.props.navigation.getParam('props').id)
+    } else {
+      this.newPayment()
+    }
+  }
+
+  updatePayment(id) {
+    axios.patch(`${global.API_URL}/payments/${id}`, this.paymentUpdateValues(), deviceStorage.loadToken() )
       .then((response) => {
         this.props.navigation.goBack();
       })
       .catch((error)=>{
-        console.log(error);
+        ToastService.showToast(error.response.data.errors);
+      })
+  }
+
+  newPayment() {
+    axios.post(`${global.API_URL}/payments/`, this.paymentCreationValues(), deviceStorage.loadToken() )
+      .then((response) => {
+        this.props.navigation.goBack();
+      })
+      .catch((error)=>{
+        ToastService.showToast(error.response.data.errors);
       })
   }
 
   render() {
+    recipientName = this.props.navigation.getParam('recipientName') || this.state.recipientName
     return(
-      <View>
+      <View style={style.center}>
+        <Thumbnail
+          style={style.thumbnail}
+          source={{uri: 'https://picsum.photos/100/100.jpg'}} />
+          <Text>You are sending to { recipientName }</Text>
+          <Text note>{ this.props.email }</Text>
         <TextInput
           autoFocus={ true }
+          adjustsFontSizeToFit={true}
           value={this.state.title}
-          placeholder='Title'
+          style={style.title}
+          placeholder='+ Add a note'
           onChangeText={ (text) => this.setState({title: text}) }
         />
-        <TextInput
-          placeholder='Amount'
-          value={this.state.amount.toString()}
-          onChangeText={ (text) => this.setState({amount: text}) }
-          keyboardType={ 'numeric' }
-        />
-        <Button
-          title='Save'
-          onPress={ () => this.handleSubmit() }
-        />
+        <View style={style.inlineElements}>
+          <Text style={style.boldText60}>$ </Text>
+          <TextInput
+            placeholder='0'
+            adjustsFontSizeToFit={true}
+            style={style.money}
+            value={this.state.amount}
+            onChangeText={ (text) => this.setState({amount: text}) }
+            keyboardType={ 'numeric' }
+          />
+        </View>
+        <View style={style.inlineElements}>
+          <Button
+            style={style.centerButton}
+            rounded
+            danger
+            onPress={ () => this.handleSubmit() }>
+            <Text>{ (this.state.id) ? 'Update Payment' : 'Pay Pay' }</Text>
+          </Button>
+        </View>
       </View>
     )
   }
 }
+
+const style = StyleSheet.create({
+  centerButton: {width: 200, justifyContent: 'center', marginTop: 30}
+  inlineElements: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }
+  center:{alignItems: 'center'}
+  thumbnail: {width: 100, height: 100, borderRadius: 50, margin: 10}
+  boldText60: { fontSize: 60, fontWeight: 'bold' }
+  label:{
+    fontSize: 20,
+    textAlign: 'center'
+  },
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    paddingLeft: 6
+  },
+  money: {
+    fontSize: 70,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  }
+})

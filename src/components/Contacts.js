@@ -1,30 +1,23 @@
 import React, { Component } from 'react';
-import { View, Button, ScrollView, Text, TextInput } from 'react-native';
-import axios from 'axios';
+import { NavigationEvents } from 'react-navigation';
+import { ScrollView, View, Text, StyleSheet } from 'react-native';
+import { Container, Fab, Icon, List } from 'native-base';
 import { deviceStorage } from '../services/deviceStorage';
 import Contact from './presentational/Contact'
+import axios from 'axios';
 
 export default class Contacts extends Component {
   constructor(props){
     super(props);
     this.state = {
       friends: [],
-      pending: [],
-      requests: []
     }
     this.getFriends = this.getFriends.bind(this);
-    this.getPendingFriendships = this.getPendingFriendships.bind(this);
-    this.getFriendshipRequests = this.getFriendshipRequests.bind(this);
     this.renderContacts = this.renderContacts.bind(this);
-    this.renderPendingFriendships = this.renderPendingFriendships.bind(this);
-    this.renderRequestFriendships = this.renderRequestFriendships.bind(this);
-    this.createBalance = this.createBalance.bind(this);
   }
 
   componentDidMount(){
     this.getFriends()
-    this.getPendingFriendships()
-    this.getFriendshipRequests()
   }
 
   getFriends() {
@@ -37,101 +30,45 @@ export default class Contacts extends Component {
       })
   }
 
-  getPendingFriendships() {
-    axios.get(`${global.API_URL}/friendships/pending_friendships_sended`, deviceStorage.loadToken())
-      .then((response) => {
-        this.setState({ pending: response.data })
-      })
-      .catch((error)=>{
-        console.log(error);
-      })
-  }
-
-  getFriendshipRequests() {
-    axios.get(`${global.API_URL}/friendships/pending_friendships_requests`, deviceStorage.loadToken())
-      .then((response) => {
-        this.setState({ requests: response.data })
-      })
-      .catch((error)=>{
-        console.log(error);
-      })
-  }
-
-  createBalance(id){
-    axios.post(`${global.API_URL}/balances/`, {user2_id: id}, deviceStorage.loadToken() )
-      .then((response) => {
-        console.log("BALANCE CREATED")
-      })
-      .catch((error)=>{
-        console.log(error);
-      })
-  }
-
   renderContacts() {
+    if (this.state.friends.length == 0) {
+      return <Text>You don't have contacts yet. Add a new friend to start to save money.</Text>
+    }
     return this.state.friends.map( friend => (
-      <View>
-        <Contact
-          id={friend.id}
-          name={friend.first_name}
-        />
-        <Button
-          title='Create Promise'
-          onPress={ () => this.props.navigation.navigate('AddPromise', {id: friend.id} )}
-        />
-        <Button
-          title='Create Balance'
-          onPress={ () => this.createBalance(friend.id) }
-        />
-      </View>
-    ))
-  }
-
-  deletePending(id) {
-    this.setState({pending: this.state.pending.filter(function(friendship) {
-      return friendship.friendship_id !== id
-    })});
-  }
-
-  deleteRequest(id) {
-    this.setState({requests: this.state.requests.filter(function(friendship) {
-      return friendship.friendship_id !== id
-    })});
-  }
-
-  renderPendingFriendships() {
-    return this.state.pending.map( friendship => (
       <Contact
-        id={friendship.friendship_id}
-        name={friendship.first_name}
-        type='pending'
-        delete={this.deletePending.bind(this)}
-      />
-    ))
-  }
-
-  renderRequestFriendships() {
-    return this.state.requests.map( friendship => (
-      <Contact
-        id={friendship.friendship_id}
-        name={friendship.first_name}
-        type='request'
-        delete={this.deleteRequest.bind(this)}
+        id={friend.id}
+        key={friend.id}
+        email={friend.email}
+        name={friend.first_name}
+        type='normal'
       />
     ))
   }
 
   render() {
+    const { navigation } = this.props
     return(
-      <ScrollView>
-        <Text> CONTACTS </Text>
-        { this.renderContacts() }
-        <Text> ---------------------------------- </Text>
-        <Text> PENDING </Text>
-        { this.renderPendingFriendships() }
-        <Text> ---------------------------------- </Text>
-        <Text> REQUESTS </Text>
-        { this.renderRequestFriendships() }
-      </ScrollView>
+      <Container>
+        <ScrollView>
+          <List>
+            { this.renderContacts() }
+          </List>
+          <NavigationEvents onWillFocus={() => this.getFriends()} />
+        </ScrollView>
+        <View>
+          <Fab
+            active={false}
+            style={style.fab}
+            onPress={ () => navigation.navigate('AddContact')}
+            position="bottomRight" >
+            <Icon type='Ionicons' name="md-person-add" />
+          </Fab>
+        </View>
+      </Container>
     )
   }
 }
+const style = StyleSheet.create({
+  fab: { backgroundColor: '#5067FF', flex: 1, zIndex: 999 },
+  flex: { flex: 1 }
+})
