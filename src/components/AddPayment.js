@@ -113,11 +113,11 @@ export default class AddPayment extends Component {
 }
 
 const style = StyleSheet.create({
-  centerButton: {width: 200, justifyContent: 'center', marginTop: 30}
-  inlineElements: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }
-  center:{alignItems: 'center'}
-  thumbnail: {width: 100, height: 100, borderRadius: 50, margin: 10}
-  boldText60: { fontSize: 60, fontWeight: 'bold' }
+  centerButton: {width: 200, justifyContent: 'center', marginTop: 30},
+  inlineElements: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' },
+  center:{alignItems: 'center'},
+  thumbnail: {width: 100, height: 100, borderRadius: 50, margin: 10},
+  boldText60: { fontSize: 60, fontWeight: 'bold' },
   label:{
     fontSize: 20,
     textAlign: 'center'
