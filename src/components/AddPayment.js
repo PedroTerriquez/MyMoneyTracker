@@ -107,6 +107,7 @@ export default class AddPayment extends Component {
             <Text>{ (this.state.id) ? 'Update Payment' : 'Pay Pay' }</Text>
           </Button>
         </View>
+        <Text>🔒 Encrypted Protection</Text>
       </View>
     )
   }
