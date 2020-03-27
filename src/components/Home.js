@@ -4,6 +4,7 @@ import { Container, Button, Segment, Content, Text } from 'native-base';
 import Payment from './presentational/Payment'
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
+import { ActionCable, Cable } from '@kesha-antonov/react-native-action-cable'
 
 export default class Home extends Component {
 
@@ -17,8 +18,29 @@ export default class Home extends Component {
     this.getPayments = this.getPayments.bind(this)
   }
 
+  handleReceived(data) {
+    console.log(`listening on ${global.id}`)
+    console.log(data)
+  }
+
+  handleConnected() {
+    console.log('connected to WS')
+  }
+
+  handleDisconnected() {
+    console.log('disconnected to WS')
+  }
+
   componentDidMount(){
     this.getPayments()
+    const actionCable = ActionCable.createConsumer('ws://localhost:3002/cable')
+    const cable = new Cable({})
+    const channel = cable.setChannel( `notifications:${global.id}`, actionCable.subscriptions.create({ channel: 'NotificationsChannel' }))
+    console.log('conectado al channel.')
+    channel
+      .on( 'received', this.handleReceived )
+      .on( 'connected', this.handleConnected )
+      .on( 'disconnected', this.handleDisconnected )
   }
 
   getPayments() {

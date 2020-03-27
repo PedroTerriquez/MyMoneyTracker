@@ -3,6 +3,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 export const deviceStorage = {
   saveToken(value){
     global.JWT = value;
+    //global.id = 1
   },
   loadToken(){
     return { headers: { Authorization: "Bearer " + global.JWT } };
