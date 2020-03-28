@@ -19,7 +19,6 @@ export default class Home extends Component {
   }
 
   handleReceived(data) {
-    console.log(`listening on ${global.id}`)
     console.log(data)
   }
 
@@ -33,10 +32,9 @@ export default class Home extends Component {
 
   componentDidMount(){
     this.getPayments()
-    const actionCable = ActionCable.createConsumer('ws://localhost:3002/cable')
+    const actionCable = ActionCable.createConsumer(`ws://localhost:3002/cable?token=${global.JWT}`)
     const cable = new Cable({})
     const channel = cable.setChannel( `notifications:${global.id}`, actionCable.subscriptions.create({ channel: 'NotificationsChannel' }))
-    console.log('conectado al channel.')
     channel
       .on( 'received', this.handleReceived )
       .on( 'connected', this.handleConnected )
