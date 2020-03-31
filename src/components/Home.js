@@ -5,6 +5,7 @@ import Payment from './presentational/Payment'
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import { ActionCable, Cable } from '@kesha-antonov/react-native-action-cable'
+import ToastService from '../services/ToastService.js';
 
 export default class Home extends Component {
 
@@ -19,7 +20,7 @@ export default class Home extends Component {
   }
 
   handleReceived(data) {
-    console.log(data)
+    ToastService.showGreenToast(`New ${data.notificaiton.type}`)
   }
 
   handleConnected() {

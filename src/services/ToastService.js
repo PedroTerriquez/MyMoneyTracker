@@ -11,6 +11,18 @@ function showToast(message) {
   );
 }
 
+function showGreenToast(message) {
+  return (
+    Toast.show({
+      text: message,
+      position: "top",
+      duration: 2000,
+      type: 'success'
+    })
+  );
+}
+
 export default {
-  showToast
+  showToast,
+  showGreenToast
 };
