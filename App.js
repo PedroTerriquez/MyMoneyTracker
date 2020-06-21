@@ -62,3 +62,4 @@ export default App
 //global.API_URL = 'https://presta-mesta.herokuapp.com/v1'
 global.API_URL = 'http://localhost:3002/v1'
 global.JWT = "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMH0.pp2olRlNc7zAOfIWWxl7e_dxazTtdu8p6i3XGGJEOIE"
+global.id = '1'

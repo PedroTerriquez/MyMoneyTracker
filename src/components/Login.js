@@ -20,7 +20,7 @@ export default class Login extends Component {
 
     axios.post(`${global.API_URL}/login`, { email: this.state.user, password: this.state.password },)
       .then((response) => {
-        deviceStorage.saveToken(response.data.auth_token);
+        deviceStorage.saveToken(response.data.auth_token, response.data.user.id);
         this.props.navigation.navigate('App');
       })
       .catch((error) => {
