@@ -20,7 +20,7 @@ export default class Home extends Component {
   }
 
   handleReceived(data) {
-    ToastService.showGreenToast(`New ${data.notificaiton.type}`)
+    ToastService.showGreenToast(`New ${data.notification.notifiable_type}`)
   }
 
   handleConnected() {
