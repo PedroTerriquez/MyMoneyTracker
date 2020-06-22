@@ -28,12 +28,14 @@ class PromiseCard extends Component {
 }
 
 const ProgressBar = ({percentage}) => {
-  let paid = ((percentage) * 140) / 100
+  //140 should be change for a value in percentage
+  //because it represents the width in iphones screen
+  let paid = ((percentage < 100 ? percentage : 100) * 140) / 100
   let debt = 140 - paid
   return (
     <View style={{flexDirection: 'row'}}>
-      <View style={{ width: paid, height: 20, backgroundColor: 'red' }}></View>
-      <View style={{ width: debt, height: 20, backgroundColor: 'lightgrey' }}></View>
+      <View style={{ width: paid, height: 20, backgroundColor: 'green' }}></View>
+      <View style={{ width: debt, height: 20, backgroundColor: 'red' }}></View>
     </View>
   );
 };

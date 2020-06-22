@@ -71,7 +71,6 @@ export default class Login extends Component {
             </View>
           </Form>
           {/* <Text>or login with</Text>*/}
-          <Text>Testing buttons</Text>
           <Button small onPress={ ()=>this.setState({user: 'test2@example.com'})}><Text>User2</Text></Button>
           <Button small onPress={ ()=>this.setState({user: 'test3@example.com'})}><Text>User3</Text></Button>
         </Content>

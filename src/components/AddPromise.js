@@ -54,7 +54,7 @@ export default class AddPromise extends Component {
   newPromise() {
     axios.post(`${global.API_URL}/promises/`, this.promiseValues() , deviceStorage.loadToken() )
       .then((response) => {
-        this.props.navigation.navigate('Promise', { id: response.data.id })
+        this.props.navigation.replace('Promise', { id: response.data.id })
       })
       .catch((error)=>{
         console.log(error);

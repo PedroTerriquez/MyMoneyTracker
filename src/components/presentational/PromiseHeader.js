@@ -18,7 +18,7 @@ class PromiseHeader extends Component {
                 style={{padding: 10}}
                 size={300}
                 value={paid}
-                totalValue={total}
+                totalValue={total || 0}
                 showPercent
                 showLabels/>
             </Body>
