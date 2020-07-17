@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavigationEvents } from 'react-navigation';
 import { ScrollView, View, Text, StyleSheet } from 'react-native';
-import { Container, Fab, Icon, List } from 'native-base';
+import { Container, Fab, Icon, List, Spinner} from 'native-base';
 import { deviceStorage } from '../services/deviceStorage';
 import Contact from './presentational/Contact'
 import axios from 'axios';
@@ -11,6 +11,7 @@ export default class Contacts extends Component {
     super(props);
     this.state = {
       friends: [],
+      spinner: true,
     }
     this.getFriends = this.getFriends.bind(this);
     this.renderContacts = this.renderContacts.bind(this);
@@ -23,15 +24,19 @@ export default class Contacts extends Component {
   getFriends() {
     axios.get(`${global.API_URL}/friendships`, deviceStorage.loadToken())
       .then((response) => {
-        this.setState({ friends: response.data })
+        this.setState({ friends: response.data, spinner: false})
       })
       .catch((error)=>{
         console.log(error);
       })
   }
 
+  renderSpinner(){
+    if (this.state.spinner) { return <Spinner color='green' />}
+  }
+
   renderContacts() {
-    if (this.state.friends.length == 0) {
+    if (!this.state.spinner && this.state.friends.length == 0) {
       return <Text>You don't have contacts yet. Add a new friend to start to save money.</Text>
     }
     return this.state.friends.map( friend => (
@@ -51,6 +56,7 @@ export default class Contacts extends Component {
       <Container>
         <ScrollView>
           <List>
+            { this.renderSpinner() }
             { this.renderContacts() }
           </List>
           <NavigationEvents onWillFocus={() => this.getFriends()} />

@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, StyleSheet } from 'react-native';
-import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import BalanceCard from './presentational/BalanceCard'
+import { ScrollView, Text, StyleSheet } from 'react-native';
+import { Spinner } from 'native-base';
+import axios from 'axios';
 
 export default class BalancesList extends Component {
   constructor(props){
     super(props);
     this.state = {
       myBalances: [],
+      spinner: true,
     }
     this.getBalances = this.getBalances.bind(this);
     this.renderBalances = this.renderBalances.bind(this);
@@ -21,7 +23,7 @@ export default class BalancesList extends Component {
   getBalances() {
     axios.get(`${global.API_URL}/balances`, deviceStorage.loadToken())
       .then((response) => {
-        this.setState({ myBalances: response.data })
+        this.setState({ myBalances: response.data, spinner: false })
       })
       .catch((error)=>{
         console.log(error);
@@ -29,7 +31,7 @@ export default class BalancesList extends Component {
   }
 
   renderBalances() {
-    if (this.state.myBalances.length == 0) {
+    if (!this.state.spinner && this.state.myBalances.length == 0) {
       return <Text>No balances yet, start one.</Text>
     }
     return this.state.myBalances.map( balance => (
@@ -49,9 +51,14 @@ export default class BalancesList extends Component {
     ))
   }
 
+  renderSpinner(){
+    if (this.state.spinner) { return <Spinner color='green' />}
+  }
+
   render() {
     return(
       <ScrollView contentContainerStyle={styles.container}>
+        { this.renderSpinner() }
         { this.renderBalances() }
       </ScrollView>
     )

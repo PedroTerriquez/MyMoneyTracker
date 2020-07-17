@@ -5,6 +5,7 @@ import { withNavigation } from 'react-navigation';
 import { deviceStorage } from '../../services/deviceStorage';
 import ToastService from '../../services/ToastService.js';
 import TimeAgo from 'react-native-timeago';
+import moment from 'moment'
 import axios from 'axios';
 
 class Notification extends Component {
@@ -33,29 +34,27 @@ class Notification extends Component {
     this.props.navigation.navigate(type, {id: id})
   }
 
-  list_elements(type, amount, sender){
+  list_elements(type, amount, sender, message){
     if(type === 'Payment')
-      return (<Text style={style.text}>Payment received of { amount && <Text style={style.bold}>{amount}</Text> } from {sender}.</Text>)
+      return (<Text style={style.text}>Payment received from {sender}: { amount && <Text style={style.boldText}>{amount}</Text> }, message: { message && <Text style={style.boldText}>{message}</Text>}.</Text>)
     else if (type === 'Balance')
       return (<Text>{sender} want to start a Balance with you.</Text>)
     else if (type === 'Promise')
-      return (<Text>{sender} is promising pay you {amount} .</Text>)
+      return (<Text>{sender} is promising pay you {amount}, message: {message && <Text style={style.boldText}>{message}</Text>} .</Text>)
     else if (type === 'Friendship')
       return (<Text>{sender} wants contact with you.</Text>)
   }
 
   render() {
-    const { id, creator, creatorName, nId, nType, eType, eId, amount, date, status } = this.props
+    const { id, creator, creatorName, nId, nType, eType, eId, amount, date, status, message } = this.props
     return(
       <ListItem thumbnail onPress={ () => this.redirect(eId || nId, eType || nType) }>
         <Left>
           <Thumbnail source={{ uri: 'https://picsum.photos/50/50.jpg' }} />
         </Left>
         <Body>
-          {this.list_elements(nType, amount, creatorName)}
-          <Text note>
-            <TimeAgo time={date} />
-          </Text>
+          {this.list_elements(nType, amount, creatorName, message)}
+          <Text note>{ moment(date).format('ll') } - <TimeAgo time={date} /> </Text>
           <Text/>
           { (status == 'pending') && <View style={style.row}>
             <Button

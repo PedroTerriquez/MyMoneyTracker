@@ -5,6 +5,7 @@ import { withNavigation } from 'react-navigation';
 import { deviceStorage } from '../../services/deviceStorage';
 import ToastService from '../../services/ToastService.js';
 import TimeAgo from 'react-native-timeago';
+import moment from 'moment'
 import axios from 'axios';
 
 class Payment extends Component {
@@ -53,10 +54,8 @@ class Payment extends Component {
               <Thumbnail source={{uri: 'https://picsum.photos/100/100.jpg'}} />
               <Body>
                 <Text>{creatorName}</Text>
-                <Text note>{title}</Text>
-                <Text note>
-                  <TimeAgo time={date} />
-                </Text>
+                <Text>{title}</Text>
+                <Text note>{ moment(date).format('ll') } - <TimeAgo time={date} /> </Text>
               </Body>
             </Left>
             <Right>

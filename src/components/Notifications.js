@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { NavigationEvents } from 'react-navigation';
 import { ScrollView, Text } from 'react-native';
-import { List } from 'native-base'
+import { List, Spinner } from 'native-base'
 import { deviceStorage } from '../services/deviceStorage';
 import Notification from './presentational/Notification'
 import axios from 'axios';
@@ -11,6 +11,7 @@ export default class Notifications extends Component {
     super(props);
     this.state = {
       notifications: [],
+      spinner: true,
     }
     this.getNotifications = this.getNotifications.bind(this);
     this.renderNotifications = this.renderNotifications.bind(this);
@@ -23,7 +24,7 @@ export default class Notifications extends Component {
   getNotifications() {
     axios.get(`${global.API_URL}/notifications`, deviceStorage.loadToken())
       .then((response) => {
-        this.setState({ notifications: response.data })
+        this.setState({ notifications: response.data, spinner: false })
       })
       .catch((error)=>{
         console.log(error);
@@ -38,7 +39,7 @@ export default class Notifications extends Component {
   }
 
   renderNotifications() {
-    if (this.state.notifications.length == 0) {
+    if (!this.state.spinner && this.state.notifications.length == 0) {
       return <Text>No notifications yet.</Text>
     }
     return this.state.notifications.map( notification => (
@@ -53,6 +54,7 @@ export default class Notifications extends Component {
         date   = {notification.updated_at}
         amount = {notification.amount}
         status = {notification.status}
+        message= {notification.message}
         creatorName={notification.sender_name}
         remove={this.removeButtons.bind(this) }
       />
@@ -60,10 +62,15 @@ export default class Notifications extends Component {
     )
   }
 
+  renderSpinner(){
+    if (this.state.spinner) { return <Spinner color='green' />}
+  }
+
   render() {
     return(
       <ScrollView>
         <List>
+          { this.renderSpinner() }
           { this.renderNotifications() }
         </List>
         <NavigationEvents onWillFocus={() => this.getNotifications()} />

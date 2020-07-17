@@ -54,11 +54,6 @@ export default class BalanceHeader extends Component {
 
     return(
       <View>
-				{/*
-				<Text>id: { user1 }/{ user2 }</Text>
-				<Text>name: { name1 }/{ name2 }</Text>
-				<Text>totals: { total1 }/{total2 }</Text>
-				*/}
 				<PieChart
 					style={{ height: 300 }}
 					valueAccessor={({ item }) => item.amount}
@@ -68,7 +63,7 @@ export default class BalanceHeader extends Component {
 					<Labels/>
 				</PieChart>
         <View style={{alignItems: 'center', justifyContent: 'center'}} >
-        { debt > 0 && <Text style={{fontSize: 15}}>{debtorName} debes ${debt} pesos en la balanza.</Text> }
+        { debt > 0 && <Text style={{fontSize: 15}}>{debtorName} you owe ${debt.toFixed(1)} in the balance.</Text> }
         </View>
       </View>
     )

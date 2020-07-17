@@ -1,19 +1,22 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { View, StyleSheet } from 'react-native';
-import { Container, Text, Thumbnail } from 'native-base';
+import { Container, Text, Thumbnail, Button } from 'native-base';
 import { deviceStorage } from '../services/deviceStorage';
+import { withNavigation } from 'react-navigation';
 
-export default class Profile extends Component {
+class Profile extends Component {
   constructor(){
     super();
     this.state = {
-      info: ''
+      info: '',
+      myProfile: false
     };
   }
 
   componentDidMount() {
-    this.getProfileInfo(this.props.navigation.getParam('id'))
+    this.getProfileInfo(this.props.navigation.getParam('id') || global.id)
+    this.setState({myProfile: !this.props.navigation.getParam('id')})
   }
 
   getProfileInfo(id){
@@ -26,6 +29,11 @@ export default class Profile extends Component {
       })
   }
 
+  logout(){
+    global.JWT = null;
+    this.props.navigation.navigate('Auth')
+  }
+
   render() {
     return(
       <Container>
@@ -34,9 +42,10 @@ export default class Profile extends Component {
             style={styles.thumbnail}
             source={{uri: 'https://picsum.photos/300/300.jpg'}} />
           <Text style={styles.font20bold}> {this.state.info.name} </Text>
-          <Text style={styles.font14}> Miembro desde {this.state.info.created_at} </Text>
+          <Text style={styles.font24}> Miembro desde {this.state.info.created_at} </Text>
           <Text style={styles.font20}>{this.state.info.percentage}%</Text>
-          <Text style={styles.font14}>Prestamos pagados a tiempo.</Text>
+          <Text style={styles.font24}>Prestamos pagados a tiempo.</Text>
+            { this.state.myProfile && <Button onPress={()=> this.logout() }><Text>Log Out</Text></Button>}
         </View>
       </Container>
     )}
@@ -46,7 +55,9 @@ export default class Profile extends Component {
 const styles = StyleSheet.create({
   center:{alignItems: 'center'},
   thumbnail:{width: 200, height: 200, borderRadius: 100, margin: 20},
-  font14:{ fontSize: 24 },
+  font24:{ fontSize: 24 },
   font20:{ fontSize: 20 },
   font20bold: { fontSize: 20, fontWeight: 'bold' },
 })
+
+export default withNavigation(Profile)

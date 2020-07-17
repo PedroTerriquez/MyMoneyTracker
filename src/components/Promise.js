@@ -11,7 +11,8 @@ export default class Promise extends Component {
     super(props);
     this.state = {
       payments : [],
-      info: null
+      info: null,
+      spinner: true
     }
     this.getPayments = this.getPayments.bind(this);
     this.renderPayments = this.renderPayments.bind(this);
@@ -24,7 +25,7 @@ export default class Promise extends Component {
   getPayments(id) {
     axios.get(`${global.API_URL}/promises/${id}`, deviceStorage.loadToken() )
       .then((response) => {
-        this.setState({ payments: response.data.payments, info: response.data.promise })
+        this.setState({ payments: response.data.payments, info: response.data.promise, spinner: false })
       })
       .catch((error)=>{
         console.log(error);
@@ -50,6 +51,10 @@ export default class Promise extends Component {
     ))
   }
 
+  renderSpinner(){
+    if (this.state.spinner) { return <spinner color='green' />}
+  }
+
   render() {
     const { navigation } = this.props
     const { info } = this.state
@@ -73,6 +78,7 @@ export default class Promise extends Component {
               })
             } />
         }
+        { this.renderSpinner() }
         { this.renderPayments() }
         <NavigationEvents onWillFocus={() => this.getPayments(info.id)} />
       </ScrollView>

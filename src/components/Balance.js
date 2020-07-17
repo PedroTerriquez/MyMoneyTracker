@@ -13,7 +13,8 @@ export default class Balance extends Component {
     super(props);
     this.state = {
       payments : [],
-      info: null
+      info: null,
+      spinner: true
     }
     this.getPayments = this.getPayments.bind(this);
     this.renderPayments = this.renderPayments.bind(this);
@@ -26,7 +27,7 @@ export default class Balance extends Component {
   getPayments(id) {
     axios.get(`${global.API_URL}/balances/${id}`, deviceStorage.loadToken() )
       .then((response) => {
-        this.setState({ payments: response.data.payments, info: response.data.balance })
+        this.setState({ payments: response.data.payments, info: response.data.balance, spinner: false })
       })
       .catch((error)=>{
         console.log(error);
@@ -53,6 +54,10 @@ export default class Balance extends Component {
     ))
   }
 
+  renderSpinner(){
+    if (this.state.spinner) { return <spinner color='green' />}
+  }
+
   render() {
     const { navigation } = this.props
     const { info } = this.state
@@ -68,6 +73,7 @@ export default class Balance extends Component {
                 total1={ info.user1_money }
                 total2={ info.user2_money }
               />
+              { this.renderSpinner() }
               { this.renderPayments() }
             </ScrollView>
             <View style={styles.flex}>

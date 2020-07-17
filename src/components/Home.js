@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { NavigationEvents } from 'react-navigation';
-import { Container, Button, Segment, Content, Text } from 'native-base';
+import { Container, Button, Segment, Content, Text, Spinner} from 'native-base';
 import Payment from './presentational/Payment'
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
@@ -15,6 +15,7 @@ export default class Home extends Component {
       balance_payments: [],
       promise_payments: [],
       tab: 0,
+      spinner: true
     }
     this.getPayments = this.getPayments.bind(this)
   }
@@ -45,16 +46,19 @@ export default class Home extends Component {
   getPayments() {
     axios.get(`${global.API_URL}/payments/friends_payments`, deviceStorage.loadToken())
       .then((response) => {
-        this.setState({ balance_payments: response.data.balance, promise_payments: response.data.promise })
-        this.state
+        this.setState({ balance_payments: response.data.balance, promise_payments: response.data.promise, spinner: false })
       })
       .catch((error)=>{
         console.log(error);
       })
   }
 
+  renderSpinner(){
+    if (this.state.spinner) { return <Spinner color='green' />}
+  }
+
   renderPayments(payments) {
-    if (payments.length == 0) {
+    if (!this.state.spinner && payments.length == 0) {
       return <Text>No payments yet, start a promise or balance.</Text>
     }
     return payments.map( payment => (
@@ -87,6 +91,7 @@ export default class Home extends Component {
           </Button>
         </Segment>
         <Content padder>
+          { this.renderSpinner() }
           {payments}
         </Content>
         <NavigationEvents onWillFocus={() => this.getPayments()} />
