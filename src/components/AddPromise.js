@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Picker, Container, Content, Form, Item, Input, Label, Button, Text, Icon } from 'native-base';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
+import I18n from "../translations/i18n";
 
 export default class AddPromise extends Component {
   constructor(props){
@@ -68,14 +69,14 @@ export default class AddPromise extends Component {
         <Content>
           <Form>
             <Item stackedLabel>
-              <Label>Total</Label>
+              <Label>{I18n.t("promise_total")}</Label>
               <Input
                 value={ total.toString() }
                 onChangeText={ (text) => this.setState({total: text}) }
                 keyboardType={ 'numeric' } />
             </Item>
             <Item stackedLabel>
-              <Label>Money per payment</Label>
+              <Label>{I18n.t("promise_payment")}</Label>
               <Input
                 value={ amount_payments.toString() }
                 onChangeText={ (text) => this.setState({amount_payments: text}) }
@@ -85,31 +86,32 @@ export default class AddPromise extends Component {
               <Picker
                 mode="dropdown"
                 iosIcon={<Icon name="arrow-down" />}
-                placeholder="Select a period per payment"
+                placeholder={I18n.t("promise_period")}
                 placeholderStyle={{ color: "#bfc6ea" }}
                 placeholderIconColor="#007aff"
                 selectedValue={period}
                 onValueChange={(itemValue, itemIndex) => this.setState({period: itemValue})} >
-                <Picker.Item label="Daily" value="day" />
-                <Picker.Item label="Weekly" value="week" />
-                <Picker.Item label="Monthly" value="month" />
+                <Picker.Item label={I18n.t("promise_day")} value="day" />
+                <Picker.Item label={I18n.t("promise_week")}  value="week" />
+                <Picker.Item label={I18n.t("promise_biweek")}  value="biweek" />
+                <Picker.Item label={I18n.t("promise_month")} value="month" />
               </Picker>
             </Item>
             <Item stackedLabel>
-              <Label>Interest</Label>
+              <Label>{I18n.t("promise_interest")}</Label>
               <Input
                 value={ interest.toString() }
                 onChangeText={ (text) => this.setState({interest: text}) }
                 keyboardType={ 'numeric' } />
             </Item>
             <Item stackedLabel>
-              <Label>Concept</Label>
+              <Label>{I18n.t("promise_concept")}</Label>
               <Input
                 value={ title }
                 onChangeText={ (text) => this.setState({title: text}) } />
             </Item>
             <Item stackedLabel success>
-              <Label>Total payments to complete</Label>
+              <Label>{I18n.t("promise_total_payments")}</Label>
               <Input
                 disabled
                 value={ parseInt((total*((100+parseInt(interest))/100))/amount_payments).toString() } />
@@ -119,13 +121,13 @@ export default class AddPromise extends Component {
                 rounded
                 success
                 onPress={ () => this.handleSave() }>
-                <Text>I promiss pay you</Text>
+                <Text>{I18n.t("promiss_you")}</Text>
               </Button>
               <Button
                 rounded
                 light
                 onPress={ () => this.props.navigation.goBack() }>
-                <Text>Cancel</Text>
+                <Text>{I18n.t("cancel")}</Text>
               </Button>
             </Item>
           </Form>

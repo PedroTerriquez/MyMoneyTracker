@@ -5,6 +5,7 @@ import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import { Money } from '../services/moneyDecorator'
 import ToastService from '../services/ToastService.js';
+import I18n from "../translations/i18n";
 
 export default class AddPayment extends Component {
   constructor(props){
@@ -77,14 +78,14 @@ export default class AddPayment extends Component {
         <Thumbnail
           style={style.thumbnail}
           source={{uri: 'https://picsum.photos/100/100.jpg'}} />
-          <Text>You are sending to { recipientName }</Text>
+          <Text>{ I18n.t("payment_sending") } { recipientName }</Text>
           <Text note>{ this.props.email }</Text>
         <TextInput
           autoFocus={ true }
           adjustsFontSizeToFit={true}
           value={this.state.title}
           style={style.title}
-          placeholder='+ Add a note'
+          placeholder={ I18n.t("payment_note") }
           onChangeText={ (text) => this.setState({title: text}) }
         />
         <View style={style.inlineElements}>

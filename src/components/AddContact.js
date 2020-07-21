@@ -4,6 +4,7 @@ import { Header, Item, Input, Icon, Text, Card, CardItem, Button, Right, Body, L
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import ToastService from '../services/ToastService.js';
+import I18n from "../translations/i18n";
 
 export default class AddContact extends Component {
   constructor(props){
@@ -87,11 +88,11 @@ export default class AddContact extends Component {
         <Header searchBar rounded>
           <Item>
             <Icon name="ios-search" />
-            <Input placeholder="Search" value={this.state.text} onChangeText={ (text) => this.getPeople(text) } autoFocus={ true }/>
+            <Input placeholder={I18n.t('search')} value={this.state.text} onChangeText={ (text) => this.getPeople(text) } autoFocus={ true }/>
             <Icon name="ios-people" />
           </Item>
           <Button transparent onPress={()=> this.handleCancel() }>
-            <Text>Cancel</Text>
+            <Text>{I18n.t('cancel')}</Text>
           </Button>
         </Header>
         <ScrollView>

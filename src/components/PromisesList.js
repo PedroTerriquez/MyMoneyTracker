@@ -4,6 +4,7 @@ import { Container, Button, Segment, Content, Text, Spinner } from 'native-base'
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import PromiseCard from './presentational/PromiseCard'
+import I18n from "../translations/i18n";
 
 export default class PromisesList extends Component {
   constructor(props){
@@ -38,7 +39,7 @@ export default class PromisesList extends Component {
 
   renderPromises(promises, type) {
     if (!this.state.spinner && promises.length == 0) {
-      return <Text>No promises yet.</Text>
+      return <Text>{I18n.t("promise_empty")}</Text>
     }
     return promises.map( promise => (
       <PromiseCard
@@ -59,10 +60,10 @@ export default class PromisesList extends Component {
       <Container>
         <Segment>
           <Button first active={this.state.tab == 0} onPress={ ()=> this.setState({tab: 0}) }>
-            <Text>Accepted promises</Text>
+            <Text>{I18n.t("accepted_promises")}</Text>
           </Button>
           <Button last active={this.state.tab == 1} onPress={ ()=> this.setState({tab: 1}) }>
-            <Text>My Promises</Text>
+            <Text>{I18n.t("my_promises")}</Text>
           </Button>
         </Segment>
         <Content padder>

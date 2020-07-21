@@ -7,6 +7,7 @@ import ToastService from '../../services/ToastService.js';
 import TimeAgo from 'react-native-timeago';
 import moment from 'moment'
 import axios from 'axios';
+import I18n from "../../translations/i18n";
 
 class Notification extends Component {
   accept = (id) => {
@@ -36,13 +37,13 @@ class Notification extends Component {
 
   list_elements(type, amount, sender, message){
     if(type === 'Payment')
-      return (<Text style={style.text}>Payment received from {sender}: { amount && <Text style={style.boldText}>{amount}</Text> }, message: { message && <Text style={style.boldText}>{message}</Text>}.</Text>)
+      return (<Text style={style.text}>{I18n.t("noti_payment")} {sender}: { amount && <Text style={style.boldText}>{amount}</Text> }, {I18n.t('noti_message')}: { message && <Text style={style.boldText}>{message}</Text>}.</Text>)
     else if (type === 'Balance')
-      return (<Text>{sender} want to start a Balance with you.</Text>)
+      return (<Text>{sender} {I18n.t("noti_balance")}</Text>)
     else if (type === 'Promise')
-      return (<Text>{sender} is promising pay you {amount}, message: {message && <Text style={style.boldText}>{message}</Text>} .</Text>)
+      return (<Text>{sender} {I18n.t("noti_promise")} {amount}, {I18n.t('noti_message')}: {message && <Text style={style.boldText}>{message}</Text>} .</Text>)
     else if (type === 'Friendship')
-      return (<Text>{sender} wants contact with you.</Text>)
+      return (<Text>{sender} {I18n.t("noti_friendship")}</Text>)
   }
 
   render() {
@@ -63,7 +64,7 @@ class Notification extends Component {
               small
               style={style.margin2}
               onPress={ () => this.accept(id) }>
-              <Text>Accept</Text>
+              <Text>{I18n.t("noti_accept")}</Text>
             </Button>
             <Button
               danger
@@ -71,7 +72,7 @@ class Notification extends Component {
               small
               style={style.margin2}
               onPress={ () => this.reject(id) }>
-              <Text>Decline</Text>
+              <Text>{I18n.t("noti_decline")}</Text>
             </Button>
           </View>
           }

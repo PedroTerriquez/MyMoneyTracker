@@ -6,6 +6,7 @@ import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import { ActionCable, Cable } from '@kesha-antonov/react-native-action-cable'
 import ToastService from '../services/ToastService.js';
+import I18n from "../translations/i18n";
 
 export default class Home extends Component {
 
@@ -59,7 +60,7 @@ export default class Home extends Component {
 
   renderPayments(payments) {
     if (!this.state.spinner && payments.length == 0) {
-      return <Text>No payments yet, start a promise or balance.</Text>
+      return <Text>{I18n.t("no_payments")}</Text>
     }
     return payments.map( payment => (
       <Payment
@@ -84,10 +85,10 @@ export default class Home extends Component {
       <Container>
         <Segment>
           <Button first active={this.state.tab == 0} onPress={ ()=> this.setState({tab: 0}) }>
-            <Text>Promise</Text>
+            <Text>{I18n.t("promise")}</Text>
           </Button>
           <Button last active={this.state.tab == 1} onPress={ ()=> this.setState({tab: 1}) }>
-            <Text>Balance</Text>
+            <Text>{I18n.t("balance")}</Text>
           </Button>
         </Segment>
         <Content padder>

@@ -5,6 +5,7 @@ import { Container, Fab, Icon, List, Spinner} from 'native-base';
 import { deviceStorage } from '../services/deviceStorage';
 import Contact from './presentational/Contact'
 import axios from 'axios';
+import I18n from "../translations/i18n";
 
 export default class Contacts extends Component {
   constructor(props){
@@ -37,7 +38,7 @@ export default class Contacts extends Component {
 
   renderContacts() {
     if (!this.state.spinner && this.state.friends.length == 0) {
-      return <Text>You don't have contacts yet. Add a new friend to start to save money.</Text>
+      return <Text>{I18n.t('contact_empty')}</Text>
     }
     return this.state.friends.map( friend => (
       <Contact

@@ -5,6 +5,7 @@ import { List, Spinner } from 'native-base'
 import { deviceStorage } from '../services/deviceStorage';
 import Notification from './presentational/Notification'
 import axios from 'axios';
+import I18n from "../translations/i18n";
 
 export default class Notifications extends Component {
   constructor(props){
@@ -40,7 +41,7 @@ export default class Notifications extends Component {
 
   renderNotifications() {
     if (!this.state.spinner && this.state.notifications.length == 0) {
-      return <Text>No notifications yet.</Text>
+      return <Text>{I18n.t("noti_empty")}</Text>
     }
     return this.state.notifications.map( notification => (
       <Notification

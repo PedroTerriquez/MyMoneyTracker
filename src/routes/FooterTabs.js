@@ -5,12 +5,13 @@ import Home from '../components/Home.js'
 import Contacts from '../components/Contacts.js'
 import PromisesList from '../components/PromisesList.js'
 import BalancesList from '../components/BalancesList.js'
+import I18n from "../translations/i18n";
 
 const Tabs = createBottomTabNavigator({
-  Home: { screen: Home, navigationOptions: { title: 'Last payments received' } },
-  Contacts: { screen: Contacts, navigationOptions: { title: 'Contacts' } },
-  BalancesList: { screen: BalancesList, navigationOptions: { title: 'Balances' } },
-  PromisesList: { screen: PromisesList, navigationOptions: { title: 'Promises' } },
+  Home: { screen: Home, navigationOptions: { title: I18n.t("home") }},
+  Contacts: { screen: Contacts, navigationOptions: { title: I18n.t("contacts") }},
+  BalancesList: { screen: BalancesList, navigationOptions: { title: I18n.t("balances") }},
+  PromisesList: { screen: PromisesList, navigationOptions: { title: I18n.t("promises")}},
 }, {
   tabBarPosition: 'bottom',
   swipeEnabled: false,
@@ -23,28 +24,28 @@ const Tabs = createBottomTabNavigator({
             vertical
             onPress={ () => props.navigation.navigate('Home') }>
             <Icon name="home" />
-            <Text>Home</Text>
+            <Text>{I18n.t("home")}</Text>
           </Button>
           <Button
             active={props.navigation.state.index === 1}
             vertical
             onPress={() => props.navigation.navigate('Contacts')}>
             <Icon name="contacts" />
-            <Text>Contacts</Text>
+            <Text>{I18n.t("contacts")}</Text>
           </Button>
           <Button
             active={props.navigation.state.index === 2}
             vertical
             onPress={() => props.navigation.navigate('BalancesList')}>
             <Icon active type='FontAwesome' name="balance-scale" />
-            <Text>Balances</Text>
+            <Text>{I18n.t("balances")}</Text>
           </Button>
           <Button
             active={props.navigation.state.index === 3}
             vertical
             onPress={() => props.navigation.navigate('PromisesList')}>
             <Icon type='FontAwesome' name="money" />
-            <Text>Promises</Text>
+            <Text>{I18n.t("promises")}</Text>
           </Button>
         </FooterTab>
       </Footer>

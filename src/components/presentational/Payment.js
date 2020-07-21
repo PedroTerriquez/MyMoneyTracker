@@ -7,6 +7,7 @@ import ToastService from '../../services/ToastService.js';
 import TimeAgo from 'react-native-timeago';
 import moment from 'moment'
 import axios from 'axios';
+import I18n from "../../translations/i18n";
 
 class Payment extends Component {
   constructor(props){
@@ -21,11 +22,11 @@ class Payment extends Component {
   acceptPaymentButton = (id) => {
     if (this.props.status != 'pending' || this.props.mine) return
     Alert.alert(
-      'Payment Acceptance',
-      'Accept this payment?',
+      I18n.t("payment_acceptance"),
+      I18n.t("payment_message"),
       [
-        {text: 'NO', onPress: () => console.log('No Pressed')},
-        {text: 'YES', onPress: () => this.accept(id)},
+        {text: I18n.t("no"), onPress: () => console.log('No Pressed')},
+        {text: I18n.t("yes"), onPress: () => this.accept(id)},
       ],
       {cancelable: false},
     );

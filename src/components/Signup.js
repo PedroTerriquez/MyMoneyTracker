@@ -4,6 +4,7 @@ import { Container, Content, Form, Item, Input, Label, Button, Text, Thumbnail }
 import { deviceStorage } from '../services/deviceStorage';
 import ToastService from '../services/ToastService.js';
 import axios from 'axios';
+import I18n from "../translations/i18n";
 
 export default class Signup extends Component {
   constructor(){
@@ -50,10 +51,10 @@ export default class Signup extends Component {
               <Thumbnail
                 style={style.thumbnail}
                 source={{uri: 'https://picsum.photos/300/300.jpg'}} />
-              <Text style={style.title}> Sign Up </Text>
+              <Text style={style.title}>{I18n.t("signup")}</Text>
             </View>
             <Item stackedLabel>
-              <Label>First name</Label>
+              <Label>{I18n.t("firstname")}</Label>
               <Input
                 id='first_name'
                 autoFocus={ true }
@@ -61,7 +62,7 @@ export default class Signup extends Component {
                 onBlur={ Keyboard.dismiss } />
             </Item>
             <Item stackedLabel>
-              <Label>Last name</Label>
+              <Label>{I18n.t("lastname")}</Label>
               <Input
                 id='last_name'
                 autoFocus={ true }
@@ -69,7 +70,7 @@ export default class Signup extends Component {
                 onBlur={ Keyboard.dismiss } />
             </Item>
             <Item stackedLabel>
-              <Label>Email</Label>
+              <Label>{I18n.t("email")}</Label>
               <Input
                 id='user'
                 onChangeText={ (text) => this.setState({user: text}) }
@@ -77,7 +78,7 @@ export default class Signup extends Component {
                 onBlur={ Keyboard.dismiss } />
             </Item>
             <Item stackedLabel>
-              <Label>Password</Label>
+              <Label>{I18n.t("password")}</Label>
               <Input
                 id='password'
                 onBlur={ Keyboard.dismiss }
@@ -90,7 +91,7 @@ export default class Signup extends Component {
                 dark
                 style={style.marginTop20}
                 onPress={ this.handleSubmit } >
-                <Text>Sign Up</Text>
+                <Text>{I18n.t("signup")}</Text>
               </Button>
             </View>
           </Form>

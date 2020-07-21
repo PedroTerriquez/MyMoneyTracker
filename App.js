@@ -13,6 +13,7 @@ import Profile from './src/components/Profile.js'
 import AddPayment from './src/components/AddPayment.js'
 import AddPromise from './src/components/AddPromise.js'
 import {createStackNavigator, createAppContainer, createSwitchNavigator, createBottomTabNavigator} from 'react-navigation';
+import I18n from "./src/translations/i18n";
 
 const AuthStack = createStackNavigator({
   Login: Login,
@@ -22,13 +23,13 @@ const AuthStack = createStackNavigator({
 const AppStack = createStackNavigator({
   Tabs: Tabs,
   AddContact: { screen: AddContact, navigationOptions: { header: null } },
-  ContactRequests: { screen: ContactRequests, navigationOptions: { title: 'Requests' } },
-  Notifications: { screen: Notifications, navigationOptions: { title: 'Notifications' } },
-  Balance: { screen: Balance, navigationOptions: { title: 'Balance' } },
-  Promise: { screen: Promise, navigationOptions: { title: 'Promise' } },
-  AddPayment: { screen: AddPayment, navigationOptions: { title: 'Add Payment' } },
-  AddPromise: { screen: AddPromise, navigationOptions: { title: 'Add Promise' } },
-  Profile: { screen: Profile, navigationOptions: { title: 'Profile\'s' } },
+  ContactRequests: { screen: ContactRequests, navigationOptions: { title: I18n.t("requests") }},
+  Notifications: { screen: Notifications, navigationOptions: { title: I18n.t("notifications") }},
+  Balance: { screen: Balance, navigationOptions: { title:  I18n.t("balance")  }},
+  Promise: { screen: Promise, navigationOptions: { title: I18n.t("promise") }},
+  AddPayment: { screen: AddPayment, navigationOptions: { title: I18n.t("add_payment") }},
+  AddPromise: { screen: AddPromise, navigationOptions: { title: I18n.t("promise_new") }},
+  Profile: { screen: Profile, navigationOptions: { title: I18n.t("profile") }},
 },{
   defaultNavigationOptions: ({ navigation }) => ({
     headerRight: (

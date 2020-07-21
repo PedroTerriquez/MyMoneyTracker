@@ -4,6 +4,7 @@ import { View, StyleSheet } from 'react-native';
 import { Container, Text, Thumbnail, Button } from 'native-base';
 import { deviceStorage } from '../services/deviceStorage';
 import { withNavigation } from 'react-navigation';
+import I18n from "../translations/i18n";
 
 class Profile extends Component {
   constructor(){
@@ -42,10 +43,10 @@ class Profile extends Component {
             style={styles.thumbnail}
             source={{uri: 'https://picsum.photos/300/300.jpg'}} />
           <Text style={styles.font20bold}> {this.state.info.name} </Text>
-          <Text style={styles.font24}> Miembro desde {this.state.info.created_at} </Text>
+          <Text style={styles.font24}>{I18n.t('member_since')} {this.state.info.created_at} </Text>
           <Text style={styles.font20}>{this.state.info.percentage}%</Text>
-          <Text style={styles.font24}>Prestamos pagados a tiempo.</Text>
-            { this.state.myProfile && <Button onPress={()=> this.logout() }><Text>Log Out</Text></Button>}
+          <Text style={styles.font24}>{I18n.t('member_status')}</Text>
+            { this.state.myProfile && <Button onPress={()=> this.logout() }><Text>{I18n.t('logout')}</Text></Button>}
         </View>
       </Container>
     )}

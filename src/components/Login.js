@@ -4,6 +4,7 @@ import { Container, Content, CardItem, Form, Item, Input, Label, Button, Text, R
 import { deviceStorage } from '../services/deviceStorage';
 import ToastService from '../services/ToastService.js';
 import axios from 'axios';
+import I18n from "../translations/i18n";
 
 export default class Login extends Component {
   constructor(){
@@ -17,7 +18,6 @@ export default class Login extends Component {
   }
 
   handleSubmit() {
-
     axios.post(`${global.API_URL}/login`, { email: this.state.user, password: this.state.password },)
       .then((response) => {
         deviceStorage.saveToken(response.data.auth_token, response.data.user.id);
@@ -37,10 +37,10 @@ export default class Login extends Component {
               <Thumbnail
                 style={style.thumbnail}
                 source={{uri: 'https://picsum.photos/300/300.jpg'}} />
-              <Text style={style.title}> Login </Text>
+              <Text style={style.title}>{I18n.t("login")} </Text>
             </View>
             <Item stackedLabel>
-              <Label>Email</Label>
+              <Label>{I18n.t("email")}</Label>
               <Input
                 id='user'
                 onChangeText={ (text) => this.setState({user: text}) }
@@ -48,7 +48,7 @@ export default class Login extends Component {
                 onBlur={ Keyboard.dismiss } />
             </Item>
             <Item stackedLabel>
-              <Label>Password</Label>
+              <Label>{I18n.t("password")}</Label>
               <Input
                 id='password'
                 onBlur={ Keyboard.dismiss }
@@ -58,7 +58,7 @@ export default class Login extends Component {
             <View style={style.center}>
               <CardItem style={style.marginTop20}>
                 <Right>
-                  <Text>Forgot your password?</Text>
+                  <Text>{I18n.t("forgot_pass")}</Text>
                 </Right>
               </CardItem>
               <Button
@@ -66,7 +66,7 @@ export default class Login extends Component {
                 rounded
                 dark
                 onPress={ this.handleSubmit } >
-                <Text>LOGIN</Text>
+                <Text>{I18n.t("login")}</Text>
               </Button>
             </View>
           </Form>
@@ -75,9 +75,9 @@ export default class Login extends Component {
           <Button small onPress={ ()=>this.setState({user: 'test3@example.com'})}><Text>User3</Text></Button>
         </Content>
         <View style={style.inline} >
-          <Text>Don’t have an account?</Text>
+          <Text>{I18n.t("new_account")}</Text>
           <Button transparent onPress={()=>this.props.navigation.replace('Signup')}>
-            <Text>Sign Up</Text>
+            <Text>{I18n.t("signup")}</Text>
           </Button>
 				</View>
       </Container>

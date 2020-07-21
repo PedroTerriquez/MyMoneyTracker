@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { Text } from 'native-base';
 import { PieChart } from 'react-native-svg-charts'
 import { Circle, G, Image, Line } from 'react-native-svg'
+import I18n from "../../translations/i18n";
 
 export default class BalanceHeader extends Component {
   render() {
@@ -63,7 +64,7 @@ export default class BalanceHeader extends Component {
 					<Labels/>
 				</PieChart>
         <View style={{alignItems: 'center', justifyContent: 'center'}} >
-        { debt > 0 && <Text style={{fontSize: 15}}>{debtorName} you owe ${debt.toFixed(1)} in the balance.</Text> }
+          { debt > 0 && <Text style={{fontSize: 15}}>{debtorName} { I18n.t('balance_owe') } ${debt.toFixed(1)} { I18n.t('balance_text') }</Text> }
         </View>
       </View>
     )
