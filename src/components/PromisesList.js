@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { ScrollView } from 'react-native';
-import { Container, Button, Segment, Content, Text, Spinner } from 'native-base';
+import { ScrollView, View, StyleSheet } from 'react-native';
+import { Container, Button, Segment, Content, Text, Spinner, Fab, Icon } from 'native-base';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import PromiseCard from './presentational/PromiseCard'
@@ -70,7 +70,20 @@ export default class PromisesList extends Component {
           { this.renderSpinner() }
           {promises}
         </Content>
+        <View>
+          <Fab
+            active={false}
+            style={style.fab}
+            onPress={ () => this.props.navigation.navigate('Contacts')}
+            position="bottomRight" >
+            <Icon type='Ionicons' name="ios-add" />
+          </Fab>
+        </View>
       </Container>
     )
   }
 }
+
+const style = StyleSheet.create({
+  fab: { backgroundColor: '#5067FF', flex: 1, zIndex: 999 }
+})

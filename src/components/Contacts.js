@@ -52,7 +52,6 @@ export default class Contacts extends Component {
   }
 
   render() {
-    const { navigation } = this.props
     return(
       <Container>
         <ScrollView>
@@ -66,7 +65,7 @@ export default class Contacts extends Component {
           <Fab
             active={false}
             style={style.fab}
-            onPress={ () => navigation.navigate('AddContact')}
+            onPress={ () => this.props.navigation.navigate('AddContact')}
             position="bottomRight" >
             <Icon type='Ionicons' name="md-person-add" />
           </Fab>

@@ -17,11 +17,21 @@ export default class Login extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  componentDidMount(){
+    deviceStorage.firstLoadToken().then(res => {
+      if (res != false) {
+        this.props.navigation.navigate('App');
+      }
+    });
+  }
+
+
   handleSubmit() {
     axios.post(`${global.API_URL}/login`, { email: this.state.user, password: this.state.password },)
       .then((response) => {
-        deviceStorage.saveToken(response.data.auth_token, response.data.user.id);
-        this.props.navigation.navigate('App');
+        deviceStorage.saveToken(response.data.auth_token, response.data.user.id).then(res => {
+          this.props.navigation.navigate('App');
+        });
       })
       .catch((error) => {
         ToastService.showToast('Wrong email or password');

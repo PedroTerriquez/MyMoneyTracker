@@ -31,8 +31,11 @@ class Profile extends Component {
   }
 
   logout(){
-    global.JWT = null;
-    this.props.navigation.navigate('Auth')
+    deviceStorage.deleteJWT().then(res => {
+      if (res == true) {
+        this.props.navigation.navigate('Auth')
+      }
+    });
   }
 
   render() {

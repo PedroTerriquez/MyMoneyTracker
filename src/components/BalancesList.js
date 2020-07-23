@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { deviceStorage } from '../services/deviceStorage';
 import BalanceCard from './presentational/BalanceCard'
-import { ScrollView, Text, StyleSheet } from 'react-native';
-import { Spinner } from 'native-base';
+import { ScrollView, Text, StyleSheet, View } from 'react-native';
+import { Container, Spinner, Fab, Icon } from 'native-base';
 import axios from 'axios';
 
 export default class BalancesList extends Component {
@@ -57,15 +57,27 @@ export default class BalancesList extends Component {
 
   render() {
     return(
+      <Container>
       <ScrollView contentContainerStyle={styles.container}>
         { this.renderSpinner() }
         { this.renderBalances() }
       </ScrollView>
+        <View>
+          <Fab
+            active={false}
+            style={styles.fab}
+            onPress={ () => this.props.navigation.navigate('Contacts')}
+            position="bottomRight" >
+            <Icon type='Ionicons' name="ios-add" />
+          </Fab>
+        </View>
+      </Container>
     )
   }
 }
 
 const styles = StyleSheet.create({
+  fab: { backgroundColor: '#5067FF', flex: 1, zIndex: 999 },
   container: {
     flex: 1,
     flexDirection: 'row',

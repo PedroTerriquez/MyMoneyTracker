@@ -22,8 +22,9 @@ export default class Signup extends Component {
     const { user, password} = this.state
     axios.post(`${global.API_URL}/login`, { email: user, password: password},)
       .then((response) => {
-        deviceStorage.saveToken(response.data.auth_token);
-        this.props.navigation.replace('App');
+        deviceStorage.saveToken(response.data.auth_token, response.data.user.id).then(res => {
+          this.props.navigation.navigate('App');
+        })
       })
       .catch((error) => {
         ToastService.showToast(error.response.data.errors);
