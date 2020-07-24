@@ -36,6 +36,7 @@ class Payment extends Component {
     axios.patch(`${global.API_URL}/payments/${id}/accept`, { status: 'accepted' }, deviceStorage.loadToken() )
       .then((response) => {
         this.setState({statusChanged: 'accepted'})
+        this.props.updateGraphic()
       })
       .catch((error)=>{
         ToastService.showToast(error.response.data.errors);

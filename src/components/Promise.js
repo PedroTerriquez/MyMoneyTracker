@@ -14,7 +14,6 @@ export default class Promise extends Component {
       info: null,
       spinner: true
     }
-    this.getPayments = this.getPayments.bind(this);
     this.renderPayments = this.renderPayments.bind(this);
   }
 
@@ -22,7 +21,7 @@ export default class Promise extends Component {
     this.getPayments(this.props.navigation.getParam('id'))
   }
 
-  getPayments(id) {
+  getPayments = (id) => {
     axios.get(`${global.API_URL}/promises/${id}`, deviceStorage.loadToken() )
       .then((response) => {
         this.setState({ payments: response.data.payments, info: response.data.promise, spinner: false })
@@ -47,6 +46,7 @@ export default class Promise extends Component {
         mine    = { payment.mine }
         type    = { payment.paymentable_type}
         paymentable_id = { payment.paymentable_id }
+        updateGraphic={ () => this.getPayments(this.props.navigation.getParam('id')) }
       />
     ))
   }

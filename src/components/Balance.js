@@ -16,7 +16,6 @@ export default class Balance extends Component {
       info: null,
       spinner: true
     }
-    this.getPayments = this.getPayments.bind(this);
     this.renderPayments = this.renderPayments.bind(this);
   }
 
@@ -24,7 +23,7 @@ export default class Balance extends Component {
     this.getPayments(this.props.navigation.getParam('id'))
   }
 
-  getPayments(id) {
+  getPayments = (id) => {
     axios.get(`${global.API_URL}/balances/${id}`, deviceStorage.loadToken() )
       .then((response) => {
         this.setState({ payments: response.data.payments, info: response.data.balance, spinner: false })
@@ -50,6 +49,7 @@ export default class Balance extends Component {
         creatorName= { payment.creator_name }
         recipientName={ this.state.info.counterpart }
         paymentable_id = { payment.paymentable_id }
+        updateGraphic={ () => this.getPayments(this.props.navigation.getParam('id')) }
       />
     ))
   }
