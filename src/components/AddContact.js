@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, ScrollView } from 'react-native';
-import { Header, Item, Input, Icon, Text, Card, CardItem, Button, Right, Body, Left, Thumbnail } from 'native-base';
+import { Header, Item, Input, Icon, Text, Card, CardItem, Button, Right, Body, Left } from 'native-base';
+import TextAvatar from 'react-native-text-thumbnail';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import ToastService from '../services/ToastService.js';
@@ -61,7 +62,9 @@ export default class AddContact extends Component {
         <Card key={person.id}>
           <CardItem>
               <Left>
-                <Thumbnail source={{uri: 'https://picsum.photos/100/100.jpg'}} />
+                <TextAvatar size={50} type={'circle'}>
+                  { `${person.first_name} ${person.last_name}` }
+                </TextAvatar>
                 <Body>
                   <Text>{person.first_name} {person.last_name}</Text>
                   <Text note>{person.email}</Text>

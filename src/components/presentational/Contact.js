@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
-import { View, Icon, Text, ListItem, Button, Right, Left, Body, Thumbnail } from 'native-base';
+import { View, Icon, Text, ListItem, Button, Right, Left, Body } from 'native-base';
 import { withNavigation } from 'react-navigation';
 import { deviceStorage } from '../../services/deviceStorage';
 import ToastService from '../../services/ToastService.js';
+import TextAvatar from 'react-native-text-thumbnail';
 import axios from 'axios';
 
 class Contact extends Component {
@@ -116,10 +117,11 @@ class Contact extends Component {
     return(
       <ListItem thumbnail onPress={()=> navigation.navigate('Profile', {id: id})}>
         <Left>
-          <Thumbnail source={{uri: 'https://picsum.photos/100/100.jpg'}} />
+          <TextAvatar size={50} type={'circle'}>
+            { name }
+          </TextAvatar>
         </Left>
         <Body>
-          {/*<Text note>Friendship id: {id}</Text>*/}
           <Text>{name}</Text>
           <Text note>{email}</Text>
         </Body>

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, View} from 'react-native';
-import { Card, CardItem, Thumbnail, Text, Left, Body } from 'native-base';
+import { Card, CardItem, Text, Left, Body } from 'native-base';
 import { withNavigation } from 'react-navigation';
+import TextAvatar from 'react-native-text-thumbnail';
 
 class PromiseCard extends Component {
   render() {
@@ -11,8 +12,9 @@ class PromiseCard extends Component {
         <Card>
           <CardItem>
             <Left>
-              <Thumbnail source={{uri: 'https://picsum.photos/50/50.jpg'}} />
-              {/*<Text>{ id }</Text>*/}
+              <TextAvatar size={40} type={'circle'}>
+                { user }
+              </TextAvatar>
               <Body>
                 <Text>{ user }</Text>
                 <Text note>{ title }</Text>

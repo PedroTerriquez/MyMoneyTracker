@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, View, StyleSheet } from 'react-native';
+import { ScrollView, View } from 'react-native';
 import { Fab, Container, Icon } from 'native-base';
 import { deviceStorage } from '../services/deviceStorage';
 import { NavigationEvents } from 'react-navigation';
@@ -76,10 +76,9 @@ export default class Balance extends Component {
               { this.renderSpinner() }
               { this.renderPayments() }
             </ScrollView>
-            <View style={styles.flex}>
+            <View>
               <Fab
                 active={false}
-                style={styles.fab}
                 onPress={ () => navigation.navigate('AddPayment', {
                   id: info.id,
                   type: 'Balance',
@@ -94,8 +93,3 @@ export default class Balance extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  flex: { flex: 1 },
-  fab: { backgroundColor: '#5067FF', flex: 1, zIndex: 999 }
-})

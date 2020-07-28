@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, TextInput } from 'react-native';
-import { Thumbnail, Text, Button } from 'native-base';
+import { Text, Button } from 'native-base';
+import TextAvatar from 'react-native-text-thumbnail';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
 import { Money } from '../services/moneyDecorator'
@@ -75,9 +76,10 @@ export default class AddPayment extends Component {
     recipientName = this.props.navigation.getParam('recipientName') || this.state.recipientName
     return(
       <View style={style.center}>
-        <Thumbnail
-          style={style.thumbnail}
-          source={{uri: 'https://picsum.photos/100/100.jpg'}} />
+
+        <TextAvatar size={100} type={'circle'}>
+          { recipientName }
+          </TextAvatar>
           <Text>{ I18n.t("payment_sending") } { recipientName }</Text>
           <Text note>{ this.props.email }</Text>
         <TextInput

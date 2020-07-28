@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, View, StyleSheet } from 'react-native';
-import { Thumbnail, Text } from 'native-base';
+import { Text } from 'native-base';
 import { withNavigation } from 'react-navigation';
 import { PieChart } from 'react-native-svg-charts'
+import TextAvatar from 'react-native-text-thumbnail';
 
 class BalanceCard extends Component {
   render() {
@@ -15,7 +16,9 @@ class BalanceCard extends Component {
     return(
       <TouchableOpacity style={styles.item} onPress={ () => this.props.navigation.navigate('Balance',  { id: id} )}>
         <View style={styles.headerRow}>
-          <Thumbnail small source={{uri: 'https://picsum.photos/10/10.jpg'}} />
+          <TextAvatar size={20} type={'circle'}>
+            { counterpart }
+          </TextAvatar>
           <Text style={styles.name}>{ counterpart }</Text>
         </View>
         <PieChart

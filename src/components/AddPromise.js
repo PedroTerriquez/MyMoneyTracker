@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { StyleSheet } from 'react-native';
 import { Picker, Container, Content, Form, Item, Input, Label, Button, Text, Icon } from 'native-base';
 import axios from 'axios';
 import { deviceStorage } from '../services/deviceStorage';
@@ -10,7 +11,7 @@ export default class AddPromise extends Component {
     this.state = {
       id: null,
       amount_payments: 10,
-      period: 1,
+      period: 'week',
       title: '',
       interest: 0,
       total: 0,
@@ -64,6 +65,7 @@ export default class AddPromise extends Component {
 
   render() {
     const {amount_payments, title, interest, period, total} = this.state
+    let percent_interest = 100+parseInt(interest || 0 )
     return(
       <Container>
         <Content>
@@ -104,19 +106,18 @@ export default class AddPromise extends Component {
                 onChangeText={ (text) => this.setState({interest: text}) }
                 keyboardType={ 'numeric' } />
             </Item>
+            <Item disabled stackedLabel>
+              <Label>{I18n.t("promise_total_interest")}</Label>
+                <Input disabled value={ (total*percent_interest/100).toString() } />
+            </Item>
             <Item stackedLabel>
               <Label>{I18n.t("promise_concept")}</Label>
               <Input
                 value={ title }
                 onChangeText={ (text) => this.setState({title: text}) } />
             </Item>
-            <Item stackedLabel success>
-              <Label>{I18n.t("promise_total_payments")}</Label>
-              <Input
-                disabled
-                value={ parseInt((total*((100+parseInt(interest))/100))/amount_payments).toString() } />
-            </Item>
-            <Item style={{borderColor: 'transparent', alignSelf: 'center', padding: '10%'}}>
+            <Label style={ style.center }>{I18n.t("promise_total_payments")} { (parseInt(total*(percent_interest)/100)/amount_payments).toString() } </Label>
+            <Item style={ style.center }>
               <Button
                 rounded
                 success
@@ -136,3 +137,7 @@ export default class AddPromise extends Component {
     )
   }
 }
+
+const style = StyleSheet.create({
+  center: {borderColor: 'transparent', alignSelf: 'center', padding: '10%'}
+})

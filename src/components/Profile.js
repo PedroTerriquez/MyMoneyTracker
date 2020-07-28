@@ -47,9 +47,11 @@ class Profile extends Component {
             source={{uri: 'https://picsum.photos/300/300.jpg'}} />
           <Text style={styles.font20bold}> {this.state.info.name} </Text>
           <Text style={styles.font24}>{I18n.t('member_since')} {this.state.info.created_at} </Text>
+          {/*
           <Text style={styles.font20}>{this.state.info.percentage}%</Text>
           <Text style={styles.font24}>{I18n.t('member_status')}</Text>
-            { this.state.myProfile && <Button onPress={()=> this.logout() }><Text>{I18n.t('logout')}</Text></Button>}
+          */}
+          { this.state.myProfile && <Button onPress={()=> this.logout() }><Text>{I18n.t('logout')}</Text></Button>}
         </View>
       </Container>
     )}

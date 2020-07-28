@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
-import { Card, CardItem, Thumbnail, Text, Body } from 'native-base';
+import { Card, CardItem, Text, Body } from 'native-base';
 import { withNavigation } from 'react-navigation';
 import Speedometer from 'react-native-speedometer-chart';
+import TextAvatar from 'react-native-text-thumbnail';
 
 class PromiseHeader extends Component {
   render() {
@@ -12,7 +13,9 @@ class PromiseHeader extends Component {
         <Card transparent>
           <CardItem>
             <Body style={{alignItems: 'center', justifyContent: 'center'}}>
-              <Thumbnail source={{uri: 'https://picsum.photos/100/100.jpg'}} />
+              <TextAvatar size={50} type={'circle'}>
+                { creator }
+              </TextAvatar>
               <Text style={{textAlign:'center'}} >{ creator }</Text>
               <Speedometer
                 style={{padding: 10}}
@@ -24,7 +27,6 @@ class PromiseHeader extends Component {
             </Body>
           </CardItem>
         </Card>
-        {/* <Text>Promise id: { id }</Text> */}
         { status == 'pending' && <Button title='Edit' onPress={()=> navigation.navigate('AddPromise', { props: this.props }) }/> }
       </View>
     )

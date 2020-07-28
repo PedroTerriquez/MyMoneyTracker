@@ -5,6 +5,7 @@ import { withNavigation } from 'react-navigation';
 import { deviceStorage } from '../../services/deviceStorage';
 import ToastService from '../../services/ToastService.js';
 import TimeAgo from 'react-native-timeago';
+import TextAvatar from 'react-native-text-thumbnail';
 import moment from 'moment'
 import axios from 'axios';
 import I18n from "../../translations/i18n";
@@ -53,15 +54,17 @@ class Payment extends Component {
         <Card>
           <CardItem>
             <Left>
-              <Thumbnail source={{uri: 'https://picsum.photos/100/100.jpg'}} />
+              <TextAvatar size={50} type={'circle'}>
+                { creatorName }
+              </TextAvatar>
               <Body>
-                <Text>{creatorName}</Text>
+                <Text style={style.boldText}>{creatorName}</Text>
                 <Text>{title}</Text>
                 <Text note>{ moment(date).format('ll') } - <TimeAgo time={date} /> </Text>
               </Body>
             </Left>
-            <Right>
-              <Text style={(mine==true ? style.greenText : style.grayText)}>{amount}</Text>
+            <Right style={ style.rightSmallSize }>
+              <Text style={(mine==true ? style.greenText : style.boldText)}>{amount}</Text>
               <Text />
               {
                 pending && <Button
@@ -95,10 +98,11 @@ class Payment extends Component {
 }
 
 const style = StyleSheet.create({
-  greenText: {color: 'green'},
-  grayText: {color: 'grey'},
+  greenText: { fontWeight: 'bold', color: 'green'},
+  boldText: { fontWeight: 'bold' },
   pendingButton: {height: 52,width: 52, borderRadius:35},
-  smallButton: {height: 50,width: 50, borderRadius:35}
+  smallButton: {height: 50,width: 50, borderRadius:35},
+  rightSmallSize: {flex: 0.5}
 })
 
 export default withNavigation(Payment)

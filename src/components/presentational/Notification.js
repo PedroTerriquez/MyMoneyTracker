@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { TouchableOpacity, View, StyleSheet } from 'react-native';
-import { ListItem, Thumbnail, Text, Button, Left, Body } from 'native-base';
+import { ListItem, Text, Button, Left, Body } from 'native-base';
 import { withNavigation } from 'react-navigation';
 import { deviceStorage } from '../../services/deviceStorage';
 import ToastService from '../../services/ToastService.js';
+import TextAvatar from 'react-native-text-thumbnail';
 import TimeAgo from 'react-native-timeago';
 import moment from 'moment'
 import axios from 'axios';
@@ -51,7 +52,9 @@ class Notification extends Component {
     return(
       <ListItem thumbnail onPress={ () => this.redirect(eId || nId, eType || nType) }>
         <Left>
-          <Thumbnail source={{ uri: 'https://picsum.photos/50/50.jpg' }} />
+          <TextAvatar size={50} type={'circle'}>
+            { creatorName }
+          </TextAvatar>
         </Left>
         <Body>
           {this.list_elements(nType, amount, creatorName, message)}
