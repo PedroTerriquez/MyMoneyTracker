@@ -49,6 +49,16 @@ class Payment extends Component {
     const pending = (mine == false && status == 'pending' && this.state.statusChanged == 'pending')
     const editable = (mine == true && status == 'pending')
     const accepted = (status == 'accepted' || this.state.statusChanged == 'accepted')
+    const rejected = (status == 'rejected')
+
+    let moneyColor = style.boldText
+    if (mine && accepted) {
+      moneyColor = style.greenText
+    } else if ( rejected ) {
+      moneyColor = style.redText
+    } else if ( pending || editable ) {
+      moneyColor = style.orangeText
+    }
     return(
       <TouchableOpacity onPress={() => this.handleClick(paymentable_id, type)}>
         <Card>
@@ -64,7 +74,7 @@ class Payment extends Component {
               </Body>
             </Left>
             <Right style={ style.rightSmallSize }>
-              <Text style={(mine==true ? style.greenText : style.boldText)}>{amount}</Text>
+              <Text style={ moneyColor }>{amount}</Text>
               <Text />
               {
                 pending && <Button
@@ -85,8 +95,19 @@ class Payment extends Component {
                 </Button>
               }
               {
-                accepted && <Button small success style={style.smallButton} >
+                accepted && <Button
+                  small
+                  success
+                  style={style.smallButton} >
                   <Icon type='FontAwesome' name='check' />
+                </Button>
+              }
+              {
+                rejected && <Button
+                  small
+                  danger
+                  style={style.smallButton} >
+                  <Icon type='FontAwesome' name='times' />
                 </Button>
               }
             </Right>
@@ -99,6 +120,8 @@ class Payment extends Component {
 
 const style = StyleSheet.create({
   greenText: { fontWeight: 'bold', color: 'green'},
+  redText: { fontWeight: 'bold', color: 'red'},
+  orangeText: { fontWeight: 'bold', color: 'orange'},
   boldText: { fontWeight: 'bold' },
   pendingButton: {height: 52,width: 52, borderRadius:35},
   smallButton: {height: 50,width: 50, borderRadius:35},

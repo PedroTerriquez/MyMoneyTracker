@@ -26,12 +26,14 @@ export default class BalanceHeader extends Component {
 			},
 		]
 
+    const text = debt > 0 && <Text style={{fontSize: 15}}>{debtorName} { I18n.t('balance_owe') } ${debt.toFixed(1)} { I18n.t('balance_text') }</Text>
+
     return(
       <View>
         <View style={ style.inline }>
           <View>
             <TextAvatar size={50} type={'circle'}>
-              { name1 }
+              { name2 }
             </TextAvatar>
           </View>
           <View style={style.marginLeftRight}>
@@ -43,9 +45,12 @@ export default class BalanceHeader extends Component {
           </View>
           <View>
             <TextAvatar size={50} type={'circle'}>
-              { name2 }
+              { name1 }
             </TextAvatar>
           </View>
+        </View>
+        <View style={style.center} >
+          { text }
         </View>
 				<PieChart
 					style={{ height: 300 }}
@@ -54,9 +59,6 @@ export default class BalanceHeader extends Component {
 					spacing={0}
 					outerRadius={'95%'} >
 				</PieChart>
-        <View style={style.center} >
-          { debt > 0 && <Text style={{fontSize: 15}}>{debtorName} { I18n.t('balance_owe') } ${debt.toFixed(1)} { I18n.t('balance_text') }</Text> }
-        </View>
       </View>
     )
   }
@@ -65,7 +67,7 @@ export default class BalanceHeader extends Component {
 const style = StyleSheet.create({
   green: { fontWeight: 'bold', color: 'green'},
   red: { fontWeight: 'bold', color: 'red'},
-  center: {alignItems: 'center', justifyContent: 'center'},
+  center: {alignItems: 'center', justifyContent: 'center', padding: 15, borderBottomWidth:1, borderRadius: 5 },
   marginLeftRight: {marginLeft: 20, marginRight: 20 },
   inline: { flexDirection:'row', flexWrap:'wrap', justifyContent: 'center', alignItems: 'center'},
 })

@@ -86,7 +86,7 @@ export default class Login extends Component {
         </Content>
         <View style={style.inline} >
           <Text>{I18n.t("new_account")}</Text>
-          <Button transparent onPress={()=>this.props.navigation.replace('Signup')}>
+          <Button transparent onPress={()=>this.props.navigation.navigate('Signup')}>
             <Text>{I18n.t("signup")}</Text>
           </Button>
 				</View>
