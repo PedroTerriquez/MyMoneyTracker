@@ -7,6 +7,7 @@ import { deviceStorage } from '../services/deviceStorage';
 import { Money } from '../services/moneyDecorator'
 import ToastService from '../services/ToastService.js';
 import I18n from "../translations/i18n";
+import {AdMobInterstitial} from 'react-native-admob';
 
 export default class AddPayment extends Component {
   constructor(props){
@@ -65,7 +66,9 @@ export default class AddPayment extends Component {
   newPayment() {
     axios.post(`${global.API_URL}/payments/`, this.paymentCreationValues(), deviceStorage.loadToken() )
       .then((response) => {
-        this.props.navigation.goBack();
+        AdMobInterstitial.setAdUnitID('ca-app-pub-6956498856378373/3714196411');
+        AdMobInterstitial.setTestDevices([AdMobInterstitial.simulatorId]);
+        AdMobInterstitial.requestAd().then(() => AdMobInterstitial.showAd().then(() => this.props.navigation.goBack()));
       })
       .catch((error)=>{
         ToastService.showToast(error.response.data.errors);

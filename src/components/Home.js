@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { View } from 'react-native';
 import { NavigationEvents } from 'react-navigation';
 import { Container, Button, Segment, Content, Text, Spinner} from 'native-base';
 import Payment from './presentational/Payment'
@@ -7,6 +8,7 @@ import { deviceStorage } from '../services/deviceStorage';
 import { ActionCable, Cable } from '@kesha-antonov/react-native-action-cable'
 import ToastService from '../services/ToastService.js';
 import I18n from "../translations/i18n";
+import { AdMobBanner } from 'react-native-admob';
 
 export default class Home extends Component {
 
@@ -95,6 +97,14 @@ export default class Home extends Component {
           { this.renderSpinner() }
           {payments}
         </Content>
+        <View>
+          <AdMobBanner
+            adSize="fullBanner"
+            adUnitID="ca-app-pub-6956498856378373/7182668135"
+            testDevices={[AdMobBanner.simulatorId]}
+            onAdFailedToLoad={error => console.error(error)}
+          />
+        </View>
         <NavigationEvents onWillFocus={() => this.getPayments()} />
       </Container>
     )

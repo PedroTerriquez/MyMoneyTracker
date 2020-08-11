@@ -60,5 +60,5 @@ const App = () => (
 );
 
 export default App
-global.API_URL = 'https://presta-mesta.herokuapp.com/v1'
-//global.API_URL = 'http://localhost:3002/v1'
+//global.API_URL = 'https://a4e14275a0e5.ngrok.io/v1'
+global.API_URL = 'http://localhost:3002/v1'
