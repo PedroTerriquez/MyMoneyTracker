@@ -55,5 +55,6 @@ export default {
   firstname: "Firstname",
   lastname: "Lastname",
   contact_empty: "You don't have contacts yet. Add a new friend to start to save money.",
-  add_payment: 'New payment'
+  add_payment: 'New payment',
+  update_payment: 'Update payment'
 };

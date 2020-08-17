@@ -99,7 +99,7 @@ export default class Home extends Component {
         </Content>
         <View>
           <AdMobBanner
-            adSize="fullBanner"
+            adSize="smartBannerPortrait"
             adUnitID="ca-app-pub-6956498856378373/7182668135"
             testDevices={[AdMobBanner.simulatorId]}
             onAdFailedToLoad={error => console.error(error)}

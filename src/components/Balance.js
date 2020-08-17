@@ -36,19 +36,19 @@ export default class Balance extends Component {
   renderPayments() {
     return this.state.payments.map( payment => (
       <Payment
-        key    = { payment.id }
-        id     = { payment.id }
-        creator= { payment.creator_id }
-        method ='Cash'
-        date   = { payment.created_at }
         amount = { payment.amount }
+        creator= { payment.creator_id }
+        creatorName= { payment.creator_name }
+        date   = { payment.created_at }
+        id     = { payment.id }
+        key    = { payment.id }
+        mine   = { payment.mine }
+        method = 'Cash'
+        paymentable_id = { payment.paymentable_id }
+        recipientName={ this.state.info.counterpart }
         status = { payment.status }
         title  = { payment.title }
-        mine   = { payment.mine }
         type   = { payment.paymentable_type }
-        creatorName= { payment.creator_name }
-        recipientName={ this.state.info.counterpart }
-        paymentable_id = { payment.paymentable_id }
         updateGraphic={ () => this.getPayments(this.props.navigation.getParam('id')) }
       />
     ))

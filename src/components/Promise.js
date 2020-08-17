@@ -5,6 +5,7 @@ import { NavigationEvents } from 'react-navigation';
 import PromiseHeader from './presentational/PromiseHeader'
 import Payment from './presentational/Payment'
 import axios from 'axios';
+import I18n from "../translations/i18n";
 
 export default class Promise extends Component {
   constructor(props){
@@ -32,20 +33,22 @@ export default class Promise extends Component {
   }
 
   renderPayments() {
+    debugger;
     return this.state.payments.map( payment => (
       <Payment
-        key     = { payment.id }
-        id      = { payment.id }
+        amount  = { payment.amount }
         creator = { payment.creator_id }
         creatorName = { payment.creator_name }
-        method  ='Cash'
         date    = { payment.agreement_date }
-        amount  = { payment.amount }
+        id      = { payment.id }
+        key     = { payment.id }
+        mine    = { payment.mine }
+        method  = 'Cash'
+        paymentable_id = { payment.paymentable_id }
+        recipientName= { this.state.info.creator_name }
         status  = { payment.status }
         title   = { payment.title }
-        mine    = { payment.mine }
         type    = { payment.paymentable_type}
-        paymentable_id = { payment.paymentable_id }
         updateGraphic={ () => this.getPayments(this.props.navigation.getParam('id')) }
       />
     ))
@@ -69,7 +72,7 @@ export default class Promise extends Component {
         />
         {
           !info.mine && <Button
-            title='Add Payment'
+            title={ I18n.t('add_payment')}
             onPress={ () => navigation.navigate('AddPayment', {
               id: navigation.getParam('id'),
               type: 'Promise',

@@ -15,6 +15,7 @@ export default class AddPayment extends Component {
     this.state = {
       title: '',
       amount: '',
+      recipientName: '',
     }
     this.newPayment = this.newPayment.bind(this);
   }
@@ -79,12 +80,11 @@ export default class AddPayment extends Component {
     recipientName = this.props.navigation.getParam('recipientName') || this.state.recipientName
     return(
       <View style={style.center}>
-
         <TextAvatar size={100} type={'circle'}>
           { recipientName }
-          </TextAvatar>
-          <Text>{ I18n.t("payment_sending") } { recipientName }</Text>
-          <Text note>{ this.props.email }</Text>
+       </TextAvatar>
+       <Text style={ style.marginTop10 }>{ I18n.t("payment_sending") } { recipientName }</Text>
+       <Text note>{ this.props.email }</Text>
         <TextInput
           autoFocus={ true }
           adjustsFontSizeToFit={true}
@@ -110,7 +110,7 @@ export default class AddPayment extends Component {
             rounded
             danger
             onPress={ () => this.handleSubmit() }>
-            <Text>{ (this.state.id) ? 'Update Payment' : 'Pay Pay' }</Text>
+            <Text>{ (this.state.id) ? I18n.t('update_payment') : 'Cool Pay' }</Text>
           </Button>
         </View>
       </View>
@@ -119,10 +119,11 @@ export default class AddPayment extends Component {
 }
 
 const style = StyleSheet.create({
-  centerButton: {width: 200, justifyContent: 'center', marginTop: 30},
+  centerButton: { width: 200, justifyContent: 'center', marginTop: 30 },
   inlineElements: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center' },
   center:{alignItems: 'center'},
-  thumbnail: {width: 100, height: 100, borderRadius: 50, margin: 10},
+  thumbnail: { width: 100, height: 100, borderRadius: 50, margin: 10 },
+  marginTop10: { marginTop: 10 },
   boldText60: { fontSize: 60, fontWeight: 'bold' },
   label:{
     fontSize: 20,
