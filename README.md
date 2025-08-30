@@ -1,3 +1,4 @@
+### Deprecated in favor of https://github.com/PedroTerriquez/FairFriends
 # MyMoneyTracker
 
 <!-- TABLE OF CONTENTS -->
